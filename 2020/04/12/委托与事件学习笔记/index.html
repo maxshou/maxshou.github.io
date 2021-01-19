@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>C#委托与事件学习笔记 | Max&#39;s blog</title>
+  <meta name="description" content="流云借风" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic|Open+Sans:700,400" />
+
+  <meta name="generator" content="Max's blog">
+
+  
+  
+  
+
+  
+</head>
+
+
+<body class="post-template">
+
+  <header class="site-head"  style="background-image: url(https://7672-vride-id-1302852934.tcb.qcloud.la/images/background.jpg?sign=45aed964f34ac38dd34aa6cf97887958&t=1611041477)" >
+    <div class="vertical">
+        <div class="site-head-content inner">
+             <a class="blog-logo" href="/"><img src="https://7672-vride-id-1302852934.tcb.qcloud.la/images/logo.png?sign=73b7b80e989477f03e9cc84872e9d5d7&t=1611044870" alt="Blog Logo"/></a> 
+            <h1 class="blog-title">Max's blog</h1>
+            <h2 class="blog-description">流云借风</h2>
+        </div>
+    </div>
+</header>
+  
+
+<main class="content" role="main">
+  <article class="post">
+    <span class="post-meta">
+      <time datetime="2020-04-12T08:33:53.000Z" itemprop="datePublished">
+          2020-04-12
+      </time>
+    
+</span>
+    <h1 class="post-title">C#委托与事件学习笔记</h1>
+    <section class="post-content">
+      <p>C# 语言中的委托（delegate）和事件（event）是其一大特色，委托和事件在 Windows 窗体应用程序、 ASP.NET 应用程序、WPF 应用程序等应用中是最为普遍的应用。</p>
+<p>通过定义委托和事件可以方便方法重用，并提高程序的编写效率。</p>
+<p>C# 中的委托类似于 C 或 C++ 中函数的指针。委托是存有对某个方法的引用的一种引用类型变量。引用可在运行时被改变。</p>
+<p>事件基本上说是一个用户操作，如按键、点击、鼠标移动等等，或者是一些出现，如系统生成的通知等。</p>
+<h2 id="将方法作为方法的参数"><a href="#将方法作为方法的参数" class="headerlink" title="将方法作为方法的参数"></a>将方法作为方法的参数</h2><p>委托定义了方法的参数（如<code>string</code>）与值（如<code>void</code>）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public delegate void GreetingDelegate(string name);</span><br><span class="line"></span><br><span class="line">public void EnglishGreeting(string name);</span><br><span class="line">public void ChineseGreeting(string name);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;注意此方法，它接受一个GreetingDelegate类型的方法作为参数</span><br><span class="line">private static void GreetPeople(string name, GreetingDelegate MakeGreeting) &#123;</span><br><span class="line">	MakeGreeting(name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实际上，委托会被编译成一个类（class）。</p>
+<h2 id="将方法绑定到委托"><a href="#将方法绑定到委托" class="headerlink" title="将方法绑定到委托"></a>将方法绑定到委托</h2><p>可以将多个方法绑定到同一个委托，当调用这个委托的时候，将依次调用其所绑定的方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GreetingDelegate delegate1;</span><br><span class="line">delegate1 &#x3D; EnglishGreeting; &#x2F;&#x2F; 先给委托类型的变量赋值</span><br><span class="line">delegate1 +&#x3D; ChineseGreeting;   &#x2F;&#x2F; 给此委托变量再绑定一个方法</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 将先后调用 EnglishGreeting 与 ChineseGreeting 方法</span><br><span class="line">delegate1(&quot;Jimmy Zhang&quot;); </span><br></pre></td></tr></table></figure>
+<p>绑定的第一个方法必须用=，其余用+=，取消绑定用-=</p>
+<h2 id="事件：封装的委托"><a href="#事件：封装的委托" class="headerlink" title="事件：封装的委托"></a>事件：封装的委托</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class GreetingManager&#123;</span><br><span class="line">    &#x2F;&#x2F;这一次我们在这里声明一个事件</span><br><span class="line">    public event GreetingDelegate MakeGreet;</span><br><span class="line"></span><br><span class="line">    public void GreetPeople(string name) &#123;</span><br><span class="line">        MakeGreet(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">static void Main(string[] args) &#123;</span><br><span class="line">    GreetingManager gm &#x3D; new  GreetingManager();</span><br><span class="line">    gm.MakeGreet &#x3D; EnglishGreeting;         &#x2F;&#x2F; 编译错误1</span><br><span class="line">    gm.MakeGreet +&#x3D; ChineseGreeting;</span><br><span class="line"></span><br><span class="line">    gm.GreetPeople(&quot;Jimmy Zhang&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时需用+=和-=绑定、取消绑定方法。</p>
+<h2 id="Observer设计模式"><a href="#Observer设计模式" class="headerlink" title="Observer设计模式"></a>Observer设计模式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 热水器</span><br><span class="line">public class Heater &#123;</span><br><span class="line">    private int temperature;</span><br><span class="line">       </span><br><span class="line">    &#x2F;&#x2F; 烧水</span><br><span class="line">    private void BoilWater() &#123;</span><br><span class="line">       for (int i &#x3D; 0; i &lt;&#x3D; 100; i++) &#123;</span><br><span class="line">           temperature &#x3D; i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 警报器</span><br><span class="line">public class Alarm&#123;</span><br><span class="line">    private void MakeAlert(int param) &#123;</span><br><span class="line">       Console.WriteLine(&quot;Alarm：嘀嘀嘀，水已经 &#123;0&#125; 度了：&quot; , param);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 显示器</span><br><span class="line">public class Display&#123;</span><br><span class="line">    private void ShowMsg(int param) &#123;</span><br><span class="line">       Console.WriteLine(&quot;Display：水已烧开，当前温度：&#123;0&#125;度。&quot; , param);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Observer设计模式中主要包括如下两类对象：</p>
+<ol>
+<li>Subject：监视对象，它往往包含着其他对象所感兴趣的内容。在本范例中，热水器就是一个监视对象，它包含的其他对象所感兴趣的内容，就是<code>temprature</code>字段，当这个字段的值快到100时，会不断把数据发给监视它的对象。</li>
+<li>Observer：监视者，它监视Subject，当Subject中的某件事发生的时候，会告知Observer，而Observer则会采取相应的行动。在本范例中，Observer有警报器和显示器，它们采取的行动分别是发出警报和显示水温。</li>
+</ol>
+<p>在本例中，事情发生的顺序应该是这样的：</p>
+<ol>
+<li><p>警报器和显示器告诉热水器，它对它的温度比较感兴趣(注册)。</p>
+</li>
+<li><p>热水器知道后保留对警报器和显示器的引用。</p>
+</li>
+<li><p>热水器进行烧水这一动作，当水温超过95度时，通过对警报器和显示器的引用，自动调用警报器的<code>MakeAlert()</code>方法、显示器的<code>ShowMsg()</code>方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">namespace Delegate</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F; 热水器</span><br><span class="line">    public class Heater</span><br><span class="line">    &#123;</span><br><span class="line">        private int temperature;</span><br><span class="line">        public delegate void BoilHandler(int param);   &#x2F;&#x2F;声明委托</span><br><span class="line">        public event BoilHandler BoilEvent;     &#x2F;&#x2F;声明事件，也就是封装委托后的委托实例</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; 烧水</span><br><span class="line">        public void BoilWater()</span><br><span class="line">        &#123;</span><br><span class="line">            for (int i &#x3D; 0; i &lt;&#x3D; 100; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                temperature &#x3D; i;</span><br><span class="line"></span><br><span class="line">                if (temperature &gt; 95)</span><br><span class="line">                &#123;</span><br><span class="line">                    BoilEvent?.Invoke(temperature);  </span><br><span class="line">                    &#x2F;&#x2F;如果有对象注册，调用所有注册对象的方法</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 警报器</span><br><span class="line">    public class Alarm</span><br><span class="line">    &#123;</span><br><span class="line">        public void MakeAlert(int param)</span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(&quot;Alarm：嘀嘀嘀，水已经 &#123;0&#125; 度了：&quot;, param);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 显示器</span><br><span class="line">    public class Display</span><br><span class="line">    &#123;</span><br><span class="line">        public static void ShowMsg(int param)</span><br><span class="line">        &#123; &#x2F;&#x2F;静态方法</span><br><span class="line">            Console.WriteLine(&quot;Display：水快烧开了，当前温度：&#123;0&#125;度。&quot;, param);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    class Program</span><br><span class="line">    &#123;</span><br><span class="line">        static void Main()</span><br><span class="line">        &#123;</span><br><span class="line">            Heater heater &#x3D; new Heater();</span><br><span class="line">            Alarm alarm &#x3D; new Alarm();</span><br><span class="line"></span><br><span class="line">            heater.BoilEvent +&#x3D; alarm.MakeAlert;    &#x2F;&#x2F;注册方法</span><br><span class="line">            heater.BoilEvent +&#x3D; (new Alarm()).MakeAlert;   &#x2F;&#x2F;给匿名对象注册方法</span><br><span class="line">            heater.BoilEvent +&#x3D; Display.ShowMsg;       &#x2F;&#x2F;注册静态方法</span><br><span class="line"></span><br><span class="line">            heater.BoilWater();   &#x2F;&#x2F;烧水，会自动调用注册过对象的方法</span><br><span class="line">            Console.ReadKey();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h2 id="Net-Framework中的委托与事件"><a href="#Net-Framework中的委托与事件" class="headerlink" title=".Net Framework中的委托与事件"></a>.Net Framework中的委托与事件</h2><p>.Net Framework的编码规范：</p>
+<ul>
+<li>委托类型的名称都应该以<code>EventHandler</code>结束。</li>
+<li>委托的原型定义：有一个void返回值，并接受两个输入参数：一个<code>Object</code> 类型，一个 <code>EventArgs</code>类型(或继承自<code>EventArgs</code>)。</li>
+<li>事件的命名为 委托去掉 <code>EventHandler</code>之后剩余的部分。</li>
+<li>继承自<code>EventArgs</code>的类型应该以<code>EventArgs</code>结尾。</li>
+</ul>
+<p>再做一下说明：</p>
+<ol>
+<li>委托声明原型中的Object类型的参数代表了Subject，也就是监视对象，在本例中是 <code>Heater</code>(热水器)。回调函数(比如Alarm的<code>MakeAlert()</code>)可以通过它访问触发事件的对象(<code>Heater</code>)。</li>
+<li><code>EventArgs</code> 对象包含了Observer所感兴趣的数据，在本例中是<code>temperature</code>。</li>
+</ol>
+<p><strong>上面这些其实不仅仅是为了编码规范而已，这样也使得程序有更大的灵活性。</strong>比如说，如果我们不光想获得热水器的温度，还想在Observer端(警报器或者显示器)方法中获得它的生产日期、型号、价格，那么委托和方法的声明都会变得很麻烦，而如果我们将热水器的引用传给警报器的方法，就可以在方法中直接访问热水器了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line">using System.Text;</span><br><span class="line"></span><br><span class="line">namespace Delegate</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F; 热水器</span><br><span class="line">    public class Heater</span><br><span class="line">    &#123;</span><br><span class="line">        private int temperature;</span><br><span class="line">        public string type &#x3D; &quot;RealFire 001&quot;;       &#x2F;&#x2F; 添加型号作为演示</span><br><span class="line">        public string area &#x3D; &quot;China Xian&quot;;         &#x2F;&#x2F; 添加产地作为演示</span><br><span class="line">                                                   &#x2F;&#x2F;声明委托</span><br><span class="line">        public delegate void BoiledEventHandler(object sender, BoiledEventArgs e);</span><br><span class="line">        public event BoiledEventHandler Boiled; &#x2F;&#x2F;声明事件</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; 定义BoiledEventArgs类，传递给Observer所感兴趣的信息</span><br><span class="line">        public class BoiledEventArgs : EventArgs</span><br><span class="line">        &#123;</span><br><span class="line">            public readonly int temperature;</span><br><span class="line">            public BoiledEventArgs(int temperature)</span><br><span class="line">            &#123;</span><br><span class="line">                this.temperature &#x3D; temperature;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; 可以供继承自 Heater 的类重写，以便继承类拒绝其他对象对它的监视</span><br><span class="line">        &#x2F;* virtual 关键字用于修饰方法、属性、索引器或事件声明，并使它们可以在派生类中被重写。</span><br><span class="line">        * 默认情况下，方法是非虚拟的。不能重写非虚方法。</span><br><span class="line">        * virtual 修饰符不能与 static、abstract, private 或 override 修饰符一起使用。</span><br><span class="line">        *&#x2F;</span><br><span class="line">        protected virtual void OnBoiled(BoiledEventArgs e)</span><br><span class="line">        &#123;</span><br><span class="line">            Boiled?.Invoke(this, e);  &#x2F;&#x2F; 如果有对象注册，调用所有注册对象的方法</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; 烧水。</span><br><span class="line">        public void BoilWater()</span><br><span class="line">        &#123;</span><br><span class="line">            for (int i &#x3D; 0; i &lt;&#x3D; 100; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                temperature &#x3D; i;</span><br><span class="line">                if (temperature &gt; 95)</span><br><span class="line">                &#123;</span><br><span class="line">                    &#x2F;&#x2F;建立BoiledEventArgs 对象。</span><br><span class="line">                    BoiledEventArgs e &#x3D; new BoiledEventArgs(temperature);</span><br><span class="line">                    OnBoiled(e);  &#x2F;&#x2F; 调用 OnBolied方法</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 警报器</span><br><span class="line">    public class Alarm</span><br><span class="line">    &#123;</span><br><span class="line">        public void MakeAlert(Object sender, Heater.BoiledEventArgs e)</span><br><span class="line">        &#123;</span><br><span class="line">            Heater heater &#x3D; (Heater)sender;     &#x2F;&#x2F;这里是不是很熟悉呢？</span><br><span class="line">                                                &#x2F;&#x2F;访问 sender 中的公共字段</span><br><span class="line">            Console.WriteLine(&quot;Alarm：&#123;0&#125; - &#123;1&#125;: &quot;, heater.area, heater.type);</span><br><span class="line">            Console.WriteLine(&quot;Alarm: 嘀嘀嘀，水已经 &#123;0&#125; 度了：&quot;, e.temperature);</span><br><span class="line">            Console.WriteLine();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 显示器</span><br><span class="line">    public class Display</span><br><span class="line">    &#123;</span><br><span class="line">        public static void ShowMsg(Object sender, Heater.BoiledEventArgs e)</span><br><span class="line">        &#123;   &#x2F;&#x2F;静态方法</span><br><span class="line">            Heater heater &#x3D; (Heater)sender;</span><br><span class="line">            Console.WriteLine(&quot;Display：&#123;0&#125; - &#123;1&#125;: &quot;, heater.area, heater.type);</span><br><span class="line">            Console.WriteLine(&quot;Display：水快烧开了，当前温度：&#123;0&#125;度。&quot;, e.temperature);</span><br><span class="line">            Console.WriteLine();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    class Program</span><br><span class="line">    &#123;</span><br><span class="line">        static void Main()</span><br><span class="line">        &#123;</span><br><span class="line">            Heater heater &#x3D; new Heater();</span><br><span class="line">            Alarm alarm &#x3D; new Alarm();</span><br><span class="line"></span><br><span class="line">            heater.Boiled +&#x3D; alarm.MakeAlert;   &#x2F;&#x2F;注册方法</span><br><span class="line">            heater.Boiled +&#x3D; (new Alarm()).MakeAlert;      &#x2F;&#x2F;给匿名对象注册方法</span><br><span class="line">            heater.Boiled +&#x3D; new Heater.BoiledEventHandler(alarm.MakeAlert);    				&#x2F;&#x2F;也可以这么注册</span><br><span class="line">            heater.Boiled +&#x3D; Display.ShowMsg;       &#x2F;&#x2F;注册静态方法</span><br><span class="line"></span><br><span class="line">            heater.BoilWater();   &#x2F;&#x2F;烧水，会自动调用注册过对象的方法</span><br><span class="line">            Console.ReadKey();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/JimmyZhang/archive/2007/09/23/903360.html">原文链接</a></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>匿名方法无法被取消订阅</p>
+
+    </section>
+    <footer class="post-footer">
+      <section class="author">
+    <h4>Max Hou</h4>
+    <p>In international we believe.</p>
+</section>
+      <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" target="_blank" rel="noopener" href="http://twitter.com/share?url=http://example.com/2020/04/12/委托与事件学习笔记/"
+       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2020/04/12/委托与事件学习笔记/"
+       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" target="_blank" rel="noopener" href="https://plus.google.com/share?url=http://example.com/2020/04/12/委托与事件学习笔记/"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+    </footer>
+  </article>
+  <nav class="pagination" role="pagination">
+    
+    <a class="newer-posts" href="/2020/06/02/%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E7%B1%BB%E6%B3%95/">
+        ← 贝叶斯分类法
+    </a>
+    
+    <span class="page-number">•</span>
+    
+</nav>
+  <div id="comment" class="comments-area">
+    <h1 class="title"><a href="#disqus_comments" name="disqus_comments">Comments</a></h1>
+
+    
+</div>
+</main>
+
+
+  
+<footer class="site-footer">
+  
+  <div class="inner">
+     <section class="copyright">All content copyright <a href="/">Max's blog</a> &copy; 2014 &bull; All rights reserved.</section>
+     <section class="poweredby">Proudly published with <a class="icon-ghost" target="_blank" rel="noopener" href="http://zespia.tw/hexo/">Hexo</a></section>
+  </div>
+</footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+
+
+
+
+
+
+</body>
+</html>
