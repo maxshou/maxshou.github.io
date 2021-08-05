@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>Max&#39;s blog</title>
+  <meta name="description" content="流云借风" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic|Open+Sans:700,400" />
+
+  <meta name="generator" content="Max's blog">
+
+  
+  
+  
+
+  
+</head>
+
+
+<body class="post-template">
+
+  <header class="site-head"  style="background-image: url(https://7672-vride-id-1302852934.tcb.qcloud.la/images/background.jpg?sign=45aed964f34ac38dd34aa6cf97887958&t=1611041477)" >
+    <div class="vertical">
+        <div class="site-head-content inner">
+             <a class="blog-logo" href="/"><img src="https://7672-vride-id-1302852934.tcb.qcloud.la/images/logo.png?sign=73b7b80e989477f03e9cc84872e9d5d7&t=1611044870" alt="Blog Logo"/></a> 
+            <h1 class="blog-title">Max's blog</h1>
+            <h2 class="blog-description">流云借风</h2>
+        </div>
+    </div>
+</header>
+  
+
+<main class="content" role="main">
+  <article class="post">
+    <span class="post-meta">
+      <time datetime="2021-08-05T08:01:13.817Z" itemprop="datePublished">
+          2021-08-05
+      </time>
+    
+</span>
+    <h1 class="post-title"></h1>
+    <section class="post-content">
+      <h4 id="671-二叉树中第二小的节点"><a href="#671-二叉树中第二小的节点" class="headerlink" title="671. 二叉树中第二小的节点"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/second-minimum-node-in-a-binary-tree/">671. 二叉树中第二小的节点</a></h4><p>难度简单</p>
+<p>给定一个非空特殊的二叉树，每个节点都是正数，并且每个节点的子节点数量只能为 <code>2</code> 或 <code>0</code>。如果一个节点有两个子节点的话，那么该节点的值等于两个子节点中较小的一个。</p>
+<p>更正式地说，<code>root.val = min(root.left.val, root.right.val)</code> 总成立。</p>
+<p>给出这样的一个二叉树，你需要输出所有节点中的<strong>第二小的值。</strong>如果第二小的值不存在的话，输出 -1 <strong>。</strong></p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/10/15/smbt1.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：root &#x3D; [2,2,5,null,null,5,7]</span><br><span class="line">输出：5</span><br><span class="line">解释：最小的值是 2 ，第二小的值是 5 。</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/10/15/smbt2.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：root &#x3D; [2,2,2]</span><br><span class="line">输出：-1</span><br><span class="line">解释：最小的值是 2, 但是不存在第二小的值。</span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ul>
+<li><p>树中节点数目在范围 <code>[1, 25]</code> 内</p>
+</li>
+<li><p><code>1 &lt;= Node.val &lt;= 231 - 1</code></p>
+</li>
+<li><p>对于树中每个节点 <code>root.val == min(root.left.val, root.right.val)</code></p>
+</li>
+</ul>
+<h3 id="记录所有叶子节点-去重-排序"><a href="#记录所有叶子节点-去重-排序" class="headerlink" title="记录所有叶子节点+去重+排序"></a>记录所有叶子节点+去重+排序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"># Definition for a binary tree node.</span><br><span class="line"># class TreeNode(object):</span><br><span class="line">#     def __init__(self, val&#x3D;0, left&#x3D;None, right&#x3D;None):</span><br><span class="line">#         self.val &#x3D; val</span><br><span class="line">#         self.left &#x3D; left</span><br><span class="line">#         self.right &#x3D; right</span><br><span class="line">class Solution(object):</span><br><span class="line">    @staticmethod</span><br><span class="line">    def add2list(root, list):</span><br><span class="line">        if root.right is None:</span><br><span class="line">            list.append(root.val)</span><br><span class="line">        else:</span><br><span class="line">            Solution.add2list(root.left, list)</span><br><span class="line">            Solution.add2list(root.right, list)</span><br><span class="line"></span><br><span class="line">    def findSecondMinimumValue(self, root):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type root: TreeNode</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        if root.right is None:</span><br><span class="line">            return -1</span><br><span class="line"></span><br><span class="line">        li &#x3D; []</span><br><span class="line">        Solution.add2list(root, li)</span><br><span class="line">        li &#x3D; set(li)				# 集合去重，但不保留顺序</span><br><span class="line">        li &#x3D; list(li)</span><br><span class="line">        li.sort()</span><br><span class="line">        if len(li) &gt; 1:</span><br><span class="line">            return li[1]</span><br><span class="line">        else:</span><br><span class="line">            return -1</span><br><span class="line">        print(li)</span><br></pre></td></tr></table></figure>
+
+    </section>
+    <footer class="post-footer">
+      <section class="author">
+    <h4>Max Hou</h4>
+    <p>In internationale we believe.</p>
+</section>
+      <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" target="_blank" rel="noopener" href="http://twitter.com/share?url=http://example.com/2021/08/05/671. 二叉树中第二小的节点/"
+       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2021/08/05/671. 二叉树中第二小的节点/"
+       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" target="_blank" rel="noopener" href="https://plus.google.com/share?url=http://example.com/2021/08/05/671. 二叉树中第二小的节点/"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+    </footer>
+  </article>
+  <nav class="pagination" role="pagination">
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2021/08/05/581.%20%E6%9C%80%E7%9F%AD%E6%97%A0%E5%BA%8F%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/">
+         →
+    </a>
+    
+</nav>
+  <div id="comment" class="comments-area">
+    <h1 class="title"><a href="#disqus_comments" name="disqus_comments">Comments</a></h1>
+
+    
+</div>
+</main>
+
+
+  
+<footer class="site-footer">
+  
+  <div class="inner">
+     <section class="copyright">All content copyright <a href="/">Max's blog</a> &copy; 2014 &bull; All rights reserved.</section>
+     <section class="poweredby">Proudly published with <a class="icon-ghost" target="_blank" rel="noopener" href="http://zespia.tw/hexo/">Hexo</a></section>
+  </div>
+</footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>Max&#39;s blog</title>
+  <meta name="description" content="流云借风" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic|Open+Sans:700,400" />
+
+  <meta name="generator" content="Max's blog">
+
+  
+  
+  
+
+  
+</head>
+
+
+<body class="post-template">
+
+  <header class="site-head"  style="background-image: url(https://7672-vride-id-1302852934.tcb.qcloud.la/images/background.jpg?sign=45aed964f34ac38dd34aa6cf97887958&t=1611041477)" >
+    <div class="vertical">
+        <div class="site-head-content inner">
+             <a class="blog-logo" href="/"><img src="https://7672-vride-id-1302852934.tcb.qcloud.la/images/logo.png?sign=73b7b80e989477f03e9cc84872e9d5d7&t=1611044870" alt="Blog Logo"/></a> 
+            <h1 class="blog-title">Max's blog</h1>
+            <h2 class="blog-description">流云借风</h2>
+        </div>
+    </div>
+</header>
+  
+
+<main class="content" role="main">
+  <article class="post">
+    <span class="post-meta">
+      <time datetime="2021-08-05T08:01:13.791Z" itemprop="datePublished">
+          2021-08-05
+      </time>
+    
+</span>
+    <h1 class="post-title"></h1>
+    <section class="post-content">
+      <h2 id="560-和为K的子数组"><a href="#560-和为K的子数组" class="headerlink" title="560. 和为K的子数组"></a>560. 和为K的子数组</h2><p>给定一个整数数组和一个整数 <strong>k，</strong>你需要找到该数组中和为 <strong>k</strong> 的连续的子数组的个数。</p>
+<p><strong>示例 1 :</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入:nums &#x3D; [1,1,1], k &#x3D; 2</span><br><span class="line">输出: 2 , [1,1] 与 [1,1] 为两种不同的情况。</span><br></pre></td></tr></table></figure>
+<p><strong>说明 :</strong></p>
+<ol>
+<li>数组的长度为 [1, 20,000]。</li>
+<li>数组中元素的范围是 [-1000, 1000] ，且整数 <strong>k</strong> 的范围是 [-1e7, 1e7]。</li>
+</ol>
+<h1 id="1-暴力算法"><a href="#1-暴力算法" class="headerlink" title="1. 暴力算法"></a>1. 暴力算法</h1><p>时间复杂度O(n^3)</p>
+<h1 id="2-去除重复计算（个人方法）"><a href="#2-去除重复计算（个人方法）" class="headerlink" title="2. 去除重复计算（个人方法）"></a>2. 去除重复计算（个人方法）</h1><p>时间复杂度O(n²)，空间复杂度O(1)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public int SubarraySum(int[] nums, int k)</span><br><span class="line">        &#123;</span><br><span class="line">            int result &#x3D; 0;</span><br><span class="line">            if (nums.Length &#x3D;&#x3D; 0)</span><br><span class="line">                return result;</span><br><span class="line">            int allSum &#x3D; 0;</span><br><span class="line">            for (int i &#x3D; 0; i &lt; nums.Length; i++)</span><br><span class="line">                allSum +&#x3D; nums[i];                  &#x2F;&#x2F;计算出所有元素之和</span><br><span class="line">            for(int i &#x3D; nums.Length - 1; i &gt;&#x3D; 0; i--)</span><br><span class="line">            &#123;                                       &#x2F;&#x2F;从最后一个元素开始遍历</span><br><span class="line">                int tempSum &#x3D; allSum;</span><br><span class="line">                for(int j &#x3D; 0; j &lt;&#x3D; i; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (tempSum &#x3D;&#x3D; k)</span><br><span class="line">                        result++;</span><br><span class="line">                    tempSum -&#x3D; nums[j];             &#x2F;&#x2F;每次去掉一个最前面的元素</span><br><span class="line">                &#125;</span><br><span class="line">                allSum -&#x3D; nums[i];                  &#x2F;&#x2F;去掉最后一个元素</span><br><span class="line">            &#125;</span><br><span class="line">            return result;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="3-前缀和"><a href="#3-前缀和" class="headerlink" title="3. 前缀和"></a>3. 前缀和</h1><ul>
+<li>什么是前缀和：<br>从 第 0 项 到 当前项 的 总和</li>
+<li>如果用一个数组 prefixSum 表示：<br>prefixSum[x]：nums 的 第 0 到 第 x 项 的总和<br>prefixSum[x] = nums[0] + nums[1] +…+nums[x]</li>
+<li>所以有，nums 某一项 = 两个相邻 前缀和 之差：<br>nums[x] = prefixSum[x] - prefixSum[x - 1]</li>
+<li>所以有，nums 的 第 i 到 j 项 的总和：<br>nums[i] +…+nums[j]=prefixSum[j] - prefixSum[i - 1]</li>
+<li>我们知道 i 当然可以为 0，此时 i - 1 为 - 1，我们让 prefixSum[-1] 为 0，此时：<br>nums[0] +…+nums[j]=prefixSum[j]</li>
+</ul>
+<h3 id="题目等价转化："><a href="#题目等价转化：" class="headerlink" title="题目等价转化："></a>题目等价转化：</h3><ul>
+<li>从【有几种 i、j 组合，使得从第 i 到 j 项的子数组的求和 === k】</li>
+</ul>
+<p>↓ ↓ ↓ 转化为 ↓ ↓ ↓</p>
+<ul>
+<li>【有几种 i、j 组合，满足 i &lt; j 且 prefixSum[ j ] - prefixSum[ i - 1 ] === k】</li>
+</ul>
+<ul>
+<li>于是我们想求出 prefixSum 数组的每一项，再看哪些项相减 === k，统计 count</li>
+</ul>
+<ul>
+<li>但通式有 i、j 2 个变量，需要两层 for 循环，时间复杂度依旧是 O(n^2)</li>
+</ul>
+<h3 id="摈弃-prefixSum-数组，引入哈希表"><a href="#摈弃-prefixSum-数组，引入哈希表" class="headerlink" title="摈弃 prefixSum 数组，引入哈希表"></a>摈弃 prefixSum 数组，引入哈希表</h3><p>可以不用 prefixSum 数组吗？可以。<br>因为我们不关心 前缀和 具体对应哪一项，只关心 前缀和 的值和 出现次数。<br>用 prefixSum 变量，保存当前项的前缀和，存入 map<br>这样 map 代替了 prefixSum 数组，记录出现过的 前缀和 和 出现次数</p>
+<h3 id="核心流程"><a href="#核心流程" class="headerlink" title="核心流程"></a>核心流程</h3><ul>
+<li><p>map 存什么键值对：</p>
+<p>键： 前缀和，从第 0 项到当前项的总和<br>值： 这个 前缀和 值出现了几次</p>
+</li>
+<li><p>遍历 nums 之前，我们预置边界情况 (即之前提到的 prefixSum[-1] = 0)：map 初始放入 0:1 键值对，即预设已经出现 1 次为 0 的前缀和</p>
+</li>
+<li><p>遍历 nums 的每一项，求当前项的前缀和，存入 map 中</p>
+<p>之前没有存过，则存入，初始值为 1<br>之前存过，则对应值 +1，即出现次数 +1</p>
+</li>
+<li><p>边存边查看 map ，如果 map 中已存在 key 为 当前前缀和 - k</p>
+<p>说明存在 【之前求出的前缀和】，它的值满足 【当前前缀和】-【之前求出的前缀和】 === k<br>把 【之前求出的前缀和】 出现的次数，累加给 count 计数器</p>
+</li>
+</ul>
+<h3 id="一句话总结"><a href="#一句话总结" class="headerlink" title="一句话总结"></a>一句话总结</h3><p>根据 当前前缀和，在 map 中寻找【相减 === k】的 目标前缀和。目标前缀和是一个数值，出现这个数值可能不止 1 次，假设为 n 次，就等价于，找到 n 个连续子数组的求和 === k，遍历 nums 数组每一项，n 不断累加给 count，最后返回 count</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>时间复杂度 O(n) 。空间复杂度 O(n)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> subarraySum = (nums, k) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (nums.length === <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">  let map = &#123; <span class="number">0</span>: <span class="number">1</span> &#125;</span><br><span class="line">  let prefixSum = <span class="number">0</span></span><br><span class="line">  let count = <span class="number">0</span></span><br><span class="line">  <span class="keyword">for</span> (let i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">    prefixSum += nums[i]</span><br><span class="line">    <span class="keyword">if</span> (map[prefixSum - k]) &#123;</span><br><span class="line">      count += map[prefixSum - k];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (map[prefixSum]) &#123;</span><br><span class="line">      map[prefixSum]++</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      map[prefixSum] = <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> count</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </section>
+    <footer class="post-footer">
+      <section class="author">
+    <h4>Max Hou</h4>
+    <p>In internationale we believe.</p>
+</section>
+      <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" target="_blank" rel="noopener" href="http://twitter.com/share?url=http://example.com/2021/08/05/560. 和为K的子数组/"
+       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2021/08/05/560. 和为K的子数组/"
+       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" target="_blank" rel="noopener" href="https://plus.google.com/share?url=http://example.com/2021/08/05/560. 和为K的子数组/"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+    </footer>
+  </article>
+  <nav class="pagination" role="pagination">
+    
+    <a class="newer-posts" href="/2021/08/05/581.%20%E6%9C%80%E7%9F%AD%E6%97%A0%E5%BA%8F%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/">
+        ← 
+    </a>
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2021/08/05/394.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%A3%E7%A0%81/">
+         →
+    </a>
+    
+</nav>
+  <div id="comment" class="comments-area">
+    <h1 class="title"><a href="#disqus_comments" name="disqus_comments">Comments</a></h1>
+
+    
+</div>
+</main>
+
+
+  
+<footer class="site-footer">
+  
+  <div class="inner">
+     <section class="copyright">All content copyright <a href="/">Max's blog</a> &copy; 2014 &bull; All rights reserved.</section>
+     <section class="poweredby">Proudly published with <a class="icon-ghost" target="_blank" rel="noopener" href="http://zespia.tw/hexo/">Hexo</a></section>
+  </div>
+</footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>Max&#39;s blog</title>
+  <meta name="description" content="流云借风" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic|Open+Sans:700,400" />
+
+  <meta name="generator" content="Max's blog">
+
+  
+  
+  
+
+  
+</head>
+
+
+<body class="post-template">
+
+  <header class="site-head"  style="background-image: url(https://7672-vride-id-1302852934.tcb.qcloud.la/images/background.jpg?sign=45aed964f34ac38dd34aa6cf97887958&t=1611041477)" >
+    <div class="vertical">
+        <div class="site-head-content inner">
+             <a class="blog-logo" href="/"><img src="https://7672-vride-id-1302852934.tcb.qcloud.la/images/logo.png?sign=73b7b80e989477f03e9cc84872e9d5d7&t=1611044870" alt="Blog Logo"/></a> 
+            <h1 class="blog-title">Max's blog</h1>
+            <h2 class="blog-description">流云借风</h2>
+        </div>
+    </div>
+</header>
+  
+
+<main class="content" role="main">
+  <article class="post">
+    <span class="post-meta">
+      <time datetime="2021-08-05T08:01:13.520Z" itemprop="datePublished">
+          2021-08-05
+      </time>
+    
+</span>
+    <h1 class="post-title"></h1>
+    <section class="post-content">
+      <h2 id="983-最低票价"><a href="#983-最低票价" class="headerlink" title="983. 最低票价"></a>983. 最低票价</h2><p>在一个火车旅行很受欢迎的国度，你提前一年计划了一些火车旅行。在接下来的一年里，你要旅行的日子将以一个名为 days 的数组给出。每一项是一个从 1 到 365 的整数。</p>
+<p>火车票有三种不同的销售方式：</p>
+<p>一张为期一天的通行证售价为 costs[0] 美元；<br>一张为期七天的通行证售价为 costs[1] 美元；<br>一张为期三十天的通行证售价为 costs[2] 美元。<br>通行证允许数天无限制的旅行。 例如，如果我们在第 2 天获得一张为期 7 天的通行证，那么我们可以连着旅行 7 天：第 2 天、第 3 天、第 4 天、第 5 天、第 6 天、第 7 天和第 8 天。</p>
+<p>返回你想要完成在给定的列表 days 中列出的每一天的旅行所需要的最低消费。</p>
+<p>示例 1：</p>
+<p>输入：days = [1,4,6,7,8,20], costs = [2,7,15]<br>输出：11<br>解释：<br>例如，这里有一种购买通行证的方法，可以让你完成你的旅行计划：<br>在第 1 天，你花了 costs[0] = $2 买了一张为期 1 天的通行证，它将在第 1 天生效。<br>在第 3 天，你花了 costs[1] = $7 买了一张为期 7 天的通行证，它将在第 3, 4, …, 9 天生效。<br>在第 20 天，你花了 costs[0] = $2 买了一张为期 1 天的通行证，它将在第 20 天生效。<br>你总共花了 $11，并完成了你计划的每一天旅行。<br>示例 2：</p>
+<p>输入：days = [1,2,3,4,5,6,7,8,9,10,30,31], costs = [2,7,15]<br>输出：17<br>解释：<br>例如，这里有一种购买通行证的方法，可以让你完成你的旅行计划：<br>在第 1 天，你花了 costs[2] = $15 买了一张为期 30 天的通行证，它将在第 1, 2, …, 30 天生效。<br>在第 31 天，你花了 costs[0] = $2 买了一张为期 1 天的通行证，它将在第 31 天生效。<br>你总共花了 $17，并完成了你计划的每一天旅行。</p>
+<p>提示：</p>
+<p>1 &lt;= days.length &lt;= 365<br>1 &lt;= days[i] &lt;= 365<br>days 按顺序严格递增<br>costs.length == 3<br>1 &lt;= costs[i] &lt;= 1000</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-cost-for-tickets">https://leetcode-cn.com/problems/minimum-cost-for-tickets</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">MincostTickets</span>(<span class="params"><span class="built_in">int</span>[] days, <span class="built_in">int</span>[] costs</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="built_in">int</span>[] costByNow = <span class="keyword">new</span> <span class="built_in">int</span>[<span class="number">366</span>];</span><br><span class="line">            costByNow[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">            <span class="built_in">int</span> coverDate = <span class="number">0</span>;</span><br><span class="line">            <span class="built_in">int</span> daysNo = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">1</span>; i &lt; costByNow.Length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (daysNo &gt;= days.Length)</span><br><span class="line">                    costByNow[i] = costByNow[i - <span class="number">1</span>];</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (i != days[daysNo])      <span class="comment">//如果这天不出门</span></span><br><span class="line">                    costByNow[i] = costByNow[i - <span class="number">1</span>];</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (coverDate &lt; days[daysNo])    <span class="comment">//如果未包含当前日期</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="comment">//寻找最优解</span></span><br><span class="line">                    <span class="keyword">if</span> (i &lt; <span class="number">7</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        costByNow[i] = Math.Min(costByNow[i - <span class="number">1</span>] + costs[<span class="number">0</span>], costByNow[<span class="number">0</span>] + costs[<span class="number">1</span>]);</span><br><span class="line">                        costByNow[i] = Math.Min(costByNow[i], costByNow[<span class="number">0</span>] + costs[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> (i &lt; <span class="number">30</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        costByNow[i] = Math.Min(costByNow[i - <span class="number">1</span>] + costs[<span class="number">0</span>], costByNow[i - <span class="number">7</span>] + costs[<span class="number">1</span>]);</span><br><span class="line">                        costByNow[i] = Math.Min(costByNow[i], costByNow[<span class="number">0</span>] + costs[<span class="number">2</span>]);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        costByNow[i] = Math.Min(costByNow[i - <span class="number">1</span>] + costs[<span class="number">0</span>], costByNow[i - <span class="number">7</span>] + costs[<span class="number">1</span>]);</span><br><span class="line">                        costByNow[i] = Math.Min(costByNow[i], costByNow[i - <span class="number">30</span>] + costs[<span class="number">2</span>]);</span><br><span class="line">                    &#125;</span><br><span class="line">                    daysNo++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> costByNow[<span class="number">365</span>];</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>思想：动态规划DP</p>
+
+    </section>
+    <footer class="post-footer">
+      <section class="author">
+    <h4>Max Hou</h4>
+    <p>In internationale we believe.</p>
+</section>
+      <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" target="_blank" rel="noopener" href="http://twitter.com/share?url=http://example.com/2021/08/05/983. 最低票价/"
+       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2021/08/05/983. 最低票价/"
+       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" target="_blank" rel="noopener" href="https://plus.google.com/share?url=http://example.com/2021/08/05/983. 最低票价/"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+    </footer>
+  </article>
+  <nav class="pagination" role="pagination">
+    
+    <a class="newer-posts" href="/2021/08/05/1365.%20%E6%9C%89%E5%A4%9A%E5%B0%91%E5%B0%8F%E4%BA%8E%E5%BD%93%E5%89%8D%E6%95%B0%E5%AD%97%E7%9A%84%E6%95%B0%E5%AD%97/">
+        ← 
+    </a>
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2021/08/05/974.%20%E5%92%8C%E5%8F%AF%E8%A2%ABK%E6%95%B4%E9%99%A4%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/">
+         →
+    </a>
+    
+</nav>
+  <div id="comment" class="comments-area">
+    <h1 class="title"><a href="#disqus_comments" name="disqus_comments">Comments</a></h1>
+
+    
+</div>
+</main>
+
+
+  
+<footer class="site-footer">
+  
+  <div class="inner">
+     <section class="copyright">All content copyright <a href="/">Max's blog</a> &copy; 2014 &bull; All rights reserved.</section>
+     <section class="poweredby">Proudly published with <a class="icon-ghost" target="_blank" rel="noopener" href="http://zespia.tw/hexo/">Hexo</a></section>
+  </div>
+</footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+
+
+
+
+
+
+</body>
+</html>

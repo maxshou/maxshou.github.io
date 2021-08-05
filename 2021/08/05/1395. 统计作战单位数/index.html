@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>Max&#39;s blog</title>
+  <meta name="description" content="流云借风" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic|Open+Sans:700,400" />
+
+  <meta name="generator" content="Max's blog">
+
+  
+  
+  
+
+  
+</head>
+
+
+<body class="post-template">
+
+  <header class="site-head"  style="background-image: url(https://7672-vride-id-1302852934.tcb.qcloud.la/images/background.jpg?sign=45aed964f34ac38dd34aa6cf97887958&t=1611041477)" >
+    <div class="vertical">
+        <div class="site-head-content inner">
+             <a class="blog-logo" href="/"><img src="https://7672-vride-id-1302852934.tcb.qcloud.la/images/logo.png?sign=73b7b80e989477f03e9cc84872e9d5d7&t=1611044870" alt="Blog Logo"/></a> 
+            <h1 class="blog-title">Max's blog</h1>
+            <h2 class="blog-description">流云借风</h2>
+        </div>
+    </div>
+</header>
+  
+
+<main class="content" role="main">
+  <article class="post">
+    <span class="post-meta">
+      <time datetime="2021-08-05T08:01:13.542Z" itemprop="datePublished">
+          2021-08-05
+      </time>
+    
+</span>
+    <h1 class="post-title"></h1>
+    <section class="post-content">
+      <h2 id="1395-统计作战单位数"><a href="#1395-统计作战单位数" class="headerlink" title="1395. 统计作战单位数"></a>1395. 统计作战单位数</h2><p>n 名士兵站成一排。每个士兵都有一个 独一无二 的评分 rating 。</p>
+<p>每 3 个士兵可以组成一个作战单位，分组规则如下：</p>
+<p>从队伍中选出下标分别为 i、j、k 的 3 名士兵，他们的评分分别为 rating[i]、rating[j]、rating[k]<br>作战单位需满足： rating[i] &lt; rating[j] &lt; rating[k] 或者 rating[i] &gt; rating[j] &gt; rating[k] ，其中  0 &lt;= i &lt; j &lt; k &lt; n<br>请你返回按上述条件可以组建的作战单位数量。每个士兵都可以是多个作战单位的一部分。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入：rating &#x3D; [2,5,3,4,1]</span><br><span class="line">输出：3</span><br><span class="line">解释：我们可以组建三个作战单位 (2,3,4)、(5,4,1)、(5,3,1) 。</span><br><span class="line"></span><br><span class="line">输入：rating &#x3D; [2,1,3]</span><br><span class="line">输出：0</span><br><span class="line">解释：根据题目条件，我们无法组建作战单位。</span><br><span class="line"></span><br><span class="line">输入：rating &#x3D; [1,2,3,4]</span><br><span class="line">输出：4</span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>n == rating.length</code></li>
+<li><code>1 &lt;= n &lt;= 200</code></li>
+<li><code>1 &lt;= rating[i] &lt;= 10^5</code></li>
+</ul>
+<h1 id="暴力算法"><a href="#暴力算法" class="headerlink" title="暴力算法"></a>暴力算法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public int NumTeams(int[] rating)</span><br><span class="line">        &#123;</span><br><span class="line">            int count &#x3D; 0;</span><br><span class="line">            for(int i &#x3D; 0; i &lt; rating.Length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                for(int j &#x3D; i; j &lt; rating.Length; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (rating[j] &gt; rating[i])</span><br><span class="line">                    &#123;</span><br><span class="line">                        for(int k &#x3D; j; k &lt; rating.Length; k++)</span><br><span class="line">                        &#123;</span><br><span class="line">                            if (rating[k] &gt; rating[j])</span><br><span class="line">                                count++;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            for (int i &#x3D; 0; i &lt; rating.Length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                for (int j &#x3D; i; j &lt; rating.Length; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (rating[j] &lt; rating[i])</span><br><span class="line">                    &#123;</span><br><span class="line">                        for (int k &#x3D; j; k &lt; rating.Length; k++)</span><br><span class="line">                        &#123;</span><br><span class="line">                            if (rating[k] &lt; rating[j])</span><br><span class="line">                                count++;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return count;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>复杂度O(n^3)</p>
+<h1 id="优化算法"><a href="#优化算法" class="headerlink" title="优化算法"></a>优化算法</h1><p>遍历中间的士兵，统计 左边/右边 比他 小/大 的士兵人数。</p>
+<p>每名士兵在中间的情况下可以组队的数量为：<br>左边比他小的人数 × 右边比他大的人数 + 左边比他大的人数 × 右边比他小的人数</p>
+<p>公式为：\sum_{}(left[0] * right[1] + left[1] * right[0])∑ </p>
+<p> (left[0]∗right[1]+left[1]∗right[0])</p>
+<p>时间复杂度：一个for循环为O(n)，两次count函数O(n)，故总的时间复杂度为O(n^2)。<br>空间复杂度：O(1)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public int NumTeams(int[] rating)</span><br><span class="line">        &#123;</span><br><span class="line">            int count &#x3D; 0;</span><br><span class="line">            int n &#x3D; rating.Length;</span><br><span class="line">            int[] leftLess &#x3D; new int[n];</span><br><span class="line">            int[] rightMore &#x3D; new int[n];</span><br><span class="line">            for (int i &#x3D; 0; i &lt; n; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                for (int j &#x3D; 0; j &lt; i; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (rating[j] &lt; rating[i])</span><br><span class="line">                        leftLess[i]++;</span><br><span class="line">                &#125;</span><br><span class="line">                for (int j &#x3D; i + 1; j &lt; n; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (rating[j] &gt; rating[i])</span><br><span class="line">                        rightMore[i]++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            for(int i &#x3D; 0; i &lt; n; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                count +&#x3D; (leftLess[i] * rightMore[i]);</span><br><span class="line">                count +&#x3D; ((i - leftLess[i]) * (n - i - 1 - rightMore[i]));</span><br><span class="line">            &#125;</span><br><span class="line">            return count;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+    </section>
+    <footer class="post-footer">
+      <section class="author">
+    <h4>Max Hou</h4>
+    <p>In internationale we believe.</p>
+</section>
+      <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" target="_blank" rel="noopener" href="http://twitter.com/share?url=http://example.com/2021/08/05/1395. 统计作战单位数/"
+       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2021/08/05/1395. 统计作战单位数/"
+       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" target="_blank" rel="noopener" href="https://plus.google.com/share?url=http://example.com/2021/08/05/1395. 统计作战单位数/"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+    </footer>
+  </article>
+  <nav class="pagination" role="pagination">
+    
+    <a class="newer-posts" href="/2021/08/05/%E5%9B%BD%E7%8E%8B%E5%92%8C%E9%87%91%E7%9F%BF%EF%BC%8C%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+        ← 
+    </a>
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2021/08/05/1365.%20%E6%9C%89%E5%A4%9A%E5%B0%91%E5%B0%8F%E4%BA%8E%E5%BD%93%E5%89%8D%E6%95%B0%E5%AD%97%E7%9A%84%E6%95%B0%E5%AD%97/">
+         →
+    </a>
+    
+</nav>
+  <div id="comment" class="comments-area">
+    <h1 class="title"><a href="#disqus_comments" name="disqus_comments">Comments</a></h1>
+
+    
+</div>
+</main>
+
+
+  
+<footer class="site-footer">
+  
+  <div class="inner">
+     <section class="copyright">All content copyright <a href="/">Max's blog</a> &copy; 2014 &bull; All rights reserved.</section>
+     <section class="poweredby">Proudly published with <a class="icon-ghost" target="_blank" rel="noopener" href="http://zespia.tw/hexo/">Hexo</a></section>
+  </div>
+</footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>Max&#39;s blog</title>
+  <meta name="description" content="流云借风" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic|Open+Sans:700,400" />
+
+  <meta name="generator" content="Max's blog">
+
+  
+  
+  
+
+  
+</head>
+
+
+<body class="post-template">
+
+  <header class="site-head"  style="background-image: url(https://7672-vride-id-1302852934.tcb.qcloud.la/images/background.jpg?sign=45aed964f34ac38dd34aa6cf97887958&t=1611041477)" >
+    <div class="vertical">
+        <div class="site-head-content inner">
+             <a class="blog-logo" href="/"><img src="https://7672-vride-id-1302852934.tcb.qcloud.la/images/logo.png?sign=73b7b80e989477f03e9cc84872e9d5d7&t=1611044870" alt="Blog Logo"/></a> 
+            <h1 class="blog-title">Max's blog</h1>
+            <h2 class="blog-description">流云借风</h2>
+        </div>
+    </div>
+</header>
+  
+
+<main class="content" role="main">
+  <article class="post">
+    <span class="post-meta">
+      <time datetime="2021-08-05T08:01:13.499Z" itemprop="datePublished">
+          2021-08-05
+      </time>
+    
+</span>
+    <h1 class="post-title"></h1>
+    <section class="post-content">
+      <h4 id="802-找到最终的安全状态"><a href="#802-找到最终的安全状态" class="headerlink" title="802. 找到最终的安全状态"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-eventual-safe-states/">802. 找到最终的安全状态</a></h4><p>难度中等</p>
+<p>在有向图中，以某个节点为起始节点，从该点出发，每一步沿着图中的一条有向边行走。如果到达的节点是终点（即它没有连出的有向边），则停止。</p>
+<p>对于一个起始节点，如果从该节点出发，<strong>无论每一步选择沿哪条有向边行走</strong>，最后必然在有限步内到达终点，则将该起始节点称作是 <strong>安全</strong> 的。</p>
+<p>返回一个由图中所有安全的起始节点组成的数组作为答案。答案数组中的元素应当按 <strong>升序</strong> 排列。</p>
+<p>该有向图有 <code>n</code> 个节点，按 <code>0</code> 到 <code>n - 1</code> 编号，其中 <code>n</code> 是 <code>graph</code> 的节点数。图以下述形式给出：<code>graph[i]</code> 是编号 <code>j</code> 节点的一个列表，满足 <code>(i, j)</code> 是图的一条有向边。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/03/17/picture1.png" alt="Illustration of graph"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：graph &#x3D; [[1,2],[2,3],[5],[0],[5],[],[]]</span><br><span class="line">输出：[2,4,5,6]</span><br><span class="line">解释：示意图如上。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：graph &#x3D; [[1,2,3,4],[1,2],[3,4],[0,4],[]]</span><br><span class="line">输出：[4]</span><br></pre></td></tr></table></figure>
+
+
+<p>提示：</p>
+<ul>
+<li>n == graph.length</li>
+<li>1 &lt;= n &lt;= 104</li>
+<li>0 &lt;= graph[i].length &lt;= n</li>
+<li>graph[i] 按严格递增顺序排列。</li>
+<li>图中可能包含自环。</li>
+<li>图中边的数目在范围 [1, 4 * 104] 内。</li>
+</ul>
+<h2 id="思路：不断遍历（超时，弃用）"><a href="#思路：不断遍历（超时，弃用）" class="headerlink" title="思路：不断遍历（超时，弃用）"></a>思路：不断遍历（超时，弃用）</h2><h2 id="思路：深度优先搜索-三色标识"><a href="#思路：深度优先搜索-三色标识" class="headerlink" title="思路：深度优先搜索+三色标识"></a>思路：深度优先搜索+三色标识</h2><p>核心：寻找环，能到达环的节点为不安全。</p>
+<ol>
+<li>白色（用 0 表示）：该节点尚未被访问；</li>
+<li>灰色（用 1 表示）：该节点位于递归栈中，或者在某个环上；</li>
+<li>黑色（用 2 表示）：该节点搜索完毕，是一个安全节点。</li>
+</ol>
+<p>搜索时遇到白色节点，则将其标记为灰色（意为正在递归），并递归搜索它能到达的节点。</p>
+<p>搜索时遇到灰色节点，说明要么当前搜索成环，要么指向到某个环节点，因此当前搜索失败，递归返回False。这路搜索中到达过的点均会保留灰色，意为这些节点均不安全。</p>
+<p>搜索时遇到黑色节点，说明到达终点（安全节点），返回True。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def eventualSafeNodes(self, graph):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type graph: List[List[int]]</span><br><span class="line">        :rtype: List[int]</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        n &#x3D; len(graph)</span><br><span class="line">        color &#x3D; [0] * n</span><br><span class="line"></span><br><span class="line">        def safe(x):</span><br><span class="line">            if color[x] &gt; 0:</span><br><span class="line">                return color[x] &#x3D;&#x3D; 2</span><br><span class="line">            color[x] &#x3D; 1</span><br><span class="line">            for y in graph[x]:</span><br><span class="line">                if not safe(y):</span><br><span class="line">                    return False</span><br><span class="line">            color[x] &#x3D; 2</span><br><span class="line">            return True</span><br><span class="line"></span><br><span class="line">        return [i for i in range(n) if safe(i)]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">    nums &#x3D; [[0],[2,3,4],[3,4],[0,4],[]]</span><br><span class="line"></span><br><span class="line">    sol &#x3D; Solution()</span><br><span class="line">    print(sol.eventualSafeNodes(nums))</span><br></pre></td></tr></table></figure>
+
+    </section>
+    <footer class="post-footer">
+      <section class="author">
+    <h4>Max Hou</h4>
+    <p>In internationale we believe.</p>
+</section>
+      <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" target="_blank" rel="noopener" href="http://twitter.com/share?url=http://example.com/2021/08/05/802. 找到最终的安全状态/"
+       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2021/08/05/802. 找到最终的安全状态/"
+       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" target="_blank" rel="noopener" href="https://plus.google.com/share?url=http://example.com/2021/08/05/802. 找到最终的安全状态/"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+    </footer>
+  </article>
+  <nav class="pagination" role="pagination">
+    
+    <a class="newer-posts" href="/2021/08/05/974.%20%E5%92%8C%E5%8F%AF%E8%A2%ABK%E6%95%B4%E9%99%A4%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/">
+        ← 
+    </a>
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2021/01/19/hello-world/">
+        Hello World →
+    </a>
+    
+</nav>
+  <div id="comment" class="comments-area">
+    <h1 class="title"><a href="#disqus_comments" name="disqus_comments">Comments</a></h1>
+
+    
+</div>
+</main>
+
+
+  
+<footer class="site-footer">
+  
+  <div class="inner">
+     <section class="copyright">All content copyright <a href="/">Max's blog</a> &copy; 2014 &bull; All rights reserved.</section>
+     <section class="poweredby">Proudly published with <a class="icon-ghost" target="_blank" rel="noopener" href="http://zespia.tw/hexo/">Hexo</a></section>
+  </div>
+</footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+
+
+
+
+
+
+</body>
+</html>
