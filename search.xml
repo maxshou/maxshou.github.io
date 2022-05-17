@@ -1,43 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>121. 买卖股票的最佳时机</title>
-    <url>/2021/08/05/121.%20%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</url>
-    <content><![CDATA[<p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
-<p>如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。</p>
-<a id="more"></a>
-
-<h4 id="121-买卖股票的最佳时机"><a href="#121-买卖股票的最佳时机" class="headerlink" title="121. 买卖股票的最佳时机"></a><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/">121. 买卖股票的最佳时机</a></h4><p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
-<p>如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。</p>
-<p>注意：你不能在买入股票前卖出股票。</p>
-<p>示例 1:</p>
-<p>输入: [7,1,5,3,6,4]<br>输出: 5<br>解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。<br>     注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。</p>
-<p>示例 2:</p>
-<p>输入: [7,6,4,3,1]<br>输出: 0<br>解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public int MaxProfit(int[] prices)</span><br><span class="line">        &#123;</span><br><span class="line">            int maxProfit &#x3D; 0;</span><br><span class="line">            int tempProfit &#x3D; 0;</span><br><span class="line">            for(int i&#x3D;0; i &lt; prices.Length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                for(int j &#x3D; i; j &lt; prices.Length; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (prices[i] &lt; prices[j])</span><br><span class="line">                    &#123;</span><br><span class="line">                        tempProfit &#x3D; prices[j] - prices[i];</span><br><span class="line">                        if (tempProfit &gt; maxProfit)</span><br><span class="line">                            maxProfit &#x3D; tempProfit;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            return maxProfit;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="DP思想"><a href="#DP思想" class="headerlink" title="DP思想"></a>DP思想</h1><ol>
-<li><p>记录【今天之前买入的最小值】</p>
-</li>
-<li><p>计算【今天之前最小值买入，今天卖出的获利】，也即【今天卖出的最大获利】</p>
-</li>
-<li><p>比较【每天的最大获利】，取最大值即可</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public int MaxProfit(int[] prices) &#123;</span><br><span class="line">        &#123;</span><br><span class="line">        	if(prices.Length&lt;&#x3D;1)		&#x2F;&#x2F;少于两天没有收益</span><br><span class="line">        		return 0;</span><br><span class="line">            int min &#x3D; prices[0];    &#x2F;&#x2F;今天以前最小的一天</span><br><span class="line">            int maxProfit &#x3D; 0;      &#x2F;&#x2F;当前最大收益</span><br><span class="line">            for(int i&#x3D;1; i &lt; prices.Length; i++)    &#x2F;&#x2F;从第二天开始遍历</span><br><span class="line">            &#123;</span><br><span class="line">                maxProfit &#x3D; Math.Max(maxProfit, prices[i] - min);   </span><br><span class="line">                &#x2F;&#x2F;比较今天卖还是之前卖收益高</span><br><span class="line">                min &#x3D; Math.Min(min, prices[i]);         </span><br><span class="line">                &#x2F;&#x2F;比较出到今天为止最低的一天</span><br><span class="line">            &#125;</span><br><span class="line">            return maxProfit;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>难度：简单</tag>
-        <tag>C#</tag>
-        <tag>数组</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>1. 两数之和</title>
     <url>/2021/08/05/1.%20%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
     <content><![CDATA[<p>给定一个整数数组 nums和一个整数目标值 target，请你在该数组中找出和为目标值target的那两个整数，并返回它们的数组下标。</p>
@@ -108,36 +71,40 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>C#</tag>
         <tag>难度：中等</tag>
+        <tag>C#</tag>
         <tag>二叉树</tag>
         <tag>层序遍历</tag>
         <tag>广度优先</tag>
       </tags>
   </entry>
   <entry>
-    <title>136. 只出现一次的数字</title>
-    <url>/2021/08/05/136.%20%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97/</url>
-    <content><![CDATA[<p>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
+    <title>121. 买卖股票的最佳时机</title>
+    <url>/2021/08/05/121.%20%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</url>
+    <content><![CDATA[<p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
+<p>如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。</p>
 <a id="more"></a>
 
-<h4 id="136-只出现一次的数字"><a href="#136-只出现一次的数字" class="headerlink" title="136. 只出现一次的数字"></a><a href="https://leetcode.cn/problems/single-number/">136. 只出现一次的数字</a></h4><p>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
-<p>说明：</p>
-<p>你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">示例 1:</span><br><span class="line"></span><br><span class="line">输入: [2,2,1]</span><br><span class="line">输出: 1</span><br><span class="line">示例 2:</span><br><span class="line"></span><br><span class="line">输入: [4,1,2,1,2]</span><br><span class="line">输出: 4</span><br></pre></td></tr></table></figure>
-<p>思路：</p>
-<ol>
-<li><p>使用暴力算法，时间复杂度O(n²)</p>
+<h4 id="121-买卖股票的最佳时机"><a href="#121-买卖股票的最佳时机" class="headerlink" title="121. 买卖股票的最佳时机"></a><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/">121. 买卖股票的最佳时机</a></h4><p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
+<p>如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。</p>
+<p>注意：你不能在买入股票前卖出股票。</p>
+<p>示例 1:</p>
+<p>输入: [7,1,5,3,6,4]<br>输出: 5<br>解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。<br>     注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。</p>
+<p>示例 2:</p>
+<p>输入: [7,6,4,3,1]<br>输出: 0<br>解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public int MaxProfit(int[] prices)</span><br><span class="line">        &#123;</span><br><span class="line">            int maxProfit &#x3D; 0;</span><br><span class="line">            int tempProfit &#x3D; 0;</span><br><span class="line">            for(int i&#x3D;0; i &lt; prices.Length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                for(int j &#x3D; i; j &lt; prices.Length; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (prices[i] &lt; prices[j])</span><br><span class="line">                    &#123;</span><br><span class="line">                        tempProfit &#x3D; prices[j] - prices[i];</span><br><span class="line">                        if (tempProfit &gt; maxProfit)</span><br><span class="line">                            maxProfit &#x3D; tempProfit;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            return maxProfit;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="DP思想"><a href="#DP思想" class="headerlink" title="DP思想"></a>DP思想</h1><ol>
+<li><p>记录【今天之前买入的最小值】</p>
 </li>
-<li><p>使用排序，复杂度O(n*log(n))</p>
+<li><p>计算【今天之前最小值买入，今天卖出的获利】，也即【今天卖出的最大获利】</p>
 </li>
-<li><p>使用哈希表，需要空间来存储之前的数，时间、空间复杂度均O(n)</p>
-</li>
-<li><p>使用异或操作</p>
-<p>异或^会按照二进制将两个数的每一位进行比较，相同为0不同为n。而且a^b^a=b，因此把数组中所有元素进行异或操作，出现偶数次的将会被约去，结果为出现奇数次的那一个元素。</p>
+<li><p>比较【每天的最大获利】，取最大值即可</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public int MaxProfit(int[] prices) &#123;</span><br><span class="line">        &#123;</span><br><span class="line">        	if(prices.Length&lt;&#x3D;1)		&#x2F;&#x2F;少于两天没有收益</span><br><span class="line">        		return 0;</span><br><span class="line">            int min &#x3D; prices[0];    &#x2F;&#x2F;今天以前最小的一天</span><br><span class="line">            int maxProfit &#x3D; 0;      &#x2F;&#x2F;当前最大收益</span><br><span class="line">            for(int i&#x3D;1; i &lt; prices.Length; i++)    &#x2F;&#x2F;从第二天开始遍历</span><br><span class="line">            &#123;</span><br><span class="line">                maxProfit &#x3D; Math.Max(maxProfit, prices[i] - min);   </span><br><span class="line">                &#x2F;&#x2F;比较今天卖还是之前卖收益高</span><br><span class="line">                min &#x3D; Math.Min(min, prices[i]);         </span><br><span class="line">                &#x2F;&#x2F;比较出到今天为止最低的一天</span><br><span class="line">            &#125;</span><br><span class="line">            return maxProfit;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public int SingleNumber(int[] nums)</span><br><span class="line">        &#123;</span><br><span class="line">            int a &#x3D; nums[0];</span><br><span class="line">            if (nums.Length &gt; 1)</span><br><span class="line">            &#123;</span><br><span class="line">                for(int i &#x3D; 1; i &lt; nums.Length; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    a &#x3D; a ^ nums[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return a;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -185,26 +152,28 @@
       </tags>
   </entry>
   <entry>
-    <title>155. 最小栈</title>
-    <url>/2021/08/05/155.%20%E6%9C%80%E5%B0%8F%E6%A0%88/</url>
-    <content><![CDATA[<p>设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。</p>
+    <title>136. 只出现一次的数字</title>
+    <url>/2021/08/05/136.%20%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97/</url>
+    <content><![CDATA[<p>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
 <a id="more"></a>
 
-<h4 id="155-最小栈"><a href="#155-最小栈" class="headerlink" title="155. 最小栈"></a><a href="https://leetcode.cn/problems/min-stack/">155. 最小栈</a></h4><p>设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。</p>
-<ul>
-<li>push(x) —— 将元素 x 推入栈中。</li>
-<li>pop() —— 删除栈顶的元素。</li>
-<li>top() —— 获取栈顶元素。</li>
-<li>getMin() —— 检索栈中的最小元素。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">[&quot;MinStack&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;getMin&quot;,&quot;pop&quot;,&quot;top&quot;,&quot;getMin&quot;]</span><br><span class="line">[[],[-2],[0],[-3],[],[],[],[]]</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">[null,null,null,null,-3,null,0,-2]</span><br><span class="line"></span><br><span class="line">解释：</span><br><span class="line">MinStack minStack &#x3D; new MinStack();</span><br><span class="line">minStack.push(-2);</span><br><span class="line">minStack.push(0);</span><br><span class="line">minStack.push(-3);</span><br><span class="line">minStack.getMin();   --&gt; 返回 -3.</span><br><span class="line">minStack.pop();</span><br><span class="line">minStack.top();      --&gt; 返回 0.</span><br><span class="line">minStack.getMin();   --&gt; 返回 -2.</span><br></pre></td></tr></table></figure>
-<p>提示：</p>
-<ul>
-<li>pop、top 和 getMin 操作总是在 非空栈 上调用。</li>
-</ul>
-<p>栈的概念是弹百压，就像子弹壳装弹，一粒一粒压进去，但是打出来的时候是度从上面打出来的，最先压进去的最后弹出来，如果进去顺序是123，打出来顺序是321，这就是后进先出。</p>
-<p>使用Object存储栈的每个节点，指针指向后一个、更小的和更大的，在MinStack类中存储栈顶和最小的一个。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class MinStack</span><br><span class="line">    &#123;</span><br><span class="line">        private Stack topStack;</span><br><span class="line">        private Stack minStack;</span><br><span class="line"></span><br><span class="line">        &#x2F;** initialize your data structure here. *&#x2F;</span><br><span class="line">        public MinStack()</span><br><span class="line">        &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void Push(int x)</span><br><span class="line">        &#123;</span><br><span class="line">            Stack newOne &#x3D; new Stack(x);</span><br><span class="line">            newOne.nextOne &#x3D; topStack;</span><br><span class="line">            topStack &#x3D; newOne;</span><br><span class="line">            if (minStack &#x3D;&#x3D; null)</span><br><span class="line">                minStack &#x3D; newOne;</span><br><span class="line">            else if (minStack.num &gt; newOne.num)</span><br><span class="line">            &#123;</span><br><span class="line">                newOne.BiggerOne &#x3D; minStack;</span><br><span class="line">                minStack &#x3D; newOne;</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">                Stack minOne &#x3D; minStack;</span><br><span class="line">                while (minOne !&#x3D; null)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (minOne.num &lt;&#x3D; x)</span><br><span class="line">                        minOne &#x3D; minOne.BiggerOne;</span><br><span class="line">                    else</span><br><span class="line">                        break;</span><br><span class="line">                &#125;</span><br><span class="line">                newOne.BiggerOne &#x3D; minOne;</span><br><span class="line">                if (minOne !&#x3D; null)</span><br><span class="line">                    newOne.SmallerOne &#x3D; minOne.SmallerOne;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void Pop()</span><br><span class="line">        &#123;</span><br><span class="line">            if (topStack !&#x3D; null)</span><br><span class="line">            &#123;</span><br><span class="line">                if (minStack &#x3D;&#x3D; topStack)</span><br><span class="line">                    minStack &#x3D; topStack.BiggerOne;</span><br><span class="line">                if (topStack.SmallerOne !&#x3D; null)</span><br><span class="line">                    topStack.SmallerOne &#x3D; topStack.SmallerOne.SmallerOne;</span><br><span class="line">                if (topStack.BiggerOne !&#x3D; null)</span><br><span class="line">                    topStack.BiggerOne &#x3D; topStack.BiggerOne.BiggerOne;</span><br><span class="line">                topStack &#x3D; topStack.nextOne;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public int Top()</span><br><span class="line">        &#123;</span><br><span class="line">            if (topStack !&#x3D; null)</span><br><span class="line">                return topStack.num;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public int GetMin()</span><br><span class="line">        &#123;</span><br><span class="line">            if (minStack !&#x3D; null)</span><br><span class="line">                return minStack.num;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        private class Stack</span><br><span class="line">        &#123;</span><br><span class="line">            public int num;</span><br><span class="line">            public Stack nextOne;</span><br><span class="line">            public Stack BiggerOne;</span><br><span class="line">            public Stack SmallerOne;</span><br><span class="line"></span><br><span class="line">            public Stack(int num)</span><br><span class="line">            &#123;</span><br><span class="line">                this.num &#x3D; num;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * Your MinStack object will be instantiated and called as such:</span><br><span class="line"> * MinStack obj &#x3D; new MinStack();</span><br><span class="line"> * obj.Push(x);</span><br><span class="line"> * obj.Pop();</span><br><span class="line"> * int param_3 &#x3D; obj.Top();</span><br><span class="line"> * int param_4 &#x3D; obj.GetMin();</span><br><span class="line"> *&#x2F;</span><br></pre></td></tr></table></figure>
+<h4 id="136-只出现一次的数字"><a href="#136-只出现一次的数字" class="headerlink" title="136. 只出现一次的数字"></a><a href="https://leetcode.cn/problems/single-number/">136. 只出现一次的数字</a></h4><p>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
+<p>说明：</p>
+<p>你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">示例 1:</span><br><span class="line"></span><br><span class="line">输入: [2,2,1]</span><br><span class="line">输出: 1</span><br><span class="line">示例 2:</span><br><span class="line"></span><br><span class="line">输入: [4,1,2,1,2]</span><br><span class="line">输出: 4</span><br></pre></td></tr></table></figure>
+<p>思路：</p>
+<ol>
+<li><p>使用暴力算法，时间复杂度O(n²)</p>
+</li>
+<li><p>使用排序，复杂度O(n*log(n))</p>
+</li>
+<li><p>使用哈希表，需要空间来存储之前的数，时间、空间复杂度均O(n)</p>
+</li>
+<li><p>使用异或操作</p>
+<p>异或^会按照二进制将两个数的每一位进行比较，相同为0不同为n。而且a^b^a=b，因此把数组中所有元素进行异或操作，出现偶数次的将会被约去，结果为出现奇数次的那一个元素。</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public int SingleNumber(int[] nums)</span><br><span class="line">        &#123;</span><br><span class="line">            int a &#x3D; nums[0];</span><br><span class="line">            if (nums.Length &gt; 1)</span><br><span class="line">            &#123;</span><br><span class="line">                for(int i &#x3D; 1; i &lt; nums.Length; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    a &#x3D; a ^ nums[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return a;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -212,7 +181,7 @@
       <tags>
         <tag>难度：简单</tag>
         <tag>C#</tag>
-        <tag>栈</tag>
+        <tag>数组</tag>
       </tags>
   </entry>
   <entry>
@@ -262,63 +231,39 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>C#</tag>
         <tag>难度：中等</tag>
+        <tag>C#</tag>
       </tags>
   </entry>
   <entry>
-    <title>221. 最大正方形</title>
-    <url>/2021/08/05/221.%20%E6%9C%80%E5%A4%A7%E6%AD%A3%E6%96%B9%E5%BD%A2/</url>
-    <content><![CDATA[<p>在一个由 0 和 1 组成的二维矩阵内，找到只包含 1 的最大正方形，并返回其面积。</p>
+    <title>155. 最小栈</title>
+    <url>/2021/08/05/155.%20%E6%9C%80%E5%B0%8F%E6%A0%88/</url>
+    <content><![CDATA[<p>设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。</p>
 <a id="more"></a>
 
-<h4 id="221-最大正方形"><a href="#221-最大正方形" class="headerlink" title="221. 最大正方形"></a><a href="https://leetcode.cn/problems/maximal-square/">221. 最大正方形</a></h4><p>在一个由 0 和 1 组成的二维矩阵内，找到只包含 1 的最大正方形，并返回其面积。</p>
-<p><strong>示例:</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line"></span><br><span class="line">1 0 1 0 0</span><br><span class="line">1 0 1 1 1</span><br><span class="line">1 1 1 1 1</span><br><span class="line">1 0 0 1 0</span><br><span class="line"></span><br><span class="line">输出: 4</span><br></pre></td></tr></table></figure>
-<h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><ul>
-<li>若形成正方形（非单 <code>1</code>），以当前为右下角的视角看，则需要：当前格、上、左、左上都是 <code>1</code></li>
-<li>可以换个角度：当前格、上、左、左上都不能受 <code>0</code> 的限制，才能成为正方形</li>
-</ul>
-<p><img src="https://pic.leetcode-cn.com/8c4bf78cf6396c40291e40c25d34ef56bd524313c2aa863f3a20c1f004f32ab0-image.png" alt="image.png"></p>
-<p>当前格可形成的大小可化简为当前格的左上、左、上三者最小值加一。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public int MaximalSquare(char[][] matrix)</span><br><span class="line">        &#123;</span><br><span class="line">            if (matrix &#x3D;&#x3D; null || matrix.Length &#x3D;&#x3D; 0)</span><br><span class="line">            &#123;</span><br><span class="line">                return 0;</span><br><span class="line">            &#125;</span><br><span class="line">            int[,] dp &#x3D; new int[matrix.Length, matrix[0].Length];</span><br><span class="line">            int max &#x3D; 0;</span><br><span class="line">            for(int i&#x3D;0;i&lt; matrix.Length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                for(int j &#x3D; 0; j &lt; matrix[0].Length; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (matrix[i][j] &#x3D;&#x3D; &#39;1&#39;)</span><br><span class="line">                    &#123;</span><br><span class="line">                        if (i &#x3D;&#x3D; 0 || j &#x3D;&#x3D; 0)</span><br><span class="line">                        &#123;</span><br><span class="line">                            dp[i, j] &#x3D; 1;</span><br><span class="line">                        &#125;</span><br><span class="line">                        else</span><br><span class="line">                        &#123;</span><br><span class="line">                            dp[i, j] &#x3D; Math.Min(dp[i - 1, j - 1], dp[i, j - 1]);</span><br><span class="line">                            dp[i, j] &#x3D; Math.Min(dp[i, j], dp[i - 1, j]);</span><br><span class="line">                            dp[i, j] +&#x3D; 1;</span><br><span class="line">                        &#125;</span><br><span class="line">                        if (dp[i, j] &gt; max)</span><br><span class="line">                            max &#x3D; dp[i, j];</span><br><span class="line">                    &#125;</span><br><span class="line">                    else</span><br><span class="line">                        dp[i, j] &#x3D; 0;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return max * max;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>C#</tag>
-        <tag>难度：中等</tag>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>236. 二叉树的最近公共祖先</title>
-    <url>/2021/08/05/236.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/</url>
-    <content><![CDATA[<p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
-<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
-<a id="more"></a>
-
-<h4 id="236-二叉树的最近公共祖先"><a href="#236-二叉树的最近公共祖先" class="headerlink" title="236. 二叉树的最近公共祖先"></a><a href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/">236. 二叉树的最近公共祖先</a></h4><p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
-<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
-<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/15/binarytree.png" alt="img"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">示例 1:</span><br><span class="line"></span><br><span class="line">输入: root &#x3D; [3,5,1,6,2,0,8,null,null,7,4], p &#x3D; 5, q &#x3D; 1</span><br><span class="line">输出: 3</span><br><span class="line">解释: 节点 5 和节点 1 的最近公共祖先是节点 3。</span><br><span class="line">示例 2:</span><br><span class="line"></span><br><span class="line">输入: root &#x3D; [3,5,1,6,2,0,8,null,null,7,4], p &#x3D; 5, q &#x3D; 4</span><br><span class="line">输出: 5</span><br><span class="line">解释: 节点 5 和节点 4 的最近公共祖先是节点 5。因为根据定义最近公共祖先节点可以为节点本身。</span><br></pre></td></tr></table></figure>
-<p><strong>说明:</strong></p>
+<h4 id="155-最小栈"><a href="#155-最小栈" class="headerlink" title="155. 最小栈"></a><a href="https://leetcode.cn/problems/min-stack/">155. 最小栈</a></h4><p>设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。</p>
 <ul>
-<li>所有节点的值都是唯一的。</li>
-<li>p、q 为不同节点且均存在于给定的二叉树中。</li>
+<li>push(x) —— 将元素 x 推入栈中。</li>
+<li>pop() —— 删除栈顶的元素。</li>
+<li>top() —— 获取栈顶元素。</li>
+<li>getMin() —— 检索栈中的最小元素。</li>
 </ul>
-<p>思路：搜素当前根节点的左右节点是否包含p和q，选择包含的一侧进行遍历，直到左右节点均不包含q和p，说明当前节点即为最近公共祖先。</p>
-<p>先验证p和q是不是公共祖先，避免树极大时超出时间。</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">LowestCommonAncestor</span>(<span class="params">TreeNode root, TreeNode p, TreeNode q</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">if</span> (Search(p, q.val) != <span class="literal">null</span>)</span><br><span class="line">                <span class="keyword">return</span> p;</span><br><span class="line">            <span class="keyword">if</span> (Search(q, p.val) != <span class="literal">null</span>)</span><br><span class="line">                <span class="keyword">return</span> q;</span><br><span class="line">            <span class="keyword">if</span>(Search(root, p.val)!=<span class="literal">null</span>&amp;&amp;Search(root, q.val) != <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (Search(root.left, p.val) != <span class="literal">null</span> &amp;&amp; Search(root.left, q.val) != <span class="literal">null</span>)</span><br><span class="line">                    <span class="keyword">return</span> LowestCommonAncestor(root.left, p, q);</span><br><span class="line">                <span class="keyword">if</span> (Search(root.right, p.val) != <span class="literal">null</span> &amp;&amp; Search(root.right, q.val) != <span class="literal">null</span>)</span><br><span class="line">                    <span class="keyword">return</span> LowestCommonAncestor(root.right, p, q);</span><br><span class="line">                <span class="keyword">return</span> root;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> TreeNode <span class="title">Search</span>(<span class="params">TreeNode root, <span class="built_in">int</span> x</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">if</span> (root == <span class="literal">null</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">if</span> (root.val == x)</span><br><span class="line">                <span class="keyword">return</span> root;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                TreeNode left = Search(root.left, x);</span><br><span class="line">                TreeNode right = Search(root.right, x);</span><br><span class="line">                <span class="keyword">if</span> (left != <span class="literal">null</span>)</span><br><span class="line">                    <span class="keyword">return</span> left;</span><br><span class="line">                <span class="keyword">if</span> (right != <span class="literal">null</span>)</span><br><span class="line">                    <span class="keyword">return</span> right;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TreeNode</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">int</span> val;</span><br><span class="line">        <span class="keyword">public</span> TreeNode left;</span><br><span class="line">        <span class="keyword">public</span> TreeNode right;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">TreeNode</span>(<span class="params"><span class="built_in">int</span> x</span>)</span> &#123; val = x; &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line">[&quot;MinStack&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;getMin&quot;,&quot;pop&quot;,&quot;top&quot;,&quot;getMin&quot;]</span><br><span class="line">[[],[-2],[0],[-3],[],[],[],[]]</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">[null,null,null,null,-3,null,0,-2]</span><br><span class="line"></span><br><span class="line">解释：</span><br><span class="line">MinStack minStack &#x3D; new MinStack();</span><br><span class="line">minStack.push(-2);</span><br><span class="line">minStack.push(0);</span><br><span class="line">minStack.push(-3);</span><br><span class="line">minStack.getMin();   --&gt; 返回 -3.</span><br><span class="line">minStack.pop();</span><br><span class="line">minStack.top();      --&gt; 返回 0.</span><br><span class="line">minStack.getMin();   --&gt; 返回 -2.</span><br></pre></td></tr></table></figure>
+<p>提示：</p>
+<ul>
+<li>pop、top 和 getMin 操作总是在 非空栈 上调用。</li>
+</ul>
+<p>栈的概念是弹百压，就像子弹壳装弹，一粒一粒压进去，但是打出来的时候是度从上面打出来的，最先压进去的最后弹出来，如果进去顺序是123，打出来顺序是321，这就是后进先出。</p>
+<p>使用Object存储栈的每个节点，指针指向后一个、更小的和更大的，在MinStack类中存储栈顶和最小的一个。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class MinStack</span><br><span class="line">    &#123;</span><br><span class="line">        private Stack topStack;</span><br><span class="line">        private Stack minStack;</span><br><span class="line"></span><br><span class="line">        &#x2F;** initialize your data structure here. *&#x2F;</span><br><span class="line">        public MinStack()</span><br><span class="line">        &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void Push(int x)</span><br><span class="line">        &#123;</span><br><span class="line">            Stack newOne &#x3D; new Stack(x);</span><br><span class="line">            newOne.nextOne &#x3D; topStack;</span><br><span class="line">            topStack &#x3D; newOne;</span><br><span class="line">            if (minStack &#x3D;&#x3D; null)</span><br><span class="line">                minStack &#x3D; newOne;</span><br><span class="line">            else if (minStack.num &gt; newOne.num)</span><br><span class="line">            &#123;</span><br><span class="line">                newOne.BiggerOne &#x3D; minStack;</span><br><span class="line">                minStack &#x3D; newOne;</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">                Stack minOne &#x3D; minStack;</span><br><span class="line">                while (minOne !&#x3D; null)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (minOne.num &lt;&#x3D; x)</span><br><span class="line">                        minOne &#x3D; minOne.BiggerOne;</span><br><span class="line">                    else</span><br><span class="line">                        break;</span><br><span class="line">                &#125;</span><br><span class="line">                newOne.BiggerOne &#x3D; minOne;</span><br><span class="line">                if (minOne !&#x3D; null)</span><br><span class="line">                    newOne.SmallerOne &#x3D; minOne.SmallerOne;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void Pop()</span><br><span class="line">        &#123;</span><br><span class="line">            if (topStack !&#x3D; null)</span><br><span class="line">            &#123;</span><br><span class="line">                if (minStack &#x3D;&#x3D; topStack)</span><br><span class="line">                    minStack &#x3D; topStack.BiggerOne;</span><br><span class="line">                if (topStack.SmallerOne !&#x3D; null)</span><br><span class="line">                    topStack.SmallerOne &#x3D; topStack.SmallerOne.SmallerOne;</span><br><span class="line">                if (topStack.BiggerOne !&#x3D; null)</span><br><span class="line">                    topStack.BiggerOne &#x3D; topStack.BiggerOne.BiggerOne;</span><br><span class="line">                topStack &#x3D; topStack.nextOne;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public int Top()</span><br><span class="line">        &#123;</span><br><span class="line">            if (topStack !&#x3D; null)</span><br><span class="line">                return topStack.num;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public int GetMin()</span><br><span class="line">        &#123;</span><br><span class="line">            if (minStack !&#x3D; null)</span><br><span class="line">                return minStack.num;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        private class Stack</span><br><span class="line">        &#123;</span><br><span class="line">            public int num;</span><br><span class="line">            public Stack nextOne;</span><br><span class="line">            public Stack BiggerOne;</span><br><span class="line">            public Stack SmallerOne;</span><br><span class="line"></span><br><span class="line">            public Stack(int num)</span><br><span class="line">            &#123;</span><br><span class="line">                this.num &#x3D; num;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * Your MinStack object will be instantiated and called as such:</span><br><span class="line"> * MinStack obj &#x3D; new MinStack();</span><br><span class="line"> * obj.Push(x);</span><br><span class="line"> * obj.Pop();</span><br><span class="line"> * int param_3 &#x3D; obj.Top();</span><br><span class="line"> * int param_4 &#x3D; obj.GetMin();</span><br><span class="line"> *&#x2F;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>LeetCode</category>
       </categories>
       <tags>
+        <tag>难度：简单</tag>
         <tag>C#</tag>
-        <tag>难度：中等</tag>
-        <tag>二叉树</tag>
+        <tag>栈</tag>
       </tags>
   </entry>
   <entry>
@@ -354,42 +299,10 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>C#</tag>
         <tag>难度：中等</tag>
+        <tag>C#</tag>
         <tag>递归</tag>
         <tag>链表</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>25. K个一组翻转链表</title>
-    <url>/2021/08/05/25.%20K%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/</url>
-    <content><![CDATA[<p>给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。</p>
-<p>k 是一个正整数，它的值小于或等于链表的长度。</p>
-<p>如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。</p>
-<a id="more"></a>
-
-<h4 id="25-K-个一组翻转链表"><a href="#25-K-个一组翻转链表" class="headerlink" title="25. K 个一组翻转链表"></a><a href="https://leetcode.cn/problems/reverse-nodes-in-k-group/">25. K 个一组翻转链表</a></h4><p>给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。</p>
-<p>k 是一个正整数，它的值小于或等于链表的长度。</p>
-<p>如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。</p>
-<p><strong>示例：</strong></p>
-<p>给你这个链表：1-&gt;2-&gt;3-&gt;4-&gt;5</p>
-<p>当 k = 2 时，应当返回: 2-&gt;1-&gt;4-&gt;3-&gt;5</p>
-<p>当 k = 3 时，应当返回: 3-&gt;2-&gt;1-&gt;4-&gt;5</p>
-<p><strong>说明：</strong></p>
-<ul>
-<li>你的算法只能使用常数的额外空间。</li>
-<li><strong>你不能只是单纯的改变节点内部的值</strong>，而是需要实际进行节点交换。</li>
-</ul>
-<p>递归，时间O(n)空间O(k)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public ListNode ReverseKGroup(ListNode head, int k)</span><br><span class="line">        &#123;</span><br><span class="line">            ListNode[] lists &#x3D; new ListNode[k];</span><br><span class="line">            ListNode tempNode &#x3D; head;</span><br><span class="line">            for(int i &#x3D; 0; i &lt; k; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                if (tempNode !&#x3D; null)</span><br><span class="line">                &#123;</span><br><span class="line">                    lists[i] &#x3D; tempNode;</span><br><span class="line">                    tempNode &#x3D; tempNode.next;</span><br><span class="line">                &#125;</span><br><span class="line">                else</span><br><span class="line">                    return head;</span><br><span class="line">            &#125;</span><br><span class="line">            for(int i &#x3D; k - 1; i &gt; 0; i--)</span><br><span class="line">            &#123;</span><br><span class="line">                lists[i].next &#x3D; lists[i - 1];</span><br><span class="line">            &#125;</span><br><span class="line">            if (tempNode !&#x3D; null)</span><br><span class="line">            &#123;</span><br><span class="line">                lists[0].next &#x3D; ReverseKGroup(tempNode, k);</span><br><span class="line">                return lists[k - 1];</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">                lists[0].next &#x3D; null;</span><br><span class="line">                return lists[k-1];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        public class ListNode</span><br><span class="line">    &#123;</span><br><span class="line">        public int val;</span><br><span class="line">        public ListNode next;</span><br><span class="line">        public ListNode(int x) &#123; val &#x3D; x; &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>C#</tag>
-        <tag>链表</tag>
-        <tag>难度：困难</tag>
       </tags>
   </entry>
   <entry>
@@ -427,6 +340,93 @@
       </tags>
   </entry>
   <entry>
+    <title>221. 最大正方形</title>
+    <url>/2021/08/05/221.%20%E6%9C%80%E5%A4%A7%E6%AD%A3%E6%96%B9%E5%BD%A2/</url>
+    <content><![CDATA[<p>在一个由 0 和 1 组成的二维矩阵内，找到只包含 1 的最大正方形，并返回其面积。</p>
+<a id="more"></a>
+
+<h4 id="221-最大正方形"><a href="#221-最大正方形" class="headerlink" title="221. 最大正方形"></a><a href="https://leetcode.cn/problems/maximal-square/">221. 最大正方形</a></h4><p>在一个由 0 和 1 组成的二维矩阵内，找到只包含 1 的最大正方形，并返回其面积。</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line"></span><br><span class="line">1 0 1 0 0</span><br><span class="line">1 0 1 1 1</span><br><span class="line">1 1 1 1 1</span><br><span class="line">1 0 0 1 0</span><br><span class="line"></span><br><span class="line">输出: 4</span><br></pre></td></tr></table></figure>
+<h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><ul>
+<li>若形成正方形（非单 <code>1</code>），以当前为右下角的视角看，则需要：当前格、上、左、左上都是 <code>1</code></li>
+<li>可以换个角度：当前格、上、左、左上都不能受 <code>0</code> 的限制，才能成为正方形</li>
+</ul>
+<p><img src="https://pic.leetcode-cn.com/8c4bf78cf6396c40291e40c25d34ef56bd524313c2aa863f3a20c1f004f32ab0-image.png" alt="image.png"></p>
+<p>当前格可形成的大小可化简为当前格的左上、左、上三者最小值加一。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public int MaximalSquare(char[][] matrix)</span><br><span class="line">        &#123;</span><br><span class="line">            if (matrix &#x3D;&#x3D; null || matrix.Length &#x3D;&#x3D; 0)</span><br><span class="line">            &#123;</span><br><span class="line">                return 0;</span><br><span class="line">            &#125;</span><br><span class="line">            int[,] dp &#x3D; new int[matrix.Length, matrix[0].Length];</span><br><span class="line">            int max &#x3D; 0;</span><br><span class="line">            for(int i&#x3D;0;i&lt; matrix.Length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                for(int j &#x3D; 0; j &lt; matrix[0].Length; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (matrix[i][j] &#x3D;&#x3D; &#39;1&#39;)</span><br><span class="line">                    &#123;</span><br><span class="line">                        if (i &#x3D;&#x3D; 0 || j &#x3D;&#x3D; 0)</span><br><span class="line">                        &#123;</span><br><span class="line">                            dp[i, j] &#x3D; 1;</span><br><span class="line">                        &#125;</span><br><span class="line">                        else</span><br><span class="line">                        &#123;</span><br><span class="line">                            dp[i, j] &#x3D; Math.Min(dp[i - 1, j - 1], dp[i, j - 1]);</span><br><span class="line">                            dp[i, j] &#x3D; Math.Min(dp[i, j], dp[i - 1, j]);</span><br><span class="line">                            dp[i, j] +&#x3D; 1;</span><br><span class="line">                        &#125;</span><br><span class="line">                        if (dp[i, j] &gt; max)</span><br><span class="line">                            max &#x3D; dp[i, j];</span><br><span class="line">                    &#125;</span><br><span class="line">                    else</span><br><span class="line">                        dp[i, j] &#x3D; 0;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return max * max;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>难度：中等</tag>
+        <tag>C#</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>236. 二叉树的最近公共祖先</title>
+    <url>/2021/08/05/236.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/</url>
+    <content><![CDATA[<p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
+<a id="more"></a>
+
+<h4 id="236-二叉树的最近公共祖先"><a href="#236-二叉树的最近公共祖先" class="headerlink" title="236. 二叉树的最近公共祖先"></a><a href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/">236. 二叉树的最近公共祖先</a></h4><p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/15/binarytree.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">示例 1:</span><br><span class="line"></span><br><span class="line">输入: root &#x3D; [3,5,1,6,2,0,8,null,null,7,4], p &#x3D; 5, q &#x3D; 1</span><br><span class="line">输出: 3</span><br><span class="line">解释: 节点 5 和节点 1 的最近公共祖先是节点 3。</span><br><span class="line">示例 2:</span><br><span class="line"></span><br><span class="line">输入: root &#x3D; [3,5,1,6,2,0,8,null,null,7,4], p &#x3D; 5, q &#x3D; 4</span><br><span class="line">输出: 5</span><br><span class="line">解释: 节点 5 和节点 4 的最近公共祖先是节点 5。因为根据定义最近公共祖先节点可以为节点本身。</span><br></pre></td></tr></table></figure>
+<p><strong>说明:</strong></p>
+<ul>
+<li>所有节点的值都是唯一的。</li>
+<li>p、q 为不同节点且均存在于给定的二叉树中。</li>
+</ul>
+<p>思路：搜素当前根节点的左右节点是否包含p和q，选择包含的一侧进行遍历，直到左右节点均不包含q和p，说明当前节点即为最近公共祖先。</p>
+<p>先验证p和q是不是公共祖先，避免树极大时超出时间。</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">LowestCommonAncestor</span>(<span class="params">TreeNode root, TreeNode p, TreeNode q</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">if</span> (Search(p, q.val) != <span class="literal">null</span>)</span><br><span class="line">                <span class="keyword">return</span> p;</span><br><span class="line">            <span class="keyword">if</span> (Search(q, p.val) != <span class="literal">null</span>)</span><br><span class="line">                <span class="keyword">return</span> q;</span><br><span class="line">            <span class="keyword">if</span>(Search(root, p.val)!=<span class="literal">null</span>&amp;&amp;Search(root, q.val) != <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (Search(root.left, p.val) != <span class="literal">null</span> &amp;&amp; Search(root.left, q.val) != <span class="literal">null</span>)</span><br><span class="line">                    <span class="keyword">return</span> LowestCommonAncestor(root.left, p, q);</span><br><span class="line">                <span class="keyword">if</span> (Search(root.right, p.val) != <span class="literal">null</span> &amp;&amp; Search(root.right, q.val) != <span class="literal">null</span>)</span><br><span class="line">                    <span class="keyword">return</span> LowestCommonAncestor(root.right, p, q);</span><br><span class="line">                <span class="keyword">return</span> root;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> TreeNode <span class="title">Search</span>(<span class="params">TreeNode root, <span class="built_in">int</span> x</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">if</span> (root == <span class="literal">null</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">if</span> (root.val == x)</span><br><span class="line">                <span class="keyword">return</span> root;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                TreeNode left = Search(root.left, x);</span><br><span class="line">                TreeNode right = Search(root.right, x);</span><br><span class="line">                <span class="keyword">if</span> (left != <span class="literal">null</span>)</span><br><span class="line">                    <span class="keyword">return</span> left;</span><br><span class="line">                <span class="keyword">if</span> (right != <span class="literal">null</span>)</span><br><span class="line">                    <span class="keyword">return</span> right;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TreeNode</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">int</span> val;</span><br><span class="line">        <span class="keyword">public</span> TreeNode left;</span><br><span class="line">        <span class="keyword">public</span> TreeNode right;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">TreeNode</span>(<span class="params"><span class="built_in">int</span> x</span>)</span> &#123; val = x; &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>难度：中等</tag>
+        <tag>C#</tag>
+        <tag>二叉树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>25. K个一组翻转链表</title>
+    <url>/2021/08/05/25.%20K%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/</url>
+    <content><![CDATA[<p>给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。</p>
+<p>k 是一个正整数，它的值小于或等于链表的长度。</p>
+<p>如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。</p>
+<a id="more"></a>
+
+<h4 id="25-K-个一组翻转链表"><a href="#25-K-个一组翻转链表" class="headerlink" title="25. K 个一组翻转链表"></a><a href="https://leetcode.cn/problems/reverse-nodes-in-k-group/">25. K 个一组翻转链表</a></h4><p>给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。</p>
+<p>k 是一个正整数，它的值小于或等于链表的长度。</p>
+<p>如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。</p>
+<p><strong>示例：</strong></p>
+<p>给你这个链表：1-&gt;2-&gt;3-&gt;4-&gt;5</p>
+<p>当 k = 2 时，应当返回: 2-&gt;1-&gt;4-&gt;3-&gt;5</p>
+<p>当 k = 3 时，应当返回: 3-&gt;2-&gt;1-&gt;4-&gt;5</p>
+<p><strong>说明：</strong></p>
+<ul>
+<li>你的算法只能使用常数的额外空间。</li>
+<li><strong>你不能只是单纯的改变节点内部的值</strong>，而是需要实际进行节点交换。</li>
+</ul>
+<p>递归，时间O(n)空间O(k)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public ListNode ReverseKGroup(ListNode head, int k)</span><br><span class="line">        &#123;</span><br><span class="line">            ListNode[] lists &#x3D; new ListNode[k];</span><br><span class="line">            ListNode tempNode &#x3D; head;</span><br><span class="line">            for(int i &#x3D; 0; i &lt; k; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                if (tempNode !&#x3D; null)</span><br><span class="line">                &#123;</span><br><span class="line">                    lists[i] &#x3D; tempNode;</span><br><span class="line">                    tempNode &#x3D; tempNode.next;</span><br><span class="line">                &#125;</span><br><span class="line">                else</span><br><span class="line">                    return head;</span><br><span class="line">            &#125;</span><br><span class="line">            for(int i &#x3D; k - 1; i &gt; 0; i--)</span><br><span class="line">            &#123;</span><br><span class="line">                lists[i].next &#x3D; lists[i - 1];</span><br><span class="line">            &#125;</span><br><span class="line">            if (tempNode !&#x3D; null)</span><br><span class="line">            &#123;</span><br><span class="line">                lists[0].next &#x3D; ReverseKGroup(tempNode, k);</span><br><span class="line">                return lists[k - 1];</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">                lists[0].next &#x3D; null;</span><br><span class="line">                return lists[k-1];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        public class ListNode</span><br><span class="line">    &#123;</span><br><span class="line">        public int val;</span><br><span class="line">        public ListNode next;</span><br><span class="line">        public ListNode(int x) &#123; val &#x3D; x; &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>C#</tag>
+        <tag>链表</tag>
+        <tag>难度：困难</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>3. 无重复字符的最长子串</title>
     <url>/2021/08/05/3.%20%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/</url>
     <content><![CDATA[<p>给定一个字符串 <code>s</code> ，请你找出其中不含有重复字符的 <strong>最长子串</strong> 的长度。</p>
@@ -461,8 +461,8 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>C#</tag>
         <tag>难度：中等</tag>
+        <tag>C#</tag>
         <tag>字符串</tag>
         <tag>滑动窗口</tag>
         <tag>子字符串</tag>
@@ -502,9 +502,9 @@
         <category>LeetCode</category>
       </categories>
       <tags>
+        <tag>难度：中等</tag>
         <tag>C#</tag>
         <tag>数组</tag>
-        <tag>难度：中等</tag>
         <tag>排序数组</tag>
       </tags>
   </entry>
@@ -548,44 +548,6 @@
       </tags>
   </entry>
   <entry>
-    <title>53. 最大子数组和</title>
-    <url>/2021/08/05/53.%20Maximum%20Subarray%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/</url>
-    <content><![CDATA[<p>给你一个整数数组 <code>nums</code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
-<p><strong>子数组</strong> 是数组中的一个连续部分。</p>
-<a id="more"></a>
-
-<h4 id="53-最大子数组和"><a href="#53-最大子数组和" class="headerlink" title="53. 最大子数组和"></a><a href="https://leetcode.cn/problems/maximum-subarray/">53. 最大子数组和</a></h4><p>给你一个整数数组 <code>nums</code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
-<p><strong>子数组</strong> 是数组中的一个连续部分。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [-2,1,-3,4,-1,2,1,-5,4]</span><br><span class="line">输出：6</span><br><span class="line">解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [1]</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
-<p><strong>示例 3：</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [5,4,-1,7,8]</span><br><span class="line">输出：23</span><br></pre></td></tr></table></figure>
-
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= nums.length &lt;= 105</code></li>
-<li><code>-104 &lt;= nums[i] &lt;= 104</code></li>
-</ul>
-<p><strong>进阶：</strong>如果你已经实现复杂度为 <code>O(n)</code> 的解法，尝试使用更为精妙的 <strong>分治法</strong> 求解。</p>
-<figure class="highlight plain"><figcaption><span>static int MaxSubArray(int[] nums)</span></figcaption><table><tr><td class="code"><pre><span class="line">public int MaxSubArray&#123;</span><br><span class="line">         int maxSum &#x3D; -2147483648;	&#x2F;&#x2F;int最小值</span><br><span class="line">         int tempSum &#x3D; 0;</span><br><span class="line">         for (int i &#x3D; 0; i &lt; nums.Length; i++)</span><br><span class="line">         &#123;</span><br><span class="line">             if (nums[i] &gt; MinOne(0, maxSum))	&#x2F;&#x2F;防止无正数</span><br><span class="line">             &#123;</span><br><span class="line">                 tempSum +&#x3D; nums[i];</span><br><span class="line">                 if (tempSum &gt; maxSum)		&#x2F;&#x2F;防止单个值最大</span><br><span class="line">                     maxSum &#x3D; tempSum;</span><br><span class="line">                 for (int j &#x3D; 1; i + j &lt; nums.Length; j++)</span><br><span class="line">                 &#123;</span><br><span class="line">                     tempSum +&#x3D; nums[i + j];</span><br><span class="line">                     if (tempSum &gt; maxSum)</span><br><span class="line">                         maxSum &#x3D; tempSum;</span><br><span class="line">                 &#125;</span><br><span class="line">                 tempSum &#x3D; 0;</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         return maxSum;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public static int MinOne(int a, int b)</span><br><span class="line">     &#123;</span><br><span class="line">         if (a &lt;&#x3D; b)</span><br><span class="line">             return a;</span><br><span class="line">         else</span><br><span class="line">             return b;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
-<p>注意：输入为1、-1、0、-2147483648时</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>难度：简单</tag>
-        <tag>C#</tag>
-        <tag>数组</tag>
-        <tag>存在进阶</tag>
-        <tag>子数组</tag>
-        <tag>分治法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>50. Pow(x, n)</title>
     <url>/2021/08/05/50.%20Pow(x,%20n)/</url>
     <content><![CDATA[<p>实现 <a href="https://www.cplusplus.com/reference/valarray/pow/">pow(<em>x</em>, <em>n</em>)</a> ，即计算 <code>x</code> 的 <code>n</code> 次幂函数（即，<code>xn</code> ）。</p>
@@ -620,8 +582,8 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>C#</tag>
         <tag>难度：中等</tag>
+        <tag>C#</tag>
         <tag>迭代</tag>
         <tag>二分法</tag>
         <tag>二进制</tag>
@@ -680,12 +642,50 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>C#</tag>
         <tag>难度：中等</tag>
+        <tag>C#</tag>
         <tag>字符串</tag>
         <tag>中心扩散法</tag>
         <tag>马拉车算法</tag>
         <tag>Manacher&#39;s Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>53. 最大子数组和</title>
+    <url>/2021/08/05/53.%20Maximum%20Subarray%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/</url>
+    <content><![CDATA[<p>给你一个整数数组 <code>nums</code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<p><strong>子数组</strong> 是数组中的一个连续部分。</p>
+<a id="more"></a>
+
+<h4 id="53-最大子数组和"><a href="#53-最大子数组和" class="headerlink" title="53. 最大子数组和"></a><a href="https://leetcode.cn/problems/maximum-subarray/">53. 最大子数组和</a></h4><p>给你一个整数数组 <code>nums</code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<p><strong>子数组</strong> 是数组中的一个连续部分。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [-2,1,-3,4,-1,2,1,-5,4]</span><br><span class="line">输出：6</span><br><span class="line">解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [1]</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [5,4,-1,7,8]</span><br><span class="line">输出：23</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 105</code></li>
+<li><code>-104 &lt;= nums[i] &lt;= 104</code></li>
+</ul>
+<p><strong>进阶：</strong>如果你已经实现复杂度为 <code>O(n)</code> 的解法，尝试使用更为精妙的 <strong>分治法</strong> 求解。</p>
+<figure class="highlight plain"><figcaption><span>static int MaxSubArray(int[] nums)</span></figcaption><table><tr><td class="code"><pre><span class="line">public int MaxSubArray&#123;</span><br><span class="line">         int maxSum &#x3D; -2147483648;	&#x2F;&#x2F;int最小值</span><br><span class="line">         int tempSum &#x3D; 0;</span><br><span class="line">         for (int i &#x3D; 0; i &lt; nums.Length; i++)</span><br><span class="line">         &#123;</span><br><span class="line">             if (nums[i] &gt; MinOne(0, maxSum))	&#x2F;&#x2F;防止无正数</span><br><span class="line">             &#123;</span><br><span class="line">                 tempSum +&#x3D; nums[i];</span><br><span class="line">                 if (tempSum &gt; maxSum)		&#x2F;&#x2F;防止单个值最大</span><br><span class="line">                     maxSum &#x3D; tempSum;</span><br><span class="line">                 for (int j &#x3D; 1; i + j &lt; nums.Length; j++)</span><br><span class="line">                 &#123;</span><br><span class="line">                     tempSum +&#x3D; nums[i + j];</span><br><span class="line">                     if (tempSum &gt; maxSum)</span><br><span class="line">                         maxSum &#x3D; tempSum;</span><br><span class="line">                 &#125;</span><br><span class="line">                 tempSum &#x3D; 0;</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         return maxSum;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public static int MinOne(int a, int b)</span><br><span class="line">     &#123;</span><br><span class="line">         if (a &lt;&#x3D; b)</span><br><span class="line">             return a;</span><br><span class="line">         else</span><br><span class="line">             return b;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<p>注意：输入为1、-1、0、-2147483648时</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>难度：简单</tag>
+        <tag>存在进阶</tag>
+        <tag>C#</tag>
+        <tag>数组</tag>
+        <tag>子数组</tag>
+        <tag>分治法</tag>
       </tags>
   </entry>
   <entry>
@@ -749,8 +749,8 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>数组</tag>
         <tag>难度：中等</tag>
+        <tag>数组</tag>
         <tag>去重</tag>
         <tag>前缀和</tag>
       </tags>
@@ -788,51 +788,11 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>数组</tag>
         <tag>Python</tag>
         <tag>排序</tag>
         <tag>难度：中等</tag>
+        <tag>数组</tag>
         <tag>双向遍历</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>70. 爬楼梯</title>
-    <url>/2021/08/05/70.%20%E7%88%AC%E6%A5%BC%E6%A2%AF%EF%BC%88%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%89/</url>
-    <content><![CDATA[<p>假设你正在爬楼梯。需要 <code>n</code> 阶你才能到达楼顶。</p>
-<p>每次你可以爬 <code>1</code> 或 <code>2</code> 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
-<a id="more"></a>
-
-<h4 id="70-爬楼梯"><a href="#70-爬楼梯" class="headerlink" title="70. 爬楼梯"></a><a href="https://leetcode.cn/problems/climbing-stairs/">70. 爬楼梯</a></h4><p>假设你正在爬楼梯。需要 <code>n</code> 阶你才能到达楼顶。</p>
-<p>每次你可以爬 <code>1</code> 或 <code>2</code> 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：n &#x3D; 2</span><br><span class="line">输出：2</span><br><span class="line">解释：有两种方法可以爬到楼顶。</span><br><span class="line">1. 1 阶 + 1 阶</span><br><span class="line">2. 2 阶</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：n &#x3D; 3</span><br><span class="line">输出：3</span><br><span class="line">解释：有三种方法可以爬到楼顶。</span><br><span class="line">1. 1 阶 + 1 阶 + 1 阶</span><br><span class="line">2. 1 阶 + 2 阶</span><br><span class="line">3. 2 阶 + 1 阶</span><br></pre></td></tr></table></figure>
-
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= n &lt;= 45</code></li>
-</ul>
-<h1 id="动态规划DP"><a href="#动态规划DP" class="headerlink" title="动态规划DP"></a>动态规划DP</h1><p>爬楼梯只有两种选择：上一阶或者两阶，因此<code>n=10</code>的情况可划分为<code>n=9</code>和<code>n=8</code>两种之和。</p>
-<p>一般性可归纳为<code>F(n)=F(n-1)+F(n-2)</code>，<code>F(1)=1, F(2)=2</code></p>
-<p>利用递归可写出代码</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Solution</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">ClimbStairs</span>(<span class="params"><span class="built_in">int</span> n</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> ClimbStairs(n - <span class="number">1</span>) + ClimbStairs(n - <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="备忘录算法"><a href="#备忘录算法" class="headerlink" title="备忘录算法"></a>备忘录算法</h1><p>然而这种写法时间复杂度为O(2^N)，重复计算了大量相同情况。我们可以用哈希表来记录 1到n-1的情况，节省时间。</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"></span><br><span class="line">Hashtable table = <span class="keyword">new</span> Hashtable();</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">ClimbStairs</span>(<span class="params"><span class="built_in">int</span> n</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(table.Contains(n))</span><br><span class="line">        <span class="keyword">return</span> table.Get(n);</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">int</span> <span class="keyword">value</span> = ClimbStairs(n<span class="number">-1</span>) + ClimbStairs(n<span class="number">-1</span>);</span><br><span class="line">        table.Add(n, <span class="keyword">value</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">value</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此时时间、空间复杂度均为O(N)。（伪代码，不保证能运行）</p>
-<h1 id="动态规划求解"><a href="#动态规划求解" class="headerlink" title="动态规划求解"></a>动态规划求解</h1><p>然而，每一阶的计算只需要前两阶的数据。我们可以进一步优化：</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Solution</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">ClimbStairs</span>(<span class="params"><span class="built_in">int</span> n</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (n == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">            <span class="built_in">int</span> a = <span class="number">1</span>, b = <span class="number">2</span>, c = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">3</span>; i &lt;= n; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                c = a + b;</span><br><span class="line">                a = b;</span><br><span class="line">                b = c;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此时时间复杂度不变，空间为O(1)。</p>
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>做动态规划时，牢记最优子结构、边界、状态转移方程式三核心元素。</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>难度：简单</tag>
-        <tag>C#</tag>
-        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -875,47 +835,43 @@
       </tags>
   </entry>
   <entry>
-    <title>974. 和可被K整除的子数组</title>
-    <url>/2021/08/05/974.%20%E5%92%8C%E5%8F%AF%E8%A2%ABK%E6%95%B4%E9%99%A4%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/</url>
-    <content><![CDATA[<p>给定一个整数数组 <code>nums</code> 和一个整数 <code>k</code> ，返回其中元素之和可被 <code>k</code> 整除的（连续、非空） <strong>子数组</strong> 的数目。</p>
-<p><strong>子数组</strong> 是数组的 <strong>连续</strong> 部分。</p>
+    <title>70. 爬楼梯</title>
+    <url>/2021/08/05/70.%20%E7%88%AC%E6%A5%BC%E6%A2%AF%EF%BC%88%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%89/</url>
+    <content><![CDATA[<p>假设你正在爬楼梯。需要 <code>n</code> 阶你才能到达楼顶。</p>
+<p>每次你可以爬 <code>1</code> 或 <code>2</code> 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
 <a id="more"></a>
 
-<h4 id="974-和可被-K-整除的子数组"><a href="#974-和可被-K-整除的子数组" class="headerlink" title="974. 和可被 K 整除的子数组"></a><a href="https://leetcode.cn/problems/subarray-sums-divisible-by-k/">974. 和可被 K 整除的子数组</a></h4><p>难度中等</p>
-<p>给定一个整数数组 <code>nums</code> 和一个整数 <code>k</code> ，返回其中元素之和可被 <code>k</code> 整除的（连续、非空） <strong>子数组</strong> 的数目。</p>
-<p><strong>子数组</strong> 是数组的 <strong>连续</strong> 部分。</p>
+<h4 id="70-爬楼梯"><a href="#70-爬楼梯" class="headerlink" title="70. 爬楼梯"></a><a href="https://leetcode.cn/problems/climbing-stairs/">70. 爬楼梯</a></h4><p>假设你正在爬楼梯。需要 <code>n</code> 阶你才能到达楼顶。</p>
+<p>每次你可以爬 <code>1</code> 或 <code>2</code> 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
 <p><strong>示例 1：</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [4,5,0,-2,-3,1], k &#x3D; 5</span><br><span class="line">输出：7</span><br><span class="line">解释：</span><br><span class="line">有 7 个子数组满足其元素之和可被 k &#x3D; 5 整除：</span><br><span class="line">[4, 5, 0, -2, -3, 1], [5], [5, 0], [5, 0, -2, -3], [0], [0, -2, -3], [-2, -3]</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: nums &#x3D; [5], k &#x3D; 9</span><br><span class="line">输出: 0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：n &#x3D; 2</span><br><span class="line">输出：2</span><br><span class="line">解释：有两种方法可以爬到楼顶。</span><br><span class="line">1. 1 阶 + 1 阶</span><br><span class="line">2. 2 阶</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：n &#x3D; 3</span><br><span class="line">输出：3</span><br><span class="line">解释：有三种方法可以爬到楼顶。</span><br><span class="line">1. 1 阶 + 1 阶 + 1 阶</span><br><span class="line">2. 1 阶 + 2 阶</span><br><span class="line">3. 2 阶 + 1 阶</span><br></pre></td></tr></table></figure>
 
 
-<p><strong>提示:</strong></p>
+<p><strong>提示：</strong></p>
 <ul>
-<li><code>1 &lt;= nums.length &lt;= 3 * 104</code></li>
-<li><code>-104 &lt;= nums[i] &lt;= 104</code></li>
-<li><code>2 &lt;= k &lt;= 104</code></li>
+<li><code>1 &lt;= n &lt;= 45</code></li>
 </ul>
-<p>复杂度O(n²)，会超时</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">SubarraysDivByK</span>(<span class="params"><span class="built_in">int</span>[] A, <span class="built_in">int</span> K</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="built_in">int</span> result = <span class="number">0</span>;</span><br><span class="line">            List&lt;List&lt;<span class="built_in">int</span>&gt;&gt; doubleList = <span class="keyword">new</span> List&lt;List&lt;<span class="built_in">int</span>&gt;&gt;();</span><br><span class="line">            List&lt;<span class="built_in">int</span>&gt; list = <span class="keyword">new</span> List&lt;<span class="built_in">int</span>&gt;();</span><br><span class="line">            <span class="built_in">int</span> noe1 = A[<span class="number">0</span>] % K;</span><br><span class="line">            <span class="keyword">if</span> (noe1 == <span class="number">0</span>)</span><br><span class="line">                result++;</span><br><span class="line">            list.Add(noe1);</span><br><span class="line">            doubleList.Add(list);</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt; A.Length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                List&lt;<span class="built_in">int</span>&gt; list1 = <span class="keyword">new</span> List&lt;<span class="built_in">int</span>&gt;();</span><br><span class="line">                <span class="keyword">foreach</span>(<span class="built_in">int</span> sum <span class="keyword">in</span> doubleList[i - <span class="number">1</span>])</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">int</span> now = (sum + A[i]) % K;</span><br><span class="line">                    <span class="keyword">if</span> (now == <span class="number">0</span>)</span><br><span class="line">                        result++;</span><br><span class="line">                    list1.Add(now);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">int</span> noe = A[i] % K;</span><br><span class="line">                <span class="keyword">if</span> (noe == <span class="number">0</span>)</span><br><span class="line">                    result++;</span><br><span class="line">                list1.Add(noe);</span><br><span class="line">                doubleList.Add(list1);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h2><p>前缀和preSum是从第0项到当前项的总和<br>$$<br>preSum[i] = A[0] + A[1] + … +A[i]<br>$$<br>本题可转化为，找出所有的i，j组合 (i&lt;j) 使得<br>$$<br>preSum[j] -preSum[i] mod K ==0<br>$$<br>此时需要遍历两次，复杂度O(n²)</p>
-<p>然而，我们只关心在i项之前的前缀和mod K == preSum[i] 出现的频次，不关心是哪一项</p>
-<p>因此我们用哈希（字典）来存储当前项之前各种模值出现的次数</p>
-<p>PS. 在0项之前需存储一个（0，1）</p>
-<p>PS2. 模值出现负数时，我们应给它加K</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">SubarraysDivByK</span>(<span class="params"><span class="built_in">int</span>[] A, <span class="built_in">int</span> K</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            Dictionary&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt; preSumModK = <span class="keyword">new</span> Dictionary&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt;();</span><br><span class="line">            preSumModK.Add(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">            <span class="built_in">int</span> preSum = <span class="number">0</span>;</span><br><span class="line">            <span class="built_in">int</span> result = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; A.Length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                preSum += A[i];</span><br><span class="line">                <span class="built_in">int</span> mod = preSum % K;</span><br><span class="line">                <span class="keyword">if</span> (mod &lt; <span class="number">0</span>)</span><br><span class="line">                    mod += K;</span><br><span class="line">                <span class="keyword">if</span> (preSumModK.ContainsKey(mod))</span><br><span class="line">                &#123;</span><br><span class="line">                    result += preSumModK[mod];</span><br><span class="line">                    preSumModK[mod]++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    preSumModK.Add(mod, <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-<p>时间复杂度O(n)，空间复杂度O(k)</p>
+<h1 id="动态规划DP"><a href="#动态规划DP" class="headerlink" title="动态规划DP"></a>动态规划DP</h1><p>爬楼梯只有两种选择：上一阶或者两阶，因此<code>n=10</code>的情况可划分为<code>n=9</code>和<code>n=8</code>两种之和。</p>
+<p>一般性可归纳为<code>F(n)=F(n-1)+F(n-2)</code>，<code>F(1)=1, F(2)=2</code></p>
+<p>利用递归可写出代码</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Solution</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">ClimbStairs</span>(<span class="params"><span class="built_in">int</span> n</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> ClimbStairs(n - <span class="number">1</span>) + ClimbStairs(n - <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="备忘录算法"><a href="#备忘录算法" class="headerlink" title="备忘录算法"></a>备忘录算法</h1><p>然而这种写法时间复杂度为O(2^N)，重复计算了大量相同情况。我们可以用哈希表来记录 1到n-1的情况，节省时间。</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"></span><br><span class="line">Hashtable table = <span class="keyword">new</span> Hashtable();</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">ClimbStairs</span>(<span class="params"><span class="built_in">int</span> n</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(table.Contains(n))</span><br><span class="line">        <span class="keyword">return</span> table.Get(n);</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">int</span> <span class="keyword">value</span> = ClimbStairs(n<span class="number">-1</span>) + ClimbStairs(n<span class="number">-1</span>);</span><br><span class="line">        table.Add(n, <span class="keyword">value</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">value</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时时间、空间复杂度均为O(N)。（伪代码，不保证能运行）</p>
+<h1 id="动态规划求解"><a href="#动态规划求解" class="headerlink" title="动态规划求解"></a>动态规划求解</h1><p>然而，每一阶的计算只需要前两阶的数据。我们可以进一步优化：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Solution</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">ClimbStairs</span>(<span class="params"><span class="built_in">int</span> n</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (n == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">            <span class="built_in">int</span> a = <span class="number">1</span>, b = <span class="number">2</span>, c = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">3</span>; i &lt;= n; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                c = a + b;</span><br><span class="line">                a = b;</span><br><span class="line">                b = c;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时时间复杂度不变，空间为O(1)。</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>做动态规划时，牢记最优子结构、边界、状态转移方程式三核心元素。</p>
 ]]></content>
       <categories>
         <category>LeetCode</category>
       </categories>
       <tags>
+        <tag>难度：简单</tag>
         <tag>C#</tag>
-        <tag>数组</tag>
-        <tag>难度：中等</tag>
-        <tag>前缀和</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -994,10 +950,54 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>C#</tag>
         <tag>难度：中等</tag>
+        <tag>C#</tag>
         <tag>二叉搜索树</tag>
         <tag>中序遍历</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>974. 和可被K整除的子数组</title>
+    <url>/2021/08/05/974.%20%E5%92%8C%E5%8F%AF%E8%A2%ABK%E6%95%B4%E9%99%A4%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<p>给定一个整数数组 <code>nums</code> 和一个整数 <code>k</code> ，返回其中元素之和可被 <code>k</code> 整除的（连续、非空） <strong>子数组</strong> 的数目。</p>
+<p><strong>子数组</strong> 是数组的 <strong>连续</strong> 部分。</p>
+<a id="more"></a>
+
+<h4 id="974-和可被-K-整除的子数组"><a href="#974-和可被-K-整除的子数组" class="headerlink" title="974. 和可被 K 整除的子数组"></a><a href="https://leetcode.cn/problems/subarray-sums-divisible-by-k/">974. 和可被 K 整除的子数组</a></h4><p>难度中等</p>
+<p>给定一个整数数组 <code>nums</code> 和一个整数 <code>k</code> ，返回其中元素之和可被 <code>k</code> 整除的（连续、非空） <strong>子数组</strong> 的数目。</p>
+<p><strong>子数组</strong> 是数组的 <strong>连续</strong> 部分。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [4,5,0,-2,-3,1], k &#x3D; 5</span><br><span class="line">输出：7</span><br><span class="line">解释：</span><br><span class="line">有 7 个子数组满足其元素之和可被 k &#x3D; 5 整除：</span><br><span class="line">[4, 5, 0, -2, -3, 1], [5], [5, 0], [5, 0, -2, -3], [0], [0, -2, -3], [-2, -3]</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: nums &#x3D; [5], k &#x3D; 9</span><br><span class="line">输出: 0</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>提示:</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 3 * 104</code></li>
+<li><code>-104 &lt;= nums[i] &lt;= 104</code></li>
+<li><code>2 &lt;= k &lt;= 104</code></li>
+</ul>
+<p>复杂度O(n²)，会超时</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">SubarraysDivByK</span>(<span class="params"><span class="built_in">int</span>[] A, <span class="built_in">int</span> K</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="built_in">int</span> result = <span class="number">0</span>;</span><br><span class="line">            List&lt;List&lt;<span class="built_in">int</span>&gt;&gt; doubleList = <span class="keyword">new</span> List&lt;List&lt;<span class="built_in">int</span>&gt;&gt;();</span><br><span class="line">            List&lt;<span class="built_in">int</span>&gt; list = <span class="keyword">new</span> List&lt;<span class="built_in">int</span>&gt;();</span><br><span class="line">            <span class="built_in">int</span> noe1 = A[<span class="number">0</span>] % K;</span><br><span class="line">            <span class="keyword">if</span> (noe1 == <span class="number">0</span>)</span><br><span class="line">                result++;</span><br><span class="line">            list.Add(noe1);</span><br><span class="line">            doubleList.Add(list);</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt; A.Length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                List&lt;<span class="built_in">int</span>&gt; list1 = <span class="keyword">new</span> List&lt;<span class="built_in">int</span>&gt;();</span><br><span class="line">                <span class="keyword">foreach</span>(<span class="built_in">int</span> sum <span class="keyword">in</span> doubleList[i - <span class="number">1</span>])</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">int</span> now = (sum + A[i]) % K;</span><br><span class="line">                    <span class="keyword">if</span> (now == <span class="number">0</span>)</span><br><span class="line">                        result++;</span><br><span class="line">                    list1.Add(now);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">int</span> noe = A[i] % K;</span><br><span class="line">                <span class="keyword">if</span> (noe == <span class="number">0</span>)</span><br><span class="line">                    result++;</span><br><span class="line">                list1.Add(noe);</span><br><span class="line">                doubleList.Add(list1);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h2><p>前缀和preSum是从第0项到当前项的总和<br>$$<br>preSum[i] = A[0] + A[1] + … +A[i]<br>$$<br>本题可转化为，找出所有的i，j组合 (i&lt;j) 使得<br>$$<br>preSum[j] -preSum[i] mod K ==0<br>$$<br>此时需要遍历两次，复杂度O(n²)</p>
+<p>然而，我们只关心在i项之前的前缀和mod K == preSum[i] 出现的频次，不关心是哪一项</p>
+<p>因此我们用哈希（字典）来存储当前项之前各种模值出现的次数</p>
+<p>PS. 在0项之前需存储一个（0，1）</p>
+<p>PS2. 模值出现负数时，我们应给它加K</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">SubarraysDivByK</span>(<span class="params"><span class="built_in">int</span>[] A, <span class="built_in">int</span> K</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            Dictionary&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt; preSumModK = <span class="keyword">new</span> Dictionary&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt;();</span><br><span class="line">            preSumModK.Add(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">            <span class="built_in">int</span> preSum = <span class="number">0</span>;</span><br><span class="line">            <span class="built_in">int</span> result = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; A.Length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                preSum += A[i];</span><br><span class="line">                <span class="built_in">int</span> mod = preSum % K;</span><br><span class="line">                <span class="keyword">if</span> (mod &lt; <span class="number">0</span>)</span><br><span class="line">                    mod += K;</span><br><span class="line">                <span class="keyword">if</span> (preSumModK.ContainsKey(mod))</span><br><span class="line">                &#123;</span><br><span class="line">                    result += preSumModK[mod];</span><br><span class="line">                    preSumModK[mod]++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    preSumModK.Add(mod, <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度O(n)，空间复杂度O(k)</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>难度：中等</tag>
+        <tag>C#</tag>
+        <tag>数组</tag>
+        <tag>前缀和</tag>
       </tags>
   </entry>
   <entry>
@@ -1036,8 +1036,8 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>C#</tag>
         <tag>难度：中等</tag>
+        <tag>C#</tag>
         <tag>动态规划</tag>
       </tags>
   </entry>
@@ -1125,54 +1125,6 @@
       </tags>
   </entry>
   <entry>
-    <title>查询二进制树防碰撞仿真程序 说明文档</title>
-    <url>/2020/06/27/quiry-binary/</url>
-    <content><![CDATA[<h2 id="环境依赖"><a href="#环境依赖" class="headerlink" title="环境依赖"></a>环境依赖</h2><p>在使用本程序之前，请配置好Java环境。推荐版本：</p>
-<p>java version “13.0.2” 2020-01-14<br>Java(TM) SE Runtime Environment (build 13.0.2+8)<br>Java HotSpot(TM) 64-Bit Server VM (build 13.0.2+8, mixed mode, sharing)</p>
-<p>本程序使用了以下库 ，您也可以在源代码中查看：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import java.io.*;</span><br><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.List;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="程序使用"><a href="#程序使用" class="headerlink" title="程序使用"></a>程序使用</h2><p>本程序无需安装。注意，直接双击.jar文件并不能在Windows系统下运行。如需运行，请打开cmd窗口（Windows快捷键：Windows + R键，输入cmd并按下回车），并打开本文件所在的目录（cd 本目录在电脑中的绝对路径），如图一所示。</p>
-<p><img src="/2020/06/27/quiry-binary/%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7_2020_06_27_17_50_51_164.png" alt="屏幕捕获_2020_06_27_17_50_51_164"></p>
-<p>然后请输入<code>java -jar QueryBinaryTree.jar</code>以运行本程序。</p>
-<p>随后，如图二所示，程序会要求您输入ID，并以英文逗号分割。您可以尝试输入以下四行输入样例中的任意一行，回车键确认。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">001,110,111</span><br><span class="line">010,101,000,111,110,001,011</span><br><span class="line">11011,11111,00101,00111</span><br><span class="line">11010101,11111111,01000000,10101010,01010101</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/06/27/quiry-binary/%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7_2020_06_27_17_52_50_976.png" alt="屏幕捕获_2020_06_27_17_52_50_976"></p>
-<p>随后您会得到程序输出结果，如图三所示。程序会循环执行，因此如果您想尝试输入其他样本，可以继续按上一步的要求输入ID。如果您不需要继续执行，可以点击X按钮关闭程序。</p>
-<p><img src="/2020/06/27/quiry-binary/%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7_2020_06_27_17_55_42_755.png" alt="屏幕捕获_2020_06_27_17_55_42_755"></p>
-<h2 id="目录结构描述"><a href="#目录结构描述" class="headerlink" title="目录结构描述"></a>目录结构描述</h2><p>本程序目录结构如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">│  list.txt											&#x2F;&#x2F;目录结构</span><br><span class="line">│  QueryBinaryTree.jar								&#x2F;&#x2F;可执行文件</span><br><span class="line">│  readme.txt										&#x2F;&#x2F;说明文档</span><br><span class="line">│  </span><br><span class="line">└─RFID</span><br><span class="line">    │  .classpath</span><br><span class="line">    │  .project</span><br><span class="line">    │  </span><br><span class="line">    ├─.settings</span><br><span class="line">    │      org.eclipse.jdt.core.prefs</span><br><span class="line">    │      </span><br><span class="line">    ├─bin</span><br><span class="line">    │      Main.class								&#x2F;&#x2F;主程序类</span><br><span class="line">    │      TreeNode.class							&#x2F;&#x2F;节点类</span><br><span class="line">    │      </span><br><span class="line">    └─src</span><br><span class="line">            Main.java								&#x2F;&#x2F;主程序类</span><br><span class="line">            TreeNode.java    						&#x2F;&#x2F;节点类</span><br></pre></td></tr></table></figure>
-<p>其中程序源代码在RFID/src目录下的Main.java及TreeNode.java中，可执行文件为根目录下的QueryBinaryTree.jar。</p>
-<h2 id="程序制作者"><a href="#程序制作者" class="headerlink" title="程序制作者"></a>程序制作者</h2><p>Max Hou</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>国王和金矿——动态规划学习笔记</title>
-    <url>/2021/08/05/%E5%9B%BD%E7%8E%8B%E5%92%8C%E9%87%91%E7%9F%BF%EF%BC%8C%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</url>
-    <content><![CDATA[<p>动态规划学习笔记</p>
-<a id="more"></a>
-
-<h2 id="国王和金矿"><a href="#国王和金矿" class="headerlink" title="国王和金矿"></a>国王和金矿</h2><p>有一个国家发现了5座金矿，每座金矿的黄金储量不同，需要参与挖掘的工人数也不同。参与挖矿工人的总数是10人。每座金矿要么全挖，要么不挖，不能派出一半人挖取一半金矿。要求用程序求解出，要想得到尽可能多的黄金，应该选择挖取哪几座金矿？</p>
-<p><img src="http://mmbiz.qpic.cn/mmbiz_jpg/NtO5sialJZGqmGDZ2No1Baib4DOV3BXWCWMeUKKeBJcIuyWnVw9keYkzEz3oGLlQJBiamJRutv8YmmjqPRFlKicqGQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<h1 id="最优子结构"><a href="#最优子结构" class="headerlink" title="最优子结构"></a>最优子结构</h1><p>5矿10工人的最优子结构为4矿10工人与4矿7工人+5矿收益的最大值。</p>
-<p>F(5, 10) = MAX( F(4, 10), F(4, 10 - P[4]) + G[4] )</p>
-<h1 id="边界"><a href="#边界" class="headerlink" title="边界"></a>边界</h1><p>边界为只有一座金矿，N = 1。</p>
-<p>W&gt;=P[0]时，F(N, W) = G[0]</p>
-<p>W&lt;P[0]时，F(N,W) = 0.</p>
-<p><strong>F(n,w) = 0  (n&lt;=1, w</strong></p>
-<p><strong>F(n,w) = g[0]   (n==1, w&gt;=p[0]);</strong></p>
-<p><strong>F(n,w) = F(n-1,w)  (n&gt;1, w</strong></p>
-<p><strong>F(n,w) = max(F(n-1,w),  F(n-1,w-p[n-1])+g[n-1])  (n&gt;1, w&gt;=p[n-1])</strong></p>
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Design Patterns 设计模式</title>
     <url>/2020/06/14/Design-Patterns/</url>
     <content><![CDATA[<p>设计模式（Design pattern）是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问，设计模式于己于他人于系统都是多赢的；设计模式使代码编制真正工程化；设计模式是软件工程的基石脉络，如同大厦的结构一样。</p>
@@ -1230,6 +1182,54 @@
       </categories>
       <tags>
         <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>查询二进制树防碰撞仿真程序 说明文档</title>
+    <url>/2020/06/27/quiry-binary/</url>
+    <content><![CDATA[<h2 id="环境依赖"><a href="#环境依赖" class="headerlink" title="环境依赖"></a>环境依赖</h2><p>在使用本程序之前，请配置好Java环境。推荐版本：</p>
+<p>java version “13.0.2” 2020-01-14<br>Java(TM) SE Runtime Environment (build 13.0.2+8)<br>Java HotSpot(TM) 64-Bit Server VM (build 13.0.2+8, mixed mode, sharing)</p>
+<p>本程序使用了以下库 ，您也可以在源代码中查看：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import java.io.*;</span><br><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.List;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="程序使用"><a href="#程序使用" class="headerlink" title="程序使用"></a>程序使用</h2><p>本程序无需安装。注意，直接双击.jar文件并不能在Windows系统下运行。如需运行，请打开cmd窗口（Windows快捷键：Windows + R键，输入cmd并按下回车），并打开本文件所在的目录（cd 本目录在电脑中的绝对路径），如图一所示。</p>
+<p><img src="/2020/06/27/quiry-binary/%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7_2020_06_27_17_50_51_164.png" alt="屏幕捕获_2020_06_27_17_50_51_164"></p>
+<p>然后请输入<code>java -jar QueryBinaryTree.jar</code>以运行本程序。</p>
+<p>随后，如图二所示，程序会要求您输入ID，并以英文逗号分割。您可以尝试输入以下四行输入样例中的任意一行，回车键确认。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">001,110,111</span><br><span class="line">010,101,000,111,110,001,011</span><br><span class="line">11011,11111,00101,00111</span><br><span class="line">11010101,11111111,01000000,10101010,01010101</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/06/27/quiry-binary/%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7_2020_06_27_17_52_50_976.png" alt="屏幕捕获_2020_06_27_17_52_50_976"></p>
+<p>随后您会得到程序输出结果，如图三所示。程序会循环执行，因此如果您想尝试输入其他样本，可以继续按上一步的要求输入ID。如果您不需要继续执行，可以点击X按钮关闭程序。</p>
+<p><img src="/2020/06/27/quiry-binary/%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7_2020_06_27_17_55_42_755.png" alt="屏幕捕获_2020_06_27_17_55_42_755"></p>
+<h2 id="目录结构描述"><a href="#目录结构描述" class="headerlink" title="目录结构描述"></a>目录结构描述</h2><p>本程序目录结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">│  list.txt											&#x2F;&#x2F;目录结构</span><br><span class="line">│  QueryBinaryTree.jar								&#x2F;&#x2F;可执行文件</span><br><span class="line">│  readme.txt										&#x2F;&#x2F;说明文档</span><br><span class="line">│  </span><br><span class="line">└─RFID</span><br><span class="line">    │  .classpath</span><br><span class="line">    │  .project</span><br><span class="line">    │  </span><br><span class="line">    ├─.settings</span><br><span class="line">    │      org.eclipse.jdt.core.prefs</span><br><span class="line">    │      </span><br><span class="line">    ├─bin</span><br><span class="line">    │      Main.class								&#x2F;&#x2F;主程序类</span><br><span class="line">    │      TreeNode.class							&#x2F;&#x2F;节点类</span><br><span class="line">    │      </span><br><span class="line">    └─src</span><br><span class="line">            Main.java								&#x2F;&#x2F;主程序类</span><br><span class="line">            TreeNode.java    						&#x2F;&#x2F;节点类</span><br></pre></td></tr></table></figure>
+<p>其中程序源代码在RFID/src目录下的Main.java及TreeNode.java中，可执行文件为根目录下的QueryBinaryTree.jar。</p>
+<h2 id="程序制作者"><a href="#程序制作者" class="headerlink" title="程序制作者"></a>程序制作者</h2><p>Max Hou</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>国王和金矿——动态规划学习笔记</title>
+    <url>/2021/08/05/%E5%9B%BD%E7%8E%8B%E5%92%8C%E9%87%91%E7%9F%BF%EF%BC%8C%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</url>
+    <content><![CDATA[<p>动态规划学习笔记</p>
+<a id="more"></a>
+
+<h2 id="国王和金矿"><a href="#国王和金矿" class="headerlink" title="国王和金矿"></a>国王和金矿</h2><p>有一个国家发现了5座金矿，每座金矿的黄金储量不同，需要参与挖掘的工人数也不同。参与挖矿工人的总数是10人。每座金矿要么全挖，要么不挖，不能派出一半人挖取一半金矿。要求用程序求解出，要想得到尽可能多的黄金，应该选择挖取哪几座金矿？</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_jpg/NtO5sialJZGqmGDZ2No1Baib4DOV3BXWCWMeUKKeBJcIuyWnVw9keYkzEz3oGLlQJBiamJRutv8YmmjqPRFlKicqGQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<h1 id="最优子结构"><a href="#最优子结构" class="headerlink" title="最优子结构"></a>最优子结构</h1><p>5矿10工人的最优子结构为4矿10工人与4矿7工人+5矿收益的最大值。</p>
+<p>F(5, 10) = MAX( F(4, 10), F(4, 10 - P[4]) + G[4] )</p>
+<h1 id="边界"><a href="#边界" class="headerlink" title="边界"></a>边界</h1><p>边界为只有一座金矿，N = 1。</p>
+<p>W&gt;=P[0]时，F(N, W) = G[0]</p>
+<p>W&lt;P[0]时，F(N,W) = 0.</p>
+<p><strong>F(n,w) = 0  (n&lt;=1, w</strong></p>
+<p><strong>F(n,w) = g[0]   (n==1, w&gt;=p[0]);</strong></p>
+<p><strong>F(n,w) = F(n-1,w)  (n&gt;1, w</strong></p>
+<p><strong>F(n,w) = max(F(n-1,w),  F(n-1,w-p[n-1])+g[n-1])  (n&gt;1, w&gt;=p[n-1])</strong></p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -1510,8 +1510,8 @@
         <category>剑指Offer</category>
       </categories>
       <tags>
-        <tag>C#</tag>
         <tag>难度：中等</tag>
+        <tag>C#</tag>
         <tag>位移</tag>
         <tag>位运算</tag>
       </tags>
