@@ -1478,4 +1478,34 @@
 <h2 id="程序制作者"><a href="#程序制作者" class="headerlink" title="程序制作者"></a>程序制作者</h2><p>Max Hou</p>
 ]]></content>
   </entry>
+  <entry>
+    <title></title>
+    <url>/2022/05/17/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8hexo/</url>
+    <content><![CDATA[<p>hexo是一个快速、简洁且高效的博客框架，可以将网站部署在本地或者github上面。本文默认已经配置好相关环境，目的为记录hexo在使用上的问题。</p>
+<a id="more"></a>
+
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>安装Hexo前需要安装<a href="http://nodejs.org/">Node.js</a>（并配置好环境变量）和<a href="https://git-scm.com/">Git</a>，随后使用命令行安装Hexo：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<p>安装以后，可以使用以下两种方式执行 Hexo：</p>
+<ol>
+<li><code>npx hexo &lt;command&gt;</code></li>
+<li>将 Hexo 所在的目录下的 <code>node_modules</code> 添加到环境变量之中即可直接使用 <code>hexo &lt;command&gt;</code>：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">echo &#39;PATH&#x3D;&quot;$PATH:.&#x2F;node_modules&#x2F;.bin&quot;&#39; &gt;&gt; ~&#x2F;.profile</span><br></pre></td></tr></table></figure>
+<p>其他配置略。</p>
+<h2 id="如何创建文章"><a href="#如何创建文章" class="headerlink" title="如何创建文章"></a>如何创建文章</h2><p>Hexo使用Markdown引擎解析文件，本地可以使用Typora进行文件的编辑。</p>
+<h3 id="使用模板Scaffold创建新文章"><a href="#使用模板Scaffold创建新文章" class="headerlink" title="使用模板Scaffold创建新文章"></a>使用模板Scaffold创建新文章</h3><p>在<code>/blog</code>文件夹下，运行下列命令来创建一篇新文章或者新的页面。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo new [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
+<p><code>/blog/scaffold</code>文件夹下存有模板，我在里面配置了标题、日期、摘要等信息。根据layout，Hexo会寻找相应的模板。</p>
+<h3 id="如何插入图片"><a href="#如何插入图片" class="headerlink" title="如何插入图片"></a>如何插入图片</h3><p>我使用Typora作为本地编辑器和渲染器，在偏好设置中开启如下配置：</p>
+<p>![Desktop Screenshot 2022.05.17 - 15.20.09.44](Desktop Screenshot 2022.05.17 - 15.20.09.44.png)</p>
+<p>这样在插入图片时，会自动将其复制到相应文件夹中，但在部署时，需要将<code>/文章名</code>一键替换掉。</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>markdown</tag>
+      </tags>
+  </entry>
 </search>
