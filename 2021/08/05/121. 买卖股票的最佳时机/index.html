@@ -30,8 +30,8 @@
 <meta property="article:published_time" content="2021-08-05T08:01:13.716Z">
 <meta property="article:modified_time" content="2022-05-16T07:20:18.204Z">
 <meta property="article:author" content="Max Hou">
-<meta property="article:tag" content="难度：简单">
 <meta property="article:tag" content="C#">
+<meta property="article:tag" content="难度：简单">
 <meta property="article:tag" content="数组">
 <meta name="twitter:card" content="summary">
 
@@ -254,7 +254,6 @@
         <p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
 <p>如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。</p>
 <a id="more"></a>
-
 <h4 id="121-买卖股票的最佳时机"><a href="#121-买卖股票的最佳时机" class="headerlink" title="121. 买卖股票的最佳时机"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/">121. 买卖股票的最佳时机</a></h4><p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
 <p>如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。</p>
 <p>注意：你不能在买入股票前卖出股票。</p>
@@ -264,8 +263,6 @@
 <p>输入: [7,6,4,3,1]<br>输出: 0<br>解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</p>
 <p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public int MaxProfit(int[] prices)</span><br><span class="line">        &#123;</span><br><span class="line">            int maxProfit &#x3D; 0;</span><br><span class="line">            int tempProfit &#x3D; 0;</span><br><span class="line">            for(int i&#x3D;0; i &lt; prices.Length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                for(int j &#x3D; i; j &lt; prices.Length; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (prices[i] &lt; prices[j])</span><br><span class="line">                    &#123;</span><br><span class="line">                        tempProfit &#x3D; prices[j] - prices[i];</span><br><span class="line">                        if (tempProfit &gt; maxProfit)</span><br><span class="line">                            maxProfit &#x3D; tempProfit;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            return maxProfit;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-
 <h1 id="DP思想"><a href="#DP思想" class="headerlink" title="DP思想"></a>DP思想</h1><ol>
 <li><p>记录【今天之前买入的最小值】</p>
 </li>
@@ -284,8 +281,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E9%9A%BE%E5%BA%A6%EF%BC%9A%E7%AE%80%E5%8D%95/" rel="tag"># 难度：简单</a>
               <a href="/tags/C/" rel="tag"># C#</a>
+              <a href="/tags/%E9%9A%BE%E5%BA%A6%EF%BC%9A%E7%AE%80%E5%8D%95/" rel="tag"># 难度：简单</a>
               <a href="/tags/%E6%95%B0%E7%BB%84/" rel="tag"># 数组</a>
           </div>
 
@@ -475,6 +472,8 @@
 
 
 
+
+  
 
   
 

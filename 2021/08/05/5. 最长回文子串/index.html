@@ -37,8 +37,8 @@
 <meta property="article:published_time" content="2021-08-05T08:01:13.580Z">
 <meta property="article:modified_time" content="2022-05-17T08:43:25.031Z">
 <meta property="article:author" content="Max Hou">
-<meta property="article:tag" content="C#">
 <meta property="article:tag" content="难度：中等">
+<meta property="article:tag" content="C#">
 <meta property="article:tag" content="字符串">
 <meta property="article:tag" content="中心扩散法">
 <meta property="article:tag" content="马拉车算法">
@@ -264,14 +264,11 @@
       
         <p>给你一个字符串 <code>s</code>，找到 <code>s</code> 中最长的回文子串。</p>
 <a id="more"></a>
-
 <h4 id="5-最长回文子串"><a href="#5-最长回文子串" class="headerlink" title="5. 最长回文子串"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-palindromic-substring/">5. 最长回文子串</a></h4><p>给你一个字符串 <code>s</code>，找到 <code>s</code> 中最长的回文子串。</p>
 <p><strong>示例 1：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s &#x3D; &quot;babad&quot;</span><br><span class="line">输出：&quot;bab&quot;</span><br><span class="line">解释：&quot;aba&quot; 同样是符合题意的答案。</span><br></pre></td></tr></table></figure>
 <p><strong>示例 2：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s &#x3D; &quot;cbbd&quot;</span><br><span class="line">输出：&quot;bb&quot;</span><br></pre></td></tr></table></figure>
-
-
 <p><strong>提示：</strong></p>
 <ul>
 <li><code>1 &lt;= s.length &lt;= 1000</code></li>
@@ -280,8 +277,6 @@
 <h2 id="中心扩散法"><a href="#中心扩散法" class="headerlink" title="中心扩散法"></a>中心扩散法</h2><p>把每一位当成对称轴查找最长回文。时间复杂度：O(n²），空间复杂度：O(1）。</p>
 <p><img src="/2021/08/05/5.%20%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/1b9bfe346a4a9a5718b08149be11236a6db61b3922265d34f22632d4687aa0a8-image.png" alt="img"></p>
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Solution</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">string</span> <span class="title">LongestPalindrome</span>(<span class="params"><span class="built_in">string</span> s</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">if</span> (s == <span class="literal">null</span> || s == <span class="string">&quot;&quot;</span>)</span><br><span class="line">                <span class="keyword">return</span> s;</span><br><span class="line">            <span class="built_in">int</span> max = <span class="number">0</span>;</span><br><span class="line">            <span class="built_in">int</span> bit = <span class="number">0</span>;</span><br><span class="line">            <span class="built_in">int</span> ifOdd = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; s.Length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">int</span> j = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">while</span> (i - j &gt;= <span class="number">0</span> &amp;&amp; i + j &lt; s.Length)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> (s[i - j] == s[i + j])</span><br><span class="line">                        j++;</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                j -= <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span> (j &gt;= max)</span><br><span class="line">                &#123;</span><br><span class="line">                    max = j;</span><br><span class="line">                    bit = i;</span><br><span class="line">                    ifOdd = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                j = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">while</span> (i - j &gt;= <span class="number">0</span> &amp;&amp; i + j + <span class="number">1</span> &lt; s.Length)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> (s[i - j] == s[i + j + <span class="number">1</span>])</span><br><span class="line">                        j++;</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (j &gt; max)</span><br><span class="line">                &#123;</span><br><span class="line">                    ifOdd = <span class="number">0</span>;</span><br><span class="line">                    bit = i;</span><br><span class="line">                    max = j;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">char</span>[] result=<span class="keyword">new</span> <span class="built_in">char</span>[max * <span class="number">2</span> + ifOdd];</span><br><span class="line">            s.CopyTo(bit - max + <span class="number">1</span> - ifOdd, result, <span class="number">0</span>, max * <span class="number">2</span> + ifOdd);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">string</span>(result);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
 <h2 id="Manacher’s-Algorithm-马拉车算法"><a href="#Manacher’s-Algorithm-马拉车算法" class="headerlink" title="Manacher’s Algorithm 马拉车算法"></a>Manacher’s Algorithm 马拉车算法</h2><p>马拉车算法 Manacher‘s Algorithm 是用来查找一个字符串的最长回文子串的线性方法，由一个叫 Manacher 的人在 1975 年发明的，这个方法的最大贡献是在于将时间复杂度提升到了线性。</p>
 <p>首先我们解决下奇数和偶数的问题，在每个字符间插入 “#”，并且为了使得扩展的过程中，到边界后自动结束，在两端分别插入 “^” 和 “$”，两个不可能在字符串中出现的字符，这样中心扩展的时候，判断两端字符是否相等的时候，如果到了边界就一定会不相等，从而出了循环。经过处理，字符串的长度永远都是奇数了。</p>
 <p><img src="/2021/08/05/5.%20%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/ad2b5e0da4a3a35b60f60c9a5a2be07a8074f9be0fe1597351eeff7dc460789a-image.png" alt="img"></p>
@@ -316,8 +311,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/C/" rel="tag"># C#</a>
               <a href="/tags/%E9%9A%BE%E5%BA%A6%EF%BC%9A%E4%B8%AD%E7%AD%89/" rel="tag"># 难度：中等</a>
+              <a href="/tags/C/" rel="tag"># C#</a>
               <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag"># 字符串</a>
               <a href="/tags/%E4%B8%AD%E5%BF%83%E6%89%A9%E6%95%A3%E6%B3%95/" rel="tag"># 中心扩散法</a>
               <a href="/tags/%E9%A9%AC%E6%8B%89%E8%BD%A6%E7%AE%97%E6%B3%95/" rel="tag"># 马拉车算法</a>
@@ -510,6 +505,8 @@
 
 
 
+
+  
 
   
 

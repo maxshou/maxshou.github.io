@@ -199,10 +199,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-05-19 16:17:58 / 修改时间：17:47:04" itemprop="dateCreated datePublished" datetime="2022-05-19T16:17:58+08:00">2022-05-19</time>
+              <time title="创建时间：2022-05-19 16:17:58" itemprop="dateCreated datePublished" datetime="2022-05-19T16:17:58+08:00">2022-05-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-20 16:55:22" itemprop="dateModified" datetime="2022-05-20T16:55:22+08:00">2022-05-20</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -240,7 +246,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>围成一圈，每次数第k个人进行淘汰，经典的约瑟夫环问题。</p>
+          <p>围成一圈报数，每次淘汰第k个人，经典的约瑟夫环问题。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/19/1823-%E6%89%BE%E5%87%BA%E6%B8%B8%E6%88%8F%E7%9A%84%E8%8E%B7%E8%83%9C%E8%80%85/#more" rel="contents">
@@ -478,10 +484,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-05-17 14:50:13 / 修改时间：15:44:32" itemprop="dateCreated datePublished" datetime="2022-05-17T14:50:13+08:00">2022-05-17</time>
+              <time title="创建时间：2022-05-17 14:50:13" itemprop="dateCreated datePublished" datetime="2022-05-17T14:50:13+08:00">2022-05-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-20 16:59:13" itemprop="dateModified" datetime="2022-05-20T16:59:13+08:00">2022-05-20</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -519,7 +531,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Hexo是一个快速、简洁且高效的博客框架，可以将网站部署在本地或者GitHub上面。本文默认已经配置好相关环境，目的为记录Hexo在使用上的问题。</p>
+          <p>Hexo是一个快速、简洁且高效的博客框架，可以将网站部署在本地或者GitHub上面。本文默认已经配置好相关环境，目的为记录Hexo在使用上的问题。<br></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/17/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8hexo/#more" rel="contents">
@@ -966,7 +978,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-16 15:01:10" itemprop="dateModified" datetime="2022-05-16T15:01:10+08:00">2022-05-16</time>
+                <time title="修改时间：2022-05-20 18:04:44" itemprop="dateModified" datetime="2022-05-20T18:04:44+08:00">2022-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1294,6 +1306,61 @@
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

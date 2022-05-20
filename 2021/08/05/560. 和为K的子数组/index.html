@@ -30,8 +30,8 @@
 <meta property="article:published_time" content="2021-08-05T08:01:13.791Z">
 <meta property="article:modified_time" content="2022-05-16T06:59:05.688Z">
 <meta property="article:author" content="Max Hou">
-<meta property="article:tag" content="数组">
 <meta property="article:tag" content="难度：中等">
+<meta property="article:tag" content="数组">
 <meta property="article:tag" content="去重">
 <meta property="article:tag" content="前缀和">
 <meta name="twitter:card" content="summary">
@@ -254,7 +254,6 @@
       
         <p>给定一个整数数组和一个整数 <strong>k，</strong>你需要找到该数组中和为 <strong>k</strong> 的连续的子数组的个数。</p>
 <a id="more"></a>
-
 <h2 id="560-和为K的子数组"><a href="#560-和为K的子数组" class="headerlink" title="560. 和为K的子数组"></a>560. 和为K的子数组</h2><p>给定一个整数数组和一个整数 <strong>k，</strong>你需要找到该数组中和为 <strong>k</strong> 的连续的子数组的个数。</p>
 <p><strong>示例 1 :</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入:nums &#x3D; [1,1,1], k &#x3D; 2</span><br><span class="line">输出: 2 , [1,1] 与 [1,1] 为两种不同的情况。</span><br></pre></td></tr></table></figure>
@@ -266,8 +265,6 @@
 <h1 id="1-暴力算法"><a href="#1-暴力算法" class="headerlink" title="1. 暴力算法"></a>1. 暴力算法</h1><p>时间复杂度O(n^3)</p>
 <h1 id="2-去除重复计算（个人方法）"><a href="#2-去除重复计算（个人方法）" class="headerlink" title="2. 去除重复计算（个人方法）"></a>2. 去除重复计算（个人方法）</h1><p>时间复杂度O(n²)，空间复杂度O(1)</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public int SubarraySum(int[] nums, int k)</span><br><span class="line">        &#123;</span><br><span class="line">            int result &#x3D; 0;</span><br><span class="line">            if (nums.Length &#x3D;&#x3D; 0)</span><br><span class="line">                return result;</span><br><span class="line">            int allSum &#x3D; 0;</span><br><span class="line">            for (int i &#x3D; 0; i &lt; nums.Length; i++)</span><br><span class="line">                allSum +&#x3D; nums[i];                  &#x2F;&#x2F;计算出所有元素之和</span><br><span class="line">            for(int i &#x3D; nums.Length - 1; i &gt;&#x3D; 0; i--)</span><br><span class="line">            &#123;                                       &#x2F;&#x2F;从最后一个元素开始遍历</span><br><span class="line">                int tempSum &#x3D; allSum;</span><br><span class="line">                for(int j &#x3D; 0; j &lt;&#x3D; i; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (tempSum &#x3D;&#x3D; k)</span><br><span class="line">                        result++;</span><br><span class="line">                    tempSum -&#x3D; nums[j];             &#x2F;&#x2F;每次去掉一个最前面的元素</span><br><span class="line">                &#125;</span><br><span class="line">                allSum -&#x3D; nums[i];                  &#x2F;&#x2F;去掉最后一个元素</span><br><span class="line">            &#125;</span><br><span class="line">            return result;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-
 <h1 id="3-前缀和"><a href="#3-前缀和" class="headerlink" title="3. 前缀和"></a>3. 前缀和</h1><ul>
 <li>什么是前缀和：<br>从 第 0 项 到 当前项 的 总和</li>
 <li>如果用一个数组 prefixSum 表示：<br>prefixSum[x]：nums 的 第 0 到 第 x 项 的总和<br>prefixSum[x] = nums[0] + nums[1] +…+nums[x]</li>
@@ -314,8 +311,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%95%B0%E7%BB%84/" rel="tag"># 数组</a>
               <a href="/tags/%E9%9A%BE%E5%BA%A6%EF%BC%9A%E4%B8%AD%E7%AD%89/" rel="tag"># 难度：中等</a>
+              <a href="/tags/%E6%95%B0%E7%BB%84/" rel="tag"># 数组</a>
               <a href="/tags/%E5%8E%BB%E9%87%8D/" rel="tag"># 去重</a>
               <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag"># 前缀和</a>
           </div>
@@ -506,6 +503,8 @@
 
 
 
+
+  
 
   
 
