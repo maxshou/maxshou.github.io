@@ -1,31 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>102. 二叉树的层序遍历</title>
-    <url>/2021/08/05/102.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86/</url>
-    <content><![CDATA[<p>给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。</p>
-<p>k 是一个正整数，它的值小于或等于链表的长度。</p>
-<p>如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。</p>
-<a id="more"></a>
-<h4 id="102-二叉树的层序遍历"><a href="#102-二叉树的层序遍历" class="headerlink" title="102. 二叉树的层序遍历"></a><a href="https://leetcode-cn.com/problems/binary-tree-level-order-traversal/">102. 二叉树的层序遍历</a></h4><p>给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。</p>
-<p>示例：<br>二叉树：[3,9,20,null,null,15,7],</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    3</span><br><span class="line">   &#x2F; \</span><br><span class="line">  9  20</span><br><span class="line">    &#x2F;  \</span><br><span class="line">   15   7</span><br><span class="line">返回其层次遍历结果：</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">  [3],</span><br><span class="line">  [9,20],</span><br><span class="line">  [15,7]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<h1 id="广度优先BFS"><a href="#广度优先BFS" class="headerlink" title="广度优先BFS"></a>广度优先BFS</h1><p>思路：遍历每一层，然后将每层的数值存入List。使用thisList存储当前要遍历的层级，并将每个节点的子节点存入nextList中，完成一层的遍历后让thisList=nextList，继续这个过程。</p>
-<p>当然，用一个队列存储，不断进队出队也行。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public IList&lt;IList&lt;int&gt;&gt; LevelOrder(TreeNode root)</span><br><span class="line">        &#123;</span><br><span class="line">            List&lt;TreeNode&gt; thisList &#x3D; new List&lt;TreeNode&gt;();</span><br><span class="line">            List&lt;TreeNode&gt; nextList &#x3D; new List&lt;TreeNode&gt;();</span><br><span class="line">            thisList.Add(root);</span><br><span class="line">            IList&lt;IList&lt;int&gt;&gt; result &#x3D; new List&lt;IList&lt;int&gt;&gt;();	&#x2F;&#x2F;注意：此处是List&lt;IList&gt;</span><br><span class="line">            if (root &#x3D;&#x3D; null)</span><br><span class="line">                return result;</span><br><span class="line">            while (thisList.Count !&#x3D; 0)</span><br><span class="line">            &#123;</span><br><span class="line">                List&lt;int&gt; temp &#x3D; new List&lt;int&gt;();</span><br><span class="line">                foreach(TreeNode thisNode in thisList)</span><br><span class="line">                &#123;</span><br><span class="line">                    temp.Add(thisNode.val);</span><br><span class="line">                    if (thisNode.left !&#x3D; null)</span><br><span class="line">                        nextList.Add(thisNode.left);</span><br><span class="line">                    if (thisNode.right !&#x3D; null)</span><br><span class="line">                        nextList.Add(thisNode.right);</span><br><span class="line">                &#125;</span><br><span class="line">                result.Add(temp);</span><br><span class="line">                thisList &#x3D; nextList;</span><br><span class="line">                nextList &#x3D; new List&lt;TreeNode&gt;();</span><br><span class="line">            &#125;</span><br><span class="line">            return result;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public class TreeNode</span><br><span class="line">        &#123;</span><br><span class="line">            public int val;</span><br><span class="line">            public TreeNode left;</span><br><span class="line">            public TreeNode right;</span><br><span class="line">            public TreeNode(int x) &#123; val &#x3D; x; &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>难度：中等</tag>
-        <tag>C#</tag>
-        <tag>二叉树</tag>
-        <tag>层序遍历</tag>
-        <tag>广度优先</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>1. 两数之和</title>
     <url>/2021/08/05/1.%20%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
     <content><![CDATA[<p>给定一个整数数组 nums和一个整数目标值 target，请你在该数组中找出和为目标值target的那两个整数，并返回它们的数组下标。</p>
@@ -71,6 +46,31 @@
       </tags>
   </entry>
   <entry>
+    <title>102. 二叉树的层序遍历</title>
+    <url>/2021/08/05/102.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86/</url>
+    <content><![CDATA[<p>给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。</p>
+<p>k 是一个正整数，它的值小于或等于链表的长度。</p>
+<p>如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。</p>
+<a id="more"></a>
+<h4 id="102-二叉树的层序遍历"><a href="#102-二叉树的层序遍历" class="headerlink" title="102. 二叉树的层序遍历"></a><a href="https://leetcode-cn.com/problems/binary-tree-level-order-traversal/">102. 二叉树的层序遍历</a></h4><p>给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。</p>
+<p>示例：<br>二叉树：[3,9,20,null,null,15,7],</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    3</span><br><span class="line">   &#x2F; \</span><br><span class="line">  9  20</span><br><span class="line">    &#x2F;  \</span><br><span class="line">   15   7</span><br><span class="line">返回其层次遍历结果：</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">  [3],</span><br><span class="line">  [9,20],</span><br><span class="line">  [15,7]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h1 id="广度优先BFS"><a href="#广度优先BFS" class="headerlink" title="广度优先BFS"></a>广度优先BFS</h1><p>思路：遍历每一层，然后将每层的数值存入List。使用thisList存储当前要遍历的层级，并将每个节点的子节点存入nextList中，完成一层的遍历后让thisList=nextList，继续这个过程。</p>
+<p>当然，用一个队列存储，不断进队出队也行。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public IList&lt;IList&lt;int&gt;&gt; LevelOrder(TreeNode root)</span><br><span class="line">        &#123;</span><br><span class="line">            List&lt;TreeNode&gt; thisList &#x3D; new List&lt;TreeNode&gt;();</span><br><span class="line">            List&lt;TreeNode&gt; nextList &#x3D; new List&lt;TreeNode&gt;();</span><br><span class="line">            thisList.Add(root);</span><br><span class="line">            IList&lt;IList&lt;int&gt;&gt; result &#x3D; new List&lt;IList&lt;int&gt;&gt;();	&#x2F;&#x2F;注意：此处是List&lt;IList&gt;</span><br><span class="line">            if (root &#x3D;&#x3D; null)</span><br><span class="line">                return result;</span><br><span class="line">            while (thisList.Count !&#x3D; 0)</span><br><span class="line">            &#123;</span><br><span class="line">                List&lt;int&gt; temp &#x3D; new List&lt;int&gt;();</span><br><span class="line">                foreach(TreeNode thisNode in thisList)</span><br><span class="line">                &#123;</span><br><span class="line">                    temp.Add(thisNode.val);</span><br><span class="line">                    if (thisNode.left !&#x3D; null)</span><br><span class="line">                        nextList.Add(thisNode.left);</span><br><span class="line">                    if (thisNode.right !&#x3D; null)</span><br><span class="line">                        nextList.Add(thisNode.right);</span><br><span class="line">                &#125;</span><br><span class="line">                result.Add(temp);</span><br><span class="line">                thisList &#x3D; nextList;</span><br><span class="line">                nextList &#x3D; new List&lt;TreeNode&gt;();</span><br><span class="line">            &#125;</span><br><span class="line">            return result;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public class TreeNode</span><br><span class="line">        &#123;</span><br><span class="line">            public int val;</span><br><span class="line">            public TreeNode left;</span><br><span class="line">            public TreeNode right;</span><br><span class="line">            public TreeNode(int x) &#123; val &#x3D; x; &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>难度：中等</tag>
+        <tag>C#</tag>
+        <tag>二叉树</tag>
+        <tag>层序遍历</tag>
+        <tag>广度优先</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>121. 买卖股票的最佳时机</title>
     <url>/2021/08/05/121.%20%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</url>
     <content><![CDATA[<p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
@@ -99,8 +99,8 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>C#</tag>
         <tag>难度：简单</tag>
+        <tag>C#</tag>
         <tag>数组</tag>
       </tags>
   </entry>
@@ -131,8 +131,8 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>C#</tag>
         <tag>难度：简单</tag>
+        <tag>C#</tag>
         <tag>数组</tag>
       </tags>
   </entry>
@@ -212,8 +212,8 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>C#</tag>
         <tag>难度：简单</tag>
+        <tag>C#</tag>
         <tag>数组</tag>
       </tags>
   </entry>
@@ -242,45 +242,9 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>C#</tag>
         <tag>难度：简单</tag>
-        <tag>栈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2. 两数相加</title>
-    <url>/2021/08/05/2.%20%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</url>
-    <content><![CDATA[<p>给你两个 <strong>非空</strong> 的链表，表示两个非负的整数。它们每位数字都是按照 <strong>逆序</strong> 的方式存储的，并且每个节点只能存储 <strong>一位</strong> 数字。</p>
-<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
-<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
-<a id="more"></a>
-<h2 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2. 两数相加"></a>2. 两数相加</h2><h4 id="2-两数相加-1"><a href="#2-两数相加-1" class="headerlink" title="2. 两数相加"></a><a href="https://leetcode.cn/problems/add-two-numbers/">2. 两数相加</a></h4><p>给你两个 <strong>非空</strong> 的链表，表示两个非负的整数。它们每位数字都是按照 <strong>逆序</strong> 的方式存储的，并且每个节点只能存储 <strong>一位</strong> 数字。</p>
-<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
-<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/01/02/addtwonumber1.jpg" alt="img"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：l1 &#x3D; [2,4,3], l2 &#x3D; [5,6,4]</span><br><span class="line">输出：[7,0,8]</span><br><span class="line">解释：342 + 465 &#x3D; 807.</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：l1 &#x3D; [0], l2 &#x3D; [0]</span><br><span class="line">输出：[0]</span><br></pre></td></tr></table></figure>
-<p><strong>示例 3：</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：l1 &#x3D; [9,9,9,9,9,9,9], l2 &#x3D; [9,9,9,9]</span><br><span class="line">输出：[8,9,9,9,0,0,0,1]</span><br></pre></td></tr></table></figure>
-<p><strong>提示：</strong></p>
-<ul>
-<li>每个链表中的节点数在范围 <code>[1, 100]</code> 内</li>
-<li><code>0 &lt;= Node.val &lt;= 9</code></li>
-<li>题目数据保证列表表示的数字不含前导零</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     public int val;</span><br><span class="line"> *     public ListNode next;</span><br><span class="line"> *     public ListNode(int x) &#123; val &#x3D; x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public ListNode AddTwoNumbers(ListNode l1, ListNode l2) &#123;</span><br><span class="line">            int flag &#x3D; 0;</span><br><span class="line">            if (l1 &#x3D;&#x3D; null)		&#x2F;&#x2F;当前位为空时用0代替</span><br><span class="line">            &#123;</span><br><span class="line">                l1 &#x3D; new ListNode(0);</span><br><span class="line">                flag++;</span><br><span class="line">            &#125;</span><br><span class="line">            if (l2 &#x3D;&#x3D; null)</span><br><span class="line">            &#123;</span><br><span class="line">                l2 &#x3D; new ListNode(0);</span><br><span class="line">                flag++;</span><br><span class="line">            &#125;</span><br><span class="line">            ListNode temp &#x3D; new ListNode(l1.val + l2.val);</span><br><span class="line">            if (temp.val &#x3D;&#x3D; 0 &amp;&amp; flag &#x3D;&#x3D; 2)		&#x2F;&#x2F;仅当两数均为空时才能跳出递归</span><br><span class="line">                return null;</span><br><span class="line">            if (temp.val &gt;&#x3D; 10)			&#x2F;&#x2F;如果需要进位</span><br><span class="line">            &#123;</span><br><span class="line">                temp.val -&#x3D; 10;</span><br><span class="line">                if (l1.next !&#x3D; null)</span><br><span class="line">                    l1.next.val++;</span><br><span class="line">                else if (l2.next !&#x3D; null)</span><br><span class="line">                    l2.next.val++;</span><br><span class="line">                else</span><br><span class="line">                &#123;</span><br><span class="line">                    l1.next &#x3D; new ListNode(1);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            temp.next &#x3D; AddTwoNumbers(l1.next, l2.next);		&#x2F;&#x2F;执行递归</span><br><span class="line">            return temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注意：当两数当前位均为0时，应该继续执行递归</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>难度：中等</tag>
         <tag>C#</tag>
-        <tag>递归</tag>
-        <tag>链表</tag>
+        <tag>栈</tag>
       </tags>
   </entry>
   <entry>
@@ -366,6 +330,42 @@
       </tags>
   </entry>
   <entry>
+    <title>2. 两数相加</title>
+    <url>/2021/08/05/2.%20%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</url>
+    <content><![CDATA[<p>给你两个 <strong>非空</strong> 的链表，表示两个非负的整数。它们每位数字都是按照 <strong>逆序</strong> 的方式存储的，并且每个节点只能存储 <strong>一位</strong> 数字。</p>
+<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
+<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<a id="more"></a>
+<h2 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2. 两数相加"></a>2. 两数相加</h2><h4 id="2-两数相加-1"><a href="#2-两数相加-1" class="headerlink" title="2. 两数相加"></a><a href="https://leetcode.cn/problems/add-two-numbers/">2. 两数相加</a></h4><p>给你两个 <strong>非空</strong> 的链表，表示两个非负的整数。它们每位数字都是按照 <strong>逆序</strong> 的方式存储的，并且每个节点只能存储 <strong>一位</strong> 数字。</p>
+<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
+<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/01/02/addtwonumber1.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：l1 &#x3D; [2,4,3], l2 &#x3D; [5,6,4]</span><br><span class="line">输出：[7,0,8]</span><br><span class="line">解释：342 + 465 &#x3D; 807.</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：l1 &#x3D; [0], l2 &#x3D; [0]</span><br><span class="line">输出：[0]</span><br></pre></td></tr></table></figure>
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：l1 &#x3D; [9,9,9,9,9,9,9], l2 &#x3D; [9,9,9,9]</span><br><span class="line">输出：[8,9,9,9,0,0,0,1]</span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ul>
+<li>每个链表中的节点数在范围 <code>[1, 100]</code> 内</li>
+<li><code>0 &lt;= Node.val &lt;= 9</code></li>
+<li>题目数据保证列表表示的数字不含前导零</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     public int val;</span><br><span class="line"> *     public ListNode next;</span><br><span class="line"> *     public ListNode(int x) &#123; val &#x3D; x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public ListNode AddTwoNumbers(ListNode l1, ListNode l2) &#123;</span><br><span class="line">            int flag &#x3D; 0;</span><br><span class="line">            if (l1 &#x3D;&#x3D; null)		&#x2F;&#x2F;当前位为空时用0代替</span><br><span class="line">            &#123;</span><br><span class="line">                l1 &#x3D; new ListNode(0);</span><br><span class="line">                flag++;</span><br><span class="line">            &#125;</span><br><span class="line">            if (l2 &#x3D;&#x3D; null)</span><br><span class="line">            &#123;</span><br><span class="line">                l2 &#x3D; new ListNode(0);</span><br><span class="line">                flag++;</span><br><span class="line">            &#125;</span><br><span class="line">            ListNode temp &#x3D; new ListNode(l1.val + l2.val);</span><br><span class="line">            if (temp.val &#x3D;&#x3D; 0 &amp;&amp; flag &#x3D;&#x3D; 2)		&#x2F;&#x2F;仅当两数均为空时才能跳出递归</span><br><span class="line">                return null;</span><br><span class="line">            if (temp.val &gt;&#x3D; 10)			&#x2F;&#x2F;如果需要进位</span><br><span class="line">            &#123;</span><br><span class="line">                temp.val -&#x3D; 10;</span><br><span class="line">                if (l1.next !&#x3D; null)</span><br><span class="line">                    l1.next.val++;</span><br><span class="line">                else if (l2.next !&#x3D; null)</span><br><span class="line">                    l2.next.val++;</span><br><span class="line">                else</span><br><span class="line">                &#123;</span><br><span class="line">                    l1.next &#x3D; new ListNode(1);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            temp.next &#x3D; AddTwoNumbers(l1.next, l2.next);		&#x2F;&#x2F;执行递归</span><br><span class="line">            return temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：当两数当前位均为0时，应该继续执行递归</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>难度：中等</tag>
+        <tag>C#</tag>
+        <tag>递归</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>21. 合并两个有序链表</title>
     <url>/2021/08/05/21.%20%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/</url>
     <content><![CDATA[<p>将两个升序链表合并为一个新的 <strong>升序</strong> 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 </p>
@@ -390,8 +390,8 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>C#</tag>
         <tag>难度：简单</tag>
+        <tag>C#</tag>
         <tag>链表</tag>
         <tag>有序链表</tag>
       </tags>
@@ -716,9 +716,9 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>C#</tag>
         <tag>难度：简单</tag>
         <tag>存在进阶</tag>
+        <tag>C#</tag>
         <tag>数组</tag>
         <tag>子数组</tag>
         <tag>分治法</tag>
@@ -818,9 +818,9 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>难度：中等</tag>
         <tag>Python</tag>
         <tag>排序</tag>
+        <tag>难度：中等</tag>
         <tag>数组</tag>
         <tag>双向遍历</tag>
       </tags>
@@ -854,10 +854,10 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>二叉树</tag>
         <tag>难度：简单</tag>
         <tag>Python</tag>
         <tag>排序</tag>
+        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
@@ -892,9 +892,38 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>C#</tag>
         <tag>难度：简单</tag>
+        <tag>C#</tag>
         <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>98. 验证二叉搜索树</title>
+    <url>/2021/08/05/98.%20%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</url>
+    <content><![CDATA[<p>给你一个二叉树的根节点 <code>root</code> ，判断其是否是一个有效的二叉搜索树。</p>
+<a id="more"></a>
+<h4 id="98-验证二叉搜索树"><a href="#98-验证二叉搜索树" class="headerlink" title="98. 验证二叉搜索树"></a><a href="https://leetcode.cn/problems/validate-binary-search-tree/">98. 验证二叉搜索树</a></h4><p>给你一个二叉树的根节点 <code>root</code> ，判断其是否是一个有效的二叉搜索树。</p>
+<p><strong>有效</strong> 二叉搜索树定义如下：</p>
+<ul>
+<li>节点的左子树只包含 <strong>小于</strong> 当前节点的数。</li>
+<li>节点的右子树只包含 <strong>大于</strong> 当前节点的数。</li>
+<li>所有左子树和右子树自身必须也是二叉搜索树。</li>
+</ul>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line">    2</span><br><span class="line">   &#x2F; \</span><br><span class="line">  1   3</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line">    5</span><br><span class="line">   &#x2F; \</span><br><span class="line">  1   4</span><br><span class="line">     &#x2F; \</span><br><span class="line">    3   6</span><br><span class="line">输出: false</span><br><span class="line">解释: 输入为: [5,1,4,null,null,3,6]。</span><br><span class="line">     根节点的值为 5 ，但是其右子节点值为 4 。</span><br></pre></td></tr></table></figure>
+<h1 id="中序遍历二叉搜素树"><a href="#中序遍历二叉搜素树" class="headerlink" title="中序遍历二叉搜素树"></a>中序遍历二叉搜素树</h1><p>中序遍历时，为升序排列！</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * public class TreeNode &#123;</span><br><span class="line"> *     public int val;</span><br><span class="line"> *     public TreeNode left;</span><br><span class="line"> *     public TreeNode right;</span><br><span class="line"> *     public TreeNode(int x) &#123; val &#x3D; x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    List&lt;int&gt; list &#x3D; new List&lt;int&gt;();</span><br><span class="line">        public bool IsValidBST(TreeNode root)</span><br><span class="line">        &#123;</span><br><span class="line">            if(root&#x3D;&#x3D;null)</span><br><span class="line">                return true;</span><br><span class="line">            RootMiddle(root);</span><br><span class="line">            for(int i &#x3D; 0; i &lt; list.Count; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                for (int j &#x3D; i-1;j &gt;&#x3D; 0; j--)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (list[i] &lt;&#x3D; list[j])</span><br><span class="line">                        return false;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        public void RootMiddle(TreeNode root)</span><br><span class="line">        &#123;</span><br><span class="line">            if (root.left !&#x3D; null) &#123; RootMiddle(root.left); &#125;</span><br><span class="line">            &#x2F;&#x2F;Console.Write(root.val + &quot;-&quot;);</span><br><span class="line">            list.Add(root.val);</span><br><span class="line">            if (root.right !&#x3D; null) &#123; RootMiddle(root.right); &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>难度：中等</tag>
+        <tag>C#</tag>
+        <tag>二叉搜索树</tag>
+        <tag>中序遍历</tag>
       </tags>
   </entry>
   <entry>
@@ -938,8 +967,8 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>难度：中等</tag>
         <tag>Python</tag>
+        <tag>难度：中等</tag>
         <tag>遍历</tag>
         <tag>深度优先</tag>
       </tags>
@@ -1023,35 +1052,6 @@ preSum[j] -preSum[i] mod K ==0</script><p>此时需要遍历两次，复杂度O(
         <tag>难度：中等</tag>
         <tag>C#</tag>
         <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>98. 验证二叉搜索树</title>
-    <url>/2021/08/05/98.%20%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</url>
-    <content><![CDATA[<p>给你一个二叉树的根节点 <code>root</code> ，判断其是否是一个有效的二叉搜索树。</p>
-<a id="more"></a>
-<h4 id="98-验证二叉搜索树"><a href="#98-验证二叉搜索树" class="headerlink" title="98. 验证二叉搜索树"></a><a href="https://leetcode.cn/problems/validate-binary-search-tree/">98. 验证二叉搜索树</a></h4><p>给你一个二叉树的根节点 <code>root</code> ，判断其是否是一个有效的二叉搜索树。</p>
-<p><strong>有效</strong> 二叉搜索树定义如下：</p>
-<ul>
-<li>节点的左子树只包含 <strong>小于</strong> 当前节点的数。</li>
-<li>节点的右子树只包含 <strong>大于</strong> 当前节点的数。</li>
-<li>所有左子树和右子树自身必须也是二叉搜索树。</li>
-</ul>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line">    2</span><br><span class="line">   &#x2F; \</span><br><span class="line">  1   3</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line">    5</span><br><span class="line">   &#x2F; \</span><br><span class="line">  1   4</span><br><span class="line">     &#x2F; \</span><br><span class="line">    3   6</span><br><span class="line">输出: false</span><br><span class="line">解释: 输入为: [5,1,4,null,null,3,6]。</span><br><span class="line">     根节点的值为 5 ，但是其右子节点值为 4 。</span><br></pre></td></tr></table></figure>
-<h1 id="中序遍历二叉搜素树"><a href="#中序遍历二叉搜素树" class="headerlink" title="中序遍历二叉搜素树"></a>中序遍历二叉搜素树</h1><p>中序遍历时，为升序排列！</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * public class TreeNode &#123;</span><br><span class="line"> *     public int val;</span><br><span class="line"> *     public TreeNode left;</span><br><span class="line"> *     public TreeNode right;</span><br><span class="line"> *     public TreeNode(int x) &#123; val &#x3D; x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    List&lt;int&gt; list &#x3D; new List&lt;int&gt;();</span><br><span class="line">        public bool IsValidBST(TreeNode root)</span><br><span class="line">        &#123;</span><br><span class="line">            if(root&#x3D;&#x3D;null)</span><br><span class="line">                return true;</span><br><span class="line">            RootMiddle(root);</span><br><span class="line">            for(int i &#x3D; 0; i &lt; list.Count; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                for (int j &#x3D; i-1;j &gt;&#x3D; 0; j--)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (list[i] &lt;&#x3D; list[j])</span><br><span class="line">                        return false;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        public void RootMiddle(TreeNode root)</span><br><span class="line">        &#123;</span><br><span class="line">            if (root.left !&#x3D; null) &#123; RootMiddle(root.left); &#125;</span><br><span class="line">            &#x2F;&#x2F;Console.Write(root.val + &quot;-&quot;);</span><br><span class="line">            list.Add(root.val);</span><br><span class="line">            if (root.right !&#x3D; null) &#123; RootMiddle(root.right); &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>难度：中等</tag>
-        <tag>C#</tag>
-        <tag>二叉搜索树</tag>
-        <tag>中序遍历</tag>
       </tags>
   </entry>
   <entry>
@@ -1217,6 +1217,19 @@ preSum[j] -preSum[i] mod K ==0</script><p>此时需要遍历两次，复杂度O(
 ]]></content>
   </entry>
   <entry>
+    <title>使用python HTTP服务器从开发机下载文件</title>
+    <url>/2022/05/18/%E4%BD%BF%E7%94%A8python-HTTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%8E%E5%BC%80%E5%8F%91%E6%9C%BA%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<p><code>python -m http.server 8000</code>启动Python自带的网络服务器，可以下载开发机上面的文件。python2使用<code>python -m SimpleHTTPServer 8000</code>。</p>
+<a id="more"></a>
+]]></content>
+      <categories>
+        <category>使用心得</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>国王和金矿——动态规划学习笔记</title>
     <url>/2021/08/05/%E5%9B%BD%E7%8E%8B%E5%92%8C%E9%87%91%E7%9F%BF%EF%BC%8C%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</url>
     <content><![CDATA[<p>动态规划学习笔记</p>
@@ -1238,19 +1251,6 @@ preSum[j] -preSum[i] mod K ==0</script><p>此时需要遍历两次，复杂度O(
       </categories>
       <tags>
         <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用python HTTP服务器从开发机下载文件</title>
-    <url>/2022/05/18/%E4%BD%BF%E7%94%A8python-HTTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%8E%E5%BC%80%E5%8F%91%E6%9C%BA%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[<p><code>python -m http.server 8000</code>启动Python自带的网络服务器，可以下载开发机上面的文件。python2使用<code>python -m SimpleHTTPServer 8000</code>。</p>
-<a id="more"></a>
-]]></content>
-      <categories>
-        <category>使用心得</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -1367,41 +1367,6 @@ preSum[j] -preSum[i] mod K ==0</script><p>此时需要遍历两次，复杂度O(
       </tags>
   </entry>
   <entry>
-    <title>如何使用pipreqs列出项目依赖</title>
-    <url>/2022/05/17/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8pipreqs%E5%88%97%E5%87%BA%E9%A1%B9%E7%9B%AE%E4%BE%9D%E8%B5%96/</url>
-    <content><![CDATA[<p>Python项目中必须包含一个 requirements.txt 文件，用于记录所有依赖包及其精确的版本号。以便一个命令便可部署新环境。pip会把整个环境的包全部列出，而pipreqs只会列出当前项目用到的包，避免过于臃肿。</p>
-<a id="more"></a>
-<h2 id="pip自动生成依赖"><a href="#pip自动生成依赖" class="headerlink" title="pip自动生成依赖"></a>pip自动生成依赖</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip list</span><br></pre></td></tr></table></figure>
-<p>在命令行列举出pip当前环境下的包。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure>
-<p>该命令会把当前环境下pip安装的所有包全部列出到requirements.txt，如果只想要当前项目的包，可以使用pipreqs。</p>
-<h2 id="如何使用pipreqs"><a href="#如何使用pipreqs" class="headerlink" title="如何使用pipreqs"></a>如何使用pipreqs</h2><p>pipreqs只会根据当前目录下的项目，导出依赖的第三方库，不过像是numpy可能不会被导出，还有扫描需要几分钟的时间，其他的没什么问题。</p>
-<h3 id="安装pipreqs"><a href="#安装pipreqs" class="headerlink" title="安装pipreqs"></a>安装pipreqs</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip install pipreqs</span><br></pre></td></tr></table></figure>
-<p>pipreqs的GitHub网址：<a href="https://github.com/bndr/pipreqs">https://github.com/bndr/pipreqs</a></p>
-<h3 id="运行pipreqs"><a href="#运行pipreqs" class="headerlink" title="运行pipreqs"></a>运行pipreqs</h3><p>直接运行可能会报command not found，原因是未加入环境变量。</p>
-<h4 id="临时加入环境变量"><a href="#临时加入环境变量" class="headerlink" title="临时加入环境变量"></a>临时加入环境变量</h4><p>命令行运行pipreqs需要先把它放入环境变量里，首先用</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip show -f pipreqs</span><br></pre></td></tr></table></figure>
-<p>这个命令列出pipreqs安装的位置，根据<code>Location:</code>显示的信息可以确定位置。然后Linux使用</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export PATH&#x3D;[安装位置&#x2F;bin]:$PATH</span><br></pre></td></tr></table></figure>
-<p>将pipreqs安装位置临时放入环境变量里，窗口关闭就会失效。</p>
-<h4 id="加入全局或用户变量"><a href="#加入全局或用户变量" class="headerlink" title="加入全局或用户变量"></a>加入全局或用户变量</h4><p>如果想永久改变，可以添加全局或者当前用户的环境变量。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;profile</span><br><span class="line">&#x2F;&#x2F; 如果只修改当前用户的环境变量，则是&#96;vim ~&#x2F;.bashrc&#96;</span><br><span class="line">&#x2F;&#x2F; 在文件的最后一行添加以下代码：</span><br><span class="line">export PATH&#x3D;$PATH:&#x2F;usr&#x2F;local&#x2F;php&#x2F;bin</span><br><span class="line">&#x2F;&#x2F; 规则和用法如第二条所说</span><br></pre></td></tr></table></figure>
-<p>关闭shell窗口后都需要再执行一次<code>source /etc/profile</code>才能生效，这个问题需要在<code>~/.bashrc</code>文件最后添加<code>source /etc/profile</code>，这样问题便得到解决。</p>
-<h3 id="运行pipreqs-1"><a href="#运行pipreqs-1" class="headerlink" title="运行pipreqs"></a>运行pipreqs</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pipreqs .&#x2F; --encoding&#x3D;utf-8 --force</span><br></pre></td></tr></table></figure>
-<p>会把依赖输出到当前目录下的requirements.txt文件中。</p>
-<h2 id="自动安装依赖包"><a href="#自动安装依赖包" class="headerlink" title="自动安装依赖包"></a>自动安装依赖包</h2><p>使用 requests.txt 自动安装所有依赖包：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
-<p>如果有找不到的包，可以手动下载<code>.whl</code>文件，然后执行<code>pip install [文件名.whl]</code>进行安装。</p>
-]]></content>
-      <categories>
-        <category>使用心得</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>搭建环境</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>如何使用Hexo</title>
     <url>/2022/05/17/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8hexo/</url>
     <content><![CDATA[<p>Hexo是一个快速、简洁且高效的博客框架，可以将网站部署在本地或者GitHub上面。本文默认已经配置好相关环境，目的为记录Hexo在使用上的问题。<br><a id="more"></a></p>
@@ -1436,6 +1401,41 @@ preSum[j] -preSum[i] mod K ==0</script><p>此时需要遍历两次，复杂度O(
       </categories>
       <tags>
         <tag>markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何使用pipreqs列出项目依赖</title>
+    <url>/2022/05/17/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8pipreqs%E5%88%97%E5%87%BA%E9%A1%B9%E7%9B%AE%E4%BE%9D%E8%B5%96/</url>
+    <content><![CDATA[<p>Python项目中必须包含一个 requirements.txt 文件，用于记录所有依赖包及其精确的版本号。以便一个命令便可部署新环境。pip会把整个环境的包全部列出，而pipreqs只会列出当前项目用到的包，避免过于臃肿。</p>
+<a id="more"></a>
+<h2 id="pip自动生成依赖"><a href="#pip自动生成依赖" class="headerlink" title="pip自动生成依赖"></a>pip自动生成依赖</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip list</span><br></pre></td></tr></table></figure>
+<p>在命令行列举出pip当前环境下的包。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure>
+<p>该命令会把当前环境下pip安装的所有包全部列出到requirements.txt，如果只想要当前项目的包，可以使用pipreqs。</p>
+<h2 id="如何使用pipreqs"><a href="#如何使用pipreqs" class="headerlink" title="如何使用pipreqs"></a>如何使用pipreqs</h2><p>pipreqs只会根据当前目录下的项目，导出依赖的第三方库，不过像是numpy可能不会被导出，还有扫描需要几分钟的时间，其他的没什么问题。</p>
+<h3 id="安装pipreqs"><a href="#安装pipreqs" class="headerlink" title="安装pipreqs"></a>安装pipreqs</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip install pipreqs</span><br></pre></td></tr></table></figure>
+<p>pipreqs的GitHub网址：<a href="https://github.com/bndr/pipreqs">https://github.com/bndr/pipreqs</a></p>
+<h3 id="运行pipreqs"><a href="#运行pipreqs" class="headerlink" title="运行pipreqs"></a>运行pipreqs</h3><p>直接运行可能会报command not found，原因是未加入环境变量。</p>
+<h4 id="临时加入环境变量"><a href="#临时加入环境变量" class="headerlink" title="临时加入环境变量"></a>临时加入环境变量</h4><p>命令行运行pipreqs需要先把它放入环境变量里，首先用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip show -f pipreqs</span><br></pre></td></tr></table></figure>
+<p>这个命令列出pipreqs安装的位置，根据<code>Location:</code>显示的信息可以确定位置。然后Linux使用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export PATH&#x3D;[安装位置&#x2F;bin]:$PATH</span><br></pre></td></tr></table></figure>
+<p>将pipreqs安装位置临时放入环境变量里，窗口关闭就会失效。</p>
+<h4 id="加入全局或用户变量"><a href="#加入全局或用户变量" class="headerlink" title="加入全局或用户变量"></a>加入全局或用户变量</h4><p>如果想永久改变，可以添加全局或者当前用户的环境变量。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;profile</span><br><span class="line">&#x2F;&#x2F; 如果只修改当前用户的环境变量，则是&#96;vim ~&#x2F;.bashrc&#96;</span><br><span class="line">&#x2F;&#x2F; 在文件的最后一行添加以下代码：</span><br><span class="line">export PATH&#x3D;$PATH:&#x2F;usr&#x2F;local&#x2F;php&#x2F;bin</span><br><span class="line">&#x2F;&#x2F; 规则和用法如第二条所说</span><br></pre></td></tr></table></figure>
+<p>关闭shell窗口后都需要再执行一次<code>source /etc/profile</code>才能生效，这个问题需要在<code>~/.bashrc</code>文件最后添加<code>source /etc/profile</code>，这样问题便得到解决。</p>
+<h3 id="运行pipreqs-1"><a href="#运行pipreqs-1" class="headerlink" title="运行pipreqs"></a>运行pipreqs</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pipreqs .&#x2F; --encoding&#x3D;utf-8 --force</span><br></pre></td></tr></table></figure>
+<p>会把依赖输出到当前目录下的requirements.txt文件中。</p>
+<h2 id="自动安装依赖包"><a href="#自动安装依赖包" class="headerlink" title="自动安装依赖包"></a>自动安装依赖包</h2><p>使用 requests.txt 自动安装所有依赖包：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>如果有找不到的包，可以手动下载<code>.whl</code>文件，然后执行<code>pip install [文件名.whl]</code>进行安装。</p>
+]]></content>
+      <categories>
+        <category>使用心得</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>搭建环境</tag>
       </tags>
   </entry>
   <entry>
