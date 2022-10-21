@@ -1307,7 +1307,10 @@ preSum[j] -preSum[i] mod K ==0</script><p>此时需要遍历两次，复杂度O(
 </ul>
 <p>（邮箱部分请替换成自己的邮箱，密码pass phrase可以不输入，因为我们不是FBI。）</p>
 <p>请注意，这个操作会生成一对公私密钥对，公钥是可以分享给别人的（等下会上传Github），但私钥请妥善保存，它将是你的身份认证。</p>
-</li>
+<p>使用默认位置的话，路径如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Your identification has been saved in &#x2F;home&#x2F;用户名&#x2F;.ssh&#x2F;id_rsa</span><br><span class="line">Your public key has been saved in &#x2F;home&#x2F;用户名&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre></td></tr></table></figure>
+<p>随后使用以下命令拷贝公钥：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cat ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre></td></tr></table></figure></li>
 <li><p>然后可以去GitHub注册一个账号。注册后，打开Setting-SSH and GPG keys-new GPG key，填上任意Title，把刚刚生成的公钥粘贴进Key部分。（以文本格式打开.pub文件，全部复制粘贴进去）、</p>
 <p>这样，Github拥有了你的公钥，可以识别出你推送的提交确实是你上传的。如果你有多个电脑，你可以添加多个Key。</p>
 </li>
@@ -1357,7 +1360,21 @@ preSum[j] -preSum[i] mod K ==0</script><p>此时需要遍历两次，复杂度O(
 <p><img src="/2021/01/19/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Git%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE/2" alt="git-br-ff-merge"></p>
 <h2 id="实际使用"><a href="#实际使用" class="headerlink" title="实际使用"></a>实际使用</h2><h3 id="拉下"><a href="#拉下" class="headerlink" title="拉下"></a>拉下</h3><p>对于已有的git远程库，需要git pull拉下，身份认证等请具体查询</p>
 <h3 id="提交修改"><a href="#提交修改" class="headerlink" title="提交修改"></a>提交修改</h3><p>本地修改代码后，使用<code>git status</code>可以查询修改了哪些文件，对于想要上传修改的文件，使用<code>git add [文件名]</code>添加到暂存区，添加完所有要修改的文件后，使用<code>git commit -m &#39;</code>要添加的信息’将暂存区文件添加到本地仓库，然后使用<code>git push</code>上传。</p>
-<h3 id="关联离线项目到github"><a href="#关联离线项目到github" class="headerlink" title="关联离线项目到github"></a>关联离线项目到github</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">unzip &lt;repo&gt;.zip</span><br><span class="line">cd &lt;repo&gt;</span><br><span class="line">git init</span><br><span class="line">git add .</span><br><span class="line">git remote add origin https:&#x2F;&#x2F;github.com&#x2F;&lt;user&gt;&#x2F;&lt;repo&gt;.git</span><br><span class="line">git remote update</span><br><span class="line">git checkout master</span><br></pre></td></tr></table></figure>]]></content>
+<h3 id="关联离线项目到github"><a href="#关联离线项目到github" class="headerlink" title="关联离线项目到github"></a>关联离线项目到github</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">unzip &lt;repo&gt;.zip</span><br><span class="line">cd &lt;repo&gt;</span><br><span class="line">git init</span><br><span class="line">git add .</span><br><span class="line">git remote add origin https:&#x2F;&#x2F;github.com&#x2F;&lt;user&gt;&#x2F;&lt;repo&gt;.git</span><br><span class="line">git remote update</span><br><span class="line">git checkout master</span><br></pre></td></tr></table></figure>
+<h3 id="查看远程地址"><a href="#查看远程地址" class="headerlink" title="查看远程地址"></a>查看远程地址</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<h3 id="Git常见报错：Updates-were-rejected-because-the-tip-of-your-current-branch-is-behind"><a href="#Git常见报错：Updates-were-rejected-because-the-tip-of-your-current-branch-is-behind" class="headerlink" title="Git常见报错：Updates were rejected because the tip of your current branch is behind"></a>Git常见报错：Updates were rejected because the tip of your current branch is behind</h3><p><strong>本地仓库上的修改没有基于远程库最新版本，你的本地仓库版本落后于远程仓库。</strong>记得修改前先git pull！</p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><ol>
+<li>git pull</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;针对场景一和二，养成先pull最新代码再修改的习惯即可</span><br><span class="line">&#x2F;&#x2F;在修改本地代码前，先使用git pull拉取远程最新代码，然后再进行修改（推荐--rebase）</span><br><span class="line">git pull 远程仓库名 远程分支名 --rebase</span><br></pre></td></tr></table></figure>
+<ol>
+<li>git push —force</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;针对场景三，在确认代码无误的情况下，直接使用--force强制推送</span><br><span class="line">git push 远程仓库名 远程分支名 --force</span><br></pre></td></tr></table></figure>
+<h4 id="具体场景："><a href="#具体场景：" class="headerlink" title="具体场景："></a>具体场景：</h4><p>场景一：<br>起初本地仓库和远程仓库是同步的，然后某一天你在远程仓库上直接做了修改，此时远程和本地就不同步了。过了几天你在本地仓库做了一些修改，修改完成后使用git push想要提交，此时就会报错。</p>
+<p>场景二：<br>起初本地仓库和远程仓库是同步的，不过有多个人都在该分支上开发，另一个人在某一天做了修改并提交到远程库了。此时远程库和你的本地库就不同步了。后续同场景一。</p>
+<p>场景三：<br>git commit —amend之后，本地仓库和远程仓库的log版本历史不一致了，此时想要git push，也会报这个错。<br>个人理解： 使用该命令后，虽然所有提交记录的内容没变化，但最后一次提交的commit id变化了。git不允许push改变提交历史的操作，可以新增或者减少commit但不能改变原来的commit历史，因此会报冲突。</p>
+]]></content>
       <categories>
         <category>学习笔记</category>
       </categories>
@@ -1568,5 +1585,170 @@ y=f(X)，使得任意xi∈有且只有一个yi∈C，使得yi∈f(xi)成立。</
 <h3 id="json写入中文编码问题"><a href="#json写入中文编码问题" class="headerlink" title="json写入中文编码问题"></a>json写入中文编码问题</h3><p>python2编码混乱，解决暂且跳过</p>
 <p>python3使用dumps时，加上<code>json.dumps(ensure_ascii=False)</code>即可。</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>Linux使用技巧</title>
+    <url>/2022/08/31/Linux%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<p>记录了一些常用命令，如压缩、下载、建立软连接、关闭进程。</p>
+<a id="more"></a>
+<p>ssh连接服务器指定端口<code>ssh -p port 用户名@ip</code></p>
+<p>下载文件<code>wget + url</code></p>
+<p>压缩 <code>tar -zcvf</code></p>
+<p>解压缩<code>tar -zxvf</code></p>
+<p>-z : 使用 gzip 来压缩和解压文件</p>
+<p>-v : —verbose 详细的列出处理的文件</p>
+<p>-f : —file=ARCHIVE 使用档案文件或设备，这个选项通常是必选的</p>
+<p>-c : —create 创建一个新的归档（压缩包）</p>
+<p>-x : 从压缩包中解出文件</p>
+<p>安装python</p>
+<p>wget下载python</p>
+<p>解压缩</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mkdir &#x2F;usr&#x2F;local&#x2F;python3</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd Python-3.7.0</span><br><span class="line">.&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;python3</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<p>报错/usr/bin/install: 无法更改”/usr/local/python397/bin” 的权限: 没有那个文件或目录<br>Creating directory /usr/local/python397/lib<br>/usr/bin/install: 无法更改”/usr/local/python397/lib” 的权限: 没有那个文件或目录</p>
+<p>解决方法：</p>
+<p>sudo make altinstall</p>
+<p>建立软连接：</p>
+<p>sudo ln -s /usr/local/python3.6/bin/python3.6 /usr/bin/python3.6</p>
+<p>在使用pip进行软件包安装的时候出现问题：</p>
+<p>WARNING: pip is configured with locations that require TLS/SSL, however the ssl module in Python is not available.</p>
+<p>解决：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mkdir -p ~&#x2F;.pip</span><br><span class="line">vim ~&#x2F;.pip&#x2F;pip.conf</span><br></pre></td></tr></table></figure>
+<p>然后输入内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url &#x3D; http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;pypi&#x2F;simple&#x2F;</span><br><span class="line"></span><br><span class="line">[install]</span><br><span class="line">trusted-host &#x3D; mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
+<p>再次使用pip安装即可。</p>
+<h2 id="一次关闭多个python进程"><a href="#一次关闭多个python进程" class="headerlink" title="一次关闭多个python进程"></a>一次关闭多个python进程</h2><p>pkill python3</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Linux安装GPU驱动</title>
+    <url>/2022/09/13/Linux%E5%AE%89%E8%A3%85GPU%E9%A9%B1%E5%8A%A8/</url>
+    <content><![CDATA[<p>由于需要使用tensorflow1版本（1.14.0是最后的），需要安装GPU相关的tensorflow-gpu，装好发现需要cuda10.0版本。以下是安装流程，显卡驱动、cudnn7.6、tensorflow-<a href="https://so.csdn.net/so/search?q=gpu&amp;spm=1001.2101.3001.7020">gpu</a>-1.14.0已经安装好。</p>
+<a id="more"></a>
+<h3 id="conda-镜像源下载-conda安装包，不行，改用官网"><a href="#conda-镜像源下载-conda安装包，不行，改用官网" class="headerlink" title="conda+镜像源下载.conda安装包，不行，改用官网"></a>conda+镜像源下载.conda安装包，不行，改用官网</h3><p>下载镜像后conda安装，发现不行，改到官网下载<a href="https://developer.nvidia.com/cuda-10.0-download-archive">https://developer.nvidia.com/cuda-10.0-download-archive</a></p>
+<p>使用wget+下载网址命令下载文件</p>
+<h3 id="官网命令多了个-run"><a href="#官网命令多了个-run" class="headerlink" title="官网命令多了个.run"></a>官网命令多了个.run</h3><p>下载后使用Base Installer的命令，官网的安装命令中文件后缀多了个.run，去掉就好了</p>
+<h3 id="显卡驱动已有"><a href="#显卡驱动已有" class="headerlink" title="显卡驱动已有"></a>显卡驱动已有</h3><p>运行错误，显示It appears that an X server is running. Please exit X before installation.</p>
+<p>显卡驱动已有且正在运行，因此在sudo sh cuda_9.0.176_384.81_linux，之后会提示安装信息，安装驱动的时候一定要选择no</p>
+<p>sample最好也取消掉。</p>
+<h3 id="gcc版本太高"><a href="#gcc版本太高" class="headerlink" title="gcc版本太高"></a>gcc版本太高</h3><p>运行错误，Error: unsupported compiler: 9.4.0. Use —override to override this check.</p>
+<p>是因为gcc版本太高，cuda10.0需要gcc7，安装命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">（1）安装gcc-7</span><br><span class="line">sudo apt install gcc-7 g++-7</span><br><span class="line"></span><br><span class="line">（2）删除原来版本gcc建立的软链接</span><br><span class="line">sudo rm -rf &#x2F;usr&#x2F;bin&#x2F;gcc</span><br><span class="line">sudo rm -rf &#x2F;usr&#x2F;bin&#x2F;g++</span><br><span class="line"></span><br><span class="line">（3）建立新的gcc版本的软连接</span><br><span class="line">sudo ln -s &#x2F;usr&#x2F;bin&#x2F;gcc-7 &#x2F;usr&#x2F;bin&#x2F;gcc</span><br><span class="line">sudo ln -s &#x2F;usr&#x2F;bin&#x2F;g++-7 &#x2F;usr&#x2F;bin&#x2F;g++</span><br><span class="line"></span><br><span class="line">（4）查看gcc版本</span><br><span class="line">gcc --version</span><br></pre></td></tr></table></figure>
+<h3 id="无关紧要的warning"><a href="#无关紧要的warning" class="headerlink" title="无关紧要的warning"></a>无关紧要的warning</h3><p>安装后报<em>*</em>WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least 384.00 is required for CUDA 10.0 functionality to work.</p>
+<p>已经有驱动的话不用管。</p>
+<h3 id="添加环境变量（其他用户可能需要再操作一次！）"><a href="#添加环境变量（其他用户可能需要再操作一次！）" class="headerlink" title="添加环境变量（其他用户可能需要再操作一次！）"></a>添加环境变量（其他用户可能需要再操作一次！）</h3><ol>
+<li>以下需要加到~/.bashrc后面</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export PATH&#x3D;&#x2F;usr&#x2F;local&#x2F;cuda-10.0&#x2F;bin$&#123;PATH:+:$&#123;PATH&#125;&#125;</span><br><span class="line"></span><br><span class="line">export LD_LIBRARY_PATH&#x3D;&#x2F;usr&#x2F;local&#x2F;cuda-10.0&#x2F;lib64$&#123;LD_LIBRARY_PATH:+:$&#123;LD_LIBRARY_PATH&#125;&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>记得删掉原来CUDA的path，不然会出现</li>
+</ol>
+<p>2022-09-05 15:14:56.205060: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Could not dlopen library ‘libcudart.so.10.0’; dlerror: libcudart.so.10.0: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /usr/local/cuda/targets/x86_64-linux/lib/:/usr/local/cuda/targets/x86_64-linux/lib/:</p>
+<h3 id="cuda版本测试"><a href="#cuda版本测试" class="headerlink" title="cuda版本测试"></a>cuda版本测试</h3><p>安装后测试cuda版本，nvcc -v，发现抱错，原因是v需要大写，正确命令为：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nvcc -V</span><br></pre></td></tr></table></figure>
+<h3 id="tensorflow测试"><a href="#tensorflow测试" class="headerlink" title="tensorflow测试"></a>tensorflow测试</h3><p>测试一下tensorflow：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">import os</span><br><span class="line">os.environ[&#39;TF_CPP_MIN_LOG_LEVEL&#39;]&#x3D;&#39;2&#39;</span><br><span class="line">print(tf.__version__)</span><br><span class="line">a &#x3D; tf.constant(1.)</span><br><span class="line">b &#x3D; tf.constant(2.)</span><br><span class="line">print(a+b)</span><br><span class="line">print(&#39;GPU:&#39;, tf.test.is_gpu_available())</span><br></pre></td></tr></table></figure>
+<p> python3 train.py —exec_cap 50 —num_init_dags 1 —num_stream_dags 200 —reset_prob 5e-7 —reset_prob_min 5e-8 —reset_prob_decay 4e-10 —diff_reward_enabled 1 —num_agents 16 —model_save_interval 100 —model_folder ./models/stream_200_job_diff_reward_reset_5e-7_5e-8/ —saved_model ./models/stream_200_job_diff_reward_reset_5e-7_5e-8/</p>
+<h3 id="argparser使用bool类型总是True"><a href="#argparser使用bool类型总是True" class="headerlink" title="argparser使用bool类型总是True"></a>argparser使用bool类型总是True</h3><p>正确方式为：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">parser.add_argument(</span><br><span class="line">    &quot;--train&quot;,</span><br><span class="line">    action&#x3D;&quot;store_true&quot;,</span><br><span class="line">    default&#x3D;False,</span><br><span class="line">    help&#x3D;&quot;the folder to save the model (default: model&#x2F;)&quot;,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="tensorflow加载模型报错"><a href="#tensorflow加载模型报错" class="headerlink" title="tensorflow加载模型报错"></a>tensorflow加载模型报错</h3><p>显示<code>model_config = json.loads(model_config.decode(&#39;utf-8&#39;)) AttributeError: &#39;str&#39; object has no attribute &#39;decode&#39;</code>，查了一下是h5py版本过高，需要降级：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip install h5py&#x3D;&#x3D;2.10</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>使用心得</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>CUDA</tag>
+        <tag>tensorflow</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Paddle踩坑指南</title>
+    <url>/2022/10/10/Paddle%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97/</url>
+    <content><![CDATA[<p>Paddle与tensorflow相似，需要和Python版本对应。</p>
+<a id="more"></a>
+<p>安装命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python -m pip install paddlepaddle -i https:&#x2F;&#x2F;mirror.baidu.com&#x2F;pypi&#x2F;simple</span><br></pre></td></tr></table></figure>
+<h2 id="找不到libstdc"><a href="#找不到libstdc" class="headerlink" title="找不到libstdc++"></a>找不到libstdc++</h2><p>ImportError: /usr/lib/x86_64-linux-gnu/libstdc++.so.6: version `GLIBCXX_3.4.22’ not found</p>
+<p>首先查看有哪些版本的</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">strings &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libstdc++.so.6 | grep GLIBCXX</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/10/10/Paddle%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97/Users\Max\Downloads\carbon (3" alt="carbon (3)">.png)</p>
+<p>发现没有4.22版本的。使用以下命令查看系统中已有的libstdc++：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo find &#x2F; -name &quot;libstdc++.so.6*&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/10/10/Paddle%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97/Users\Max\Downloads\carbon (4" alt="carbon (4)">.png)</p>
+<p>从里面选一个更高版本的：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">strings &#x2F;home&#x2F;vinsa&#x2F;anaconda3&#x2F;envs&#x2F;pcc27&#x2F;lib&#x2F;libstdc++.so.6.0.29 | grep GLIBCXX</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/10/10/Paddle%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97/Users\Max\Downloads\carbon (5" alt="carbon (5)">.png)</p>
+<p>运行后发现里面有我们需要的4.22版本，于是拷贝过来：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo cp &#x2F;home&#x2F;vinsa&#x2F;anaconda3&#x2F;envs&#x2F;pcc27&#x2F;lib&#x2F;libstdc++.so.6.0.29 &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;</span><br></pre></td></tr></table></figure>
+<p>删除原来的：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo rm &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libstdc++.so.6</span><br></pre></td></tr></table></figure>
+<p>重新建立软连接，f意为强制：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo ln -sf &#x2F;home&#x2F;vinsa&#x2F;anaconda3&#x2F;envs&#x2F;pcc27&#x2F;lib&#x2F;libstdc++.so.6.0.29 &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libstdc++.so.6</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>使用心得</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>Paddle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从头安装python3.6+tensorflow 1.4.0</title>
+    <url>/2022/09/19/%E4%BB%8E%E5%A4%B4%E5%AE%89%E8%A3%85python3.6+tensorflow%201.4.0/</url>
+    <content><![CDATA[<p>tensorflow1.x和2.x的api有很大区别，因此专门记录了1.4的安装过程。如果需要GPU训练，请直接安装tensorflow-gpu，并根据tensorflow版本，安装对应的cuda！</p>
+<a id="more"></a>
+<h1 id="从头安装python3-6-tensorflow-1-4-0"><a href="#从头安装python3-6-tensorflow-1-4-0" class="headerlink" title="从头安装python3.6+tensorflow 1.4.0"></a>从头安装python3.6+tensorflow 1.4.0</h1><h2 id="安装python3-6"><a href="#安装python3-6" class="headerlink" title="安装python3.6"></a>安装python3.6</h2><ol>
+<li><p>首先下载安装包，使用wget <a href="https://www.python.org/ftp/python/3.6.6/Python-3.6.6.tgz发现速度太慢，换国内源：">https://www.python.org/ftp/python/3.6.6/Python-3.6.6.tgz发现速度太慢，换国内源：</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;registry.npmmirror.com&#x2F;-&#x2F;binary&#x2F;python&#x2F;3.6.6&#x2F;Python-3.6.6.tgz</span><br></pre></td></tr></table></figure></li>
+<li><p>解压缩：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -zxvf Python-3.6.6.tgz -C &#x2F;&lt;解压路径&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>进入解压后的文件夹：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd Python-3.6.6</span><br></pre></td></tr></table></figure></li>
+<li><p>安装</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;python3</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure></li>
+<li><p>安装之后建立软连接，让默认python3变成3.6版本，ln -s命令报错：File exists，改为以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ln -sf &#x2F;usr&#x2F;local&#x2F;python3&#x2F;bin&#x2F;python3.6 &#x2F;usr&#x2F;bin&#x2F;python3</span><br><span class="line">ln -sf &#x2F;usr&#x2F;local&#x2F;python3&#x2F;bin&#x2F;pip3 &#x2F;usr&#x2F;bin&#x2F;pip3</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="安装Anaconda"><a href="#安装Anaconda" class="headerlink" title="安装Anaconda"></a>安装Anaconda</h2><ol>
+<li><p>去官网<a href="https://repo.anaconda.com/archive/找到想要的版本，下载安装包">https://repo.anaconda.com/archive/找到想要的版本，下载安装包</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;repo.anaconda.com&#x2F;archive&#x2F;Anaconda3-2022.05-Linux-x86_64.sh</span><br></pre></td></tr></table></figure></li>
+<li><p>添加权限</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod +x Anaconda3-2022.05-Linux-x86_64.sh</span><br></pre></td></tr></table></figure></li>
+<li><p>运行<code>./Anaconda3-2022.05-Linux-x86_64.sh</code></p>
+</li>
+<li><p>会显示用户条款，一路按enter，直到按提示输入yes</p>
+</li>
+<li><p>询问安装路径，我选择安装在<code>/home/&lt;用户名&gt;/anaconda3</code>，因为担心安装在需要root权限的路径下，其他用户无法使用anaconda</p>
+</li>
+<li><p>显示报错：<code>subprocess.CalledProcessError: Command &#39;(&#39;lsb_release&#39;, &#39;-a&#39;)&#39; returned non-zero exit status 1.</code>需要找到这个文件然后删除：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">find &#x2F; -name lsb_release</span><br><span class="line">rm -rf &#x2F;usr&#x2F;bin&#x2F;lsb_release</span><br></pre></td></tr></table></figure></li>
+<li><p>重新安装，使用原目录会提示路径下不为空，运行命令加个<code>-u</code>即可</p>
+</li>
+<li><p>询问是否初始化Do you wish the installer to initialize Anaconda3<br>by running conda init? [yes|no]，我选择yes，不然需要手动配置一下bash，问题也不大</p>
+</li>
+<li><p>验证安装：打卡一个新terminal，运行<code>anaconda -V</code></p>
+</li>
+<li><p>创建新环境：<code>conda create -n &lt;环境名&gt; python=3.6</code></p>
+</li>
+<li><p>运行新环境：<code>conda activate &lt;环境名&gt;</code></p>
+</li>
+</ol>
+<h2 id="安装tensorflow-1-14"><a href="#安装tensorflow-1-14" class="headerlink" title="安装tensorflow 1.14"></a>安装tensorflow 1.14</h2><p>选择这个版本是因为tensorflow1和2差别很大，而之前的开源代码用的1版本。此外，选择python3.6也是为了适配tensorflow</p>
+<p>使用默认安装，下载速度太慢，换成国内源：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip install tensorflow&#x3D;&#x3D;1.14 -i https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple</span><br></pre></td></tr></table></figure>
+<h2 id="运行tensorflow出现decode错误"><a href="#运行tensorflow出现decode错误" class="headerlink" title="运行tensorflow出现decode错误"></a>运行tensorflow出现decode错误</h2><h3 id="tensorflow加载模型报错"><a href="#tensorflow加载模型报错" class="headerlink" title="tensorflow加载模型报错"></a>tensorflow加载模型报错</h3><p>显示<code>model_config = json.loads(model_config.decode(&#39;utf-8&#39;)) AttributeError: &#39;str&#39; object has no attribute &#39;decode&#39;</code>，查了一下是h5py版本过高，需要降级：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip install h5py&#x3D;&#x3D;2.10</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>使用心得</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>tensorflow</tag>
+      </tags>
   </entry>
 </search>

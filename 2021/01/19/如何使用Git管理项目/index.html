@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://example.com/2021/01/19/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Git%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE/1">
 <meta property="og:image" content="http://example.com/2021/01/19/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Git%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE/2">
 <meta property="article:published_time" content="2021-01-19T07:55:01.383Z">
-<meta property="article:modified_time" content="2022-05-26T09:42:26.529Z">
+<meta property="article:modified_time" content="2022-09-05T08:03:51.256Z">
 <meta property="article:author" content="Max Hou">
 <meta property="article:tag" content="Git">
 <meta property="article:tag" content="项目管理">
@@ -216,7 +216,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-26 17:42:26" itemprop="dateModified" datetime="2022-05-26T17:42:26+08:00">2022-05-26</time>
+                <time title="修改时间：2022-09-05 16:03:51" itemprop="dateModified" datetime="2022-09-05T16:03:51+08:00">2022-09-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -306,7 +306,10 @@
 </ul>
 <p>（邮箱部分请替换成自己的邮箱，密码pass phrase可以不输入，因为我们不是FBI。）</p>
 <p>请注意，这个操作会生成一对公私密钥对，公钥是可以分享给别人的（等下会上传Github），但私钥请妥善保存，它将是你的身份认证。</p>
-</li>
+<p>使用默认位置的话，路径如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Your identification has been saved in &#x2F;home&#x2F;用户名&#x2F;.ssh&#x2F;id_rsa</span><br><span class="line">Your public key has been saved in &#x2F;home&#x2F;用户名&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre></td></tr></table></figure>
+<p>随后使用以下命令拷贝公钥：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre></td></tr></table></figure></li>
 <li><p>然后可以去GitHub注册一个账号。注册后，打开Setting-SSH and GPG keys-new GPG key，填上任意Title，把刚刚生成的公钥粘贴进Key部分。（以文本格式打开.pub文件，全部复制粘贴进去）、</p>
 <p>这样，Github拥有了你的公钥，可以识别出你推送的提交确实是你上传的。如果你有多个电脑，你可以添加多个Key。</p>
 </li>
@@ -357,6 +360,20 @@
 <h2 id="实际使用"><a href="#实际使用" class="headerlink" title="实际使用"></a>实际使用</h2><h3 id="拉下"><a href="#拉下" class="headerlink" title="拉下"></a>拉下</h3><p>对于已有的git远程库，需要git pull拉下，身份认证等请具体查询</p>
 <h3 id="提交修改"><a href="#提交修改" class="headerlink" title="提交修改"></a>提交修改</h3><p>本地修改代码后，使用<code>git status</code>可以查询修改了哪些文件，对于想要上传修改的文件，使用<code>git add [文件名]</code>添加到暂存区，添加完所有要修改的文件后，使用<code>git commit -m &#39;</code>要添加的信息’将暂存区文件添加到本地仓库，然后使用<code>git push</code>上传。</p>
 <h3 id="关联离线项目到github"><a href="#关联离线项目到github" class="headerlink" title="关联离线项目到github"></a>关联离线项目到github</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">unzip &lt;repo&gt;.zip</span><br><span class="line">cd &lt;repo&gt;</span><br><span class="line">git init</span><br><span class="line">git add .</span><br><span class="line">git remote add origin https:&#x2F;&#x2F;github.com&#x2F;&lt;user&gt;&#x2F;&lt;repo&gt;.git</span><br><span class="line">git remote update</span><br><span class="line">git checkout master</span><br></pre></td></tr></table></figure>
+<h3 id="查看远程地址"><a href="#查看远程地址" class="headerlink" title="查看远程地址"></a>查看远程地址</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<h3 id="Git常见报错：Updates-were-rejected-because-the-tip-of-your-current-branch-is-behind"><a href="#Git常见报错：Updates-were-rejected-because-the-tip-of-your-current-branch-is-behind" class="headerlink" title="Git常见报错：Updates were rejected because the tip of your current branch is behind"></a>Git常见报错：Updates were rejected because the tip of your current branch is behind</h3><p><strong>本地仓库上的修改没有基于远程库最新版本，你的本地仓库版本落后于远程仓库。</strong>记得修改前先git pull！</p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><ol>
+<li>git pull</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;针对场景一和二，养成先pull最新代码再修改的习惯即可</span><br><span class="line">&#x2F;&#x2F;在修改本地代码前，先使用git pull拉取远程最新代码，然后再进行修改（推荐--rebase）</span><br><span class="line">git pull 远程仓库名 远程分支名 --rebase</span><br></pre></td></tr></table></figure>
+<ol>
+<li>git push —force</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;针对场景三，在确认代码无误的情况下，直接使用--force强制推送</span><br><span class="line">git push 远程仓库名 远程分支名 --force</span><br></pre></td></tr></table></figure>
+<h4 id="具体场景："><a href="#具体场景：" class="headerlink" title="具体场景："></a>具体场景：</h4><p>场景一：<br>起初本地仓库和远程仓库是同步的，然后某一天你在远程仓库上直接做了修改，此时远程和本地就不同步了。过了几天你在本地仓库做了一些修改，修改完成后使用git push想要提交，此时就会报错。</p>
+<p>场景二：<br>起初本地仓库和远程仓库是同步的，不过有多个人都在该分支上开发，另一个人在某一天做了修改并提交到远程库了。此时远程库和你的本地库就不同步了。后续同场景一。</p>
+<p>场景三：<br>git commit —amend之后，本地仓库和远程仓库的log版本历史不一致了，此时想要git push，也会报这个错。<br>个人理解： 使用该命令后，虽然所有提交记录的内容没变化，但最后一次提交的commit id变化了。git不允许push改变提交历史的操作，可以新增或者减少commit但不能改变原来的commit历史，因此会报冲突。</p>
+
     </div>
 
     
@@ -445,7 +462,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">最简单的入门教程：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFGit%E5%92%8CGithub%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">什么是Git和Github？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Git%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">如何使用Git？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8"><span class="nav-number">3.2.</span> <span class="nav-text">开始使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E7%89%B9%E7%82%B9%EF%BC%9A%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="nav-number">3.3.</span> <span class="nav-text">Git特点：分支管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">实际使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%89%E4%B8%8B"><span class="nav-number">4.1.</span> <span class="nav-text">拉下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E4%BF%AE%E6%94%B9"><span class="nav-number">4.2.</span> <span class="nav-text">提交修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E8%81%94%E7%A6%BB%E7%BA%BF%E9%A1%B9%E7%9B%AE%E5%88%B0github"><span class="nav-number">4.3.</span> <span class="nav-text">关联离线项目到github</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">最简单的入门教程：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFGit%E5%92%8CGithub%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">什么是Git和Github？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Git%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">如何使用Git？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8"><span class="nav-number">3.2.</span> <span class="nav-text">开始使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E7%89%B9%E7%82%B9%EF%BC%9A%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="nav-number">3.3.</span> <span class="nav-text">Git特点：分支管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">实际使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%89%E4%B8%8B"><span class="nav-number">4.1.</span> <span class="nav-text">拉下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E4%BF%AE%E6%94%B9"><span class="nav-number">4.2.</span> <span class="nav-text">提交修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E8%81%94%E7%A6%BB%E7%BA%BF%E9%A1%B9%E7%9B%AE%E5%88%B0github"><span class="nav-number">4.3.</span> <span class="nav-text">关联离线项目到github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B%E5%9C%B0%E5%9D%80"><span class="nav-number">4.4.</span> <span class="nav-text">查看远程地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99%EF%BC%9AUpdates-were-rejected-because-the-tip-of-your-current-branch-is-behind"><span class="nav-number">4.5.</span> <span class="nav-text">Git常见报错：Updates were rejected because the tip of your current branch is behind</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">4.5.1.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E5%9C%BA%E6%99%AF%EF%BC%9A"><span class="nav-number">4.5.2.</span> <span class="nav-text">具体场景：</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -459,7 +476,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -469,7 +486,7 @@
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
